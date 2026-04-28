@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index, follow">
+  <title id="page-title">City Internet Speed Test — PakSpeed | شہر سپیڈ ٹیسٹ</title>
+  <meta id="page-desc" name="description" content="Check internet speed in your city. Compare ISP performance with average download, upload, and ping speed data across all major Pakistani cities.">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png">
+  <meta name="theme-color" content="#01411C">
+
+  <!-- Canonical & Alternates (set dynamically by JS) -->
+  <link id="page-canonical" rel="canonical" href="https://pakspeed.com/city.html">
+  <link rel="alternate" hreflang="ur" id="hreflang-ur" href="https://pakspeed.com/city.html?lang=ur">
+  <link rel="alternate" hreflang="en" id="hreflang-en" href="https://pakspeed.com/city.html?lang=en">
+  <link rel="alternate" hreflang="x-default" id="hreflang-default" href="https://pakspeed.com/city.html">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" id="og-url" content="https://pakspeed.com/city.html">
+  <meta property="og:title" id="og-title" content="City Internet Speed — PakSpeed">
+  <meta property="og:description" id="og-desc" content="Check internet speed in your city. Compare ISP performance across Pakistan.">
+  <meta property="og:image" content="https://pakspeed.com/assets/og-image.jpg">
+  <meta property="og:locale" content="ur_PK">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:site_name" content="PakSpeed">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" id="tw-title" content="City Internet Speed — PakSpeed">
+  <meta name="twitter:description" id="tw-desc" content="Check internet speed in your city. Compare ISP performance across Pakistan.">
+  <meta name="twitter:image" content="https://pakspeed.com/assets/og-image.jpg">
+  <meta name="twitter:site" content="@PakSpeed">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Montserrat:wght@800&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" media="print" onload="this.media='all'">
+
+  <!-- Font metric override to reduce CLS -->
+  <style>
+    @font-face { font-family: 'Noto Nastaliq Urdu Fallback'; src: local('Arial'); ascent-override: 110%; descent-override: 50%; line-gap-override: 0%; size-adjust: 120%; }
+  </style>
+  <link rel="stylesheet" href="/css/style.css?v=12" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/css/style.css?v=12"></noscript>
+  <link rel="stylesheet" href="/css/rtl.css?v=4" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/css/rtl.css?v=4"></noscript>
+
+  <style>
+    .city-container { max-width: 800px; margin: 0 auto; padding: 2rem 1rem; }
+
+    .city-header { text-align: center; margin-bottom: 2.5rem; }
+    .city-name { font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .city-subtitle { font-size: 1.1rem; color: var(--gray-400); line-height: 1.8; }
+
+    .city-hero {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .city-stat-card {
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 1rem;
+      padding: 1.5rem 1rem;
+      text-align: center;
+    }
+
+    .city-stat-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--gray-400);
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    .city-stat-value {
+      font-family: var(--font-en);
+      font-size: 2rem;
+      font-weight: 900;
+    }
+
+    .city-stat-unit {
+      font-size: 0.85rem;
+      color: var(--gray-400);
+      font-weight: 400;
+    }
+
+    .stat-download { color: var(--neon-green); }
+    .stat-upload { color: var(--neon-blue); }
+    .stat-ping { color: var(--gold); }
+    .stat-peak { color: #a78bfa; }
+
+    .city-comparison {
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      margin-bottom: 2.5rem;
+      text-align: center;
+    }
+
+    .comparison-text { font-size: 1.1rem; line-height: 1.8; }
+    .comparison-faster { color: var(--neon-green); font-weight: 700; }
+    .comparison-slower { color: #f87171; font-weight: 700; }
+
+    .city-section-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--white);
+    }
+
+    .isp-table-wrap {
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 1rem;
+      overflow: hidden;
+      margin-bottom: 2.5rem;
+    }
+
+    .isp-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+    }
+
+    .isp-table thead {
+      background: rgba(0, 255, 136, 0.06);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .isp-table th {
+      padding: 0.875rem 0.75rem;
+      font-weight: 700;
+      color: var(--neon-green);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    .isp-table th:first-child,
+    .isp-table td:first-child { text-align: start; }
+
+    .isp-table td {
+      padding: 0.75rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      text-align: center;
+      font-family: var(--font-en);
+    }
+
+    .isp-table td:first-child {
+      font-weight: 600;
+      color: var(--white);
+      font-family: inherit;
+    }
+
+    .isp-table tbody tr:hover { background: rgba(0, 255, 136, 0.03); }
+
+    .city-cta {
+      text-align: center;
+      padding: 2rem;
+      background: rgba(0, 255, 136, 0.05);
+      border: 1px solid rgba(0, 255, 136, 0.15);
+      border-radius: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .city-cta-text { font-size: 1.2rem; margin-bottom: 1rem; line-height: 1.8; }
+
+    .city-cta-btn {
+      display: inline-block;
+      padding: 12px 32px;
+      background: var(--neon-green);
+      color: #000;
+      font-weight: 800;
+      font-size: 1.1rem;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .city-cta-btn:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(0, 255, 136, 0.3); }
+
+    .lb-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--neon-green);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 8px 16px;
+      border-radius: 8px;
+      background: rgba(0, 255, 136, 0.05);
+      border: 1px solid rgba(0, 255, 136, 0.2);
+      margin-bottom: 2rem;
+      transition: all 0.2s ease;
+    }
+
+    .lb-back:hover { background: rgba(0, 255, 136, 0.15); }
+
+    .city-loading { text-align: center; padding: 4rem; color: var(--gray-400); font-size: 1.1rem; }
+
+    .city-review-card { background: rgba(15,23,42,0.65); border: 1px solid rgba(255,255,255,0.08); border-radius: 0.75rem; padding: 1rem; margin-bottom: 0.75rem; }
+    .city-review-header { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; font-size: 0.85rem; color: var(--gray-400); direction: ltr; margin-bottom: 0.5rem; }
+    .city-review-stars { color: #FFD700; letter-spacing: 1px; }
+    .city-review-text { font-size: 0.95rem; color: var(--white); line-height: 1.6; }
+    .city-review-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 0.5rem; }
+    .city-review-author { font-size: 0.8rem; color: var(--gray-400); }
+    .review-report-btn { display: inline-flex; align-items: center; gap: 4px; background: none; border: none; color: var(--gray-400); font-size: 0.7rem; cursor: pointer; padding: 4px 8px; border-radius: 4px; opacity: 0.4; transition: all 0.2s; }
+    .review-report-btn:hover { opacity: 1; color: #f87171; background: rgba(248,113,113,0.1); }
+    .review-report-btn.reported { opacity: 0.3; pointer-events: none; }
+    .city-review-cta { text-align: center; padding: 1rem; color: var(--gray-400); }
+    .city-review-cta a { color: var(--neon-green); text-decoration: none; font-weight: 600; }
+
+    .city-explore {
+      margin-top: 2.5rem;
+      padding: 1.5rem;
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 1rem;
+    }
+    .city-explore h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 1rem;
+    }
+    .explore-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .explore-link {
+      display: inline-block;
+      padding: 8px 16px;
+      background: rgba(0, 255, 136, 0.06);
+      border: 1px solid rgba(0, 255, 136, 0.15);
+      border-radius: 8px;
+      color: var(--neon-green);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+    .explore-link:hover { background: rgba(0, 255, 136, 0.15); }
+    .explore-link.secondary { color: var(--gray-400); border-color: rgba(255,255,255,0.1); background: rgba(255,255,255,0.03); }
+    .explore-link.secondary:hover { background: rgba(255,255,255,0.08); color: var(--white); }
+
+    @media (max-width: 600px) {
+      .city-name { font-size: 1.75rem; }
+      .city-hero { grid-template-columns: repeat(2, 1fr); }
+      .city-stat-value { font-size: 1.5rem; }
+    }
+  </style>    <!-- Google tag (gtag.js) — consent-gated -->
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('consent', 'default', { analytics_storage: 'denied' });
+        function loadGA() {
+            if (document.getElementById('ga-script')) return;
+            var s = document.createElement('script');
+            s.id = 'ga-script'; s.async = true;
+            s.src = 'https://www.googletagmanager.com/gtag/js?id=G-0EGYB6TXS6';
+            document.head.appendChild(s);
+            gtag('js', new Date());
+            gtag('consent', 'update', { analytics_storage: 'granted' });
+            gtag('config', 'G-0EGYB6TXS6');
+        }
+        if (localStorage.getItem('cookie_consent')) loadGA();
+    </script>
+
+  <!-- Static BreadcrumbList fallback for Googlebot first-pass -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "PakSpeed", "item": "https://pakspeed.com/"},
+      {"@type": "ListItem", "position": 2, "name": "City Speed Data"}
+    ]
+  }
+  </script>
+  <!-- Structured Data for SEO (set dynamically by JS) -->
+  <script type="application/ld+json" id="schema-json"></script>
+</head>
+
+<body class="lang-ur">
+
+  <header class="header">
+    <div class="header-inner">
+      <a href="/" class="logo">
+        <span class="logo-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00FF88" stroke-width="2.5" stroke-linecap="round">
+            <path d="M12 12L18 6" />
+            <path d="M5 19a9 9 0 0 1 0-14" />
+            <path d="M19 19a9 9 0 0 0 0-14" />
+          </svg>
+        </span>
+        <span class="brand-text" style="font-size: 1.75rem;">Pak<span class="brand-text-accent">Speed</span></span>
+      </a>
+      <div class="header-controls">
+        <a href="/" class="map-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+          </svg>
+          <span class="map-text">Speed Test</span>
+        </a>
+        <button id="btn-lang" class="btn-lang" aria-label="Switch language">English</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="city-container">
+    <a href="/leaderboard.html" class="lb-back">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+      <span id="back-text">رینکنگ</span>
+    </a>
+
+    <div id="city-loading" class="city-loading">Loading...</div>
+
+    <!-- Noscript fallback: Googlebot sees this content on first crawl pass -->
+    <noscript>
+      <div style="max-width:800px; margin:0 auto; padding:2rem 1rem; color:#94a3b8;">
+        <h1 style="color:#00FF88; font-size:2rem; margin-bottom:1rem;">Pakistan City Internet Speed Data — PakSpeed</h1>
+        <p>Check real-time internet speed data for cities across Pakistan. PakSpeed measures download speed, upload speed, and ping latency using Cloudflare Edge CDN technology with servers in Karachi, Lahore, and Islamabad.</p>
+        <p>پاکستان کے شہروں میں انٹرنیٹ کی رفتار کا ڈیٹا دیکھیں۔ PakSpeed کلاؤڈ فلیئر ایج سی ڈی این ٹیکنالوجی استعمال کرتے ہوئے ڈاؤن لوڈ، اپ لوڈ اور پنگ سپیڈ ناپتا ہے۔</p>
+
+        <h2 style="color:#fff; font-size:1.3rem; margin:1.5rem 0 1rem;">Browse City Speed Data</h2>
+        <ul style="columns:2; column-gap:2rem; list-style:none; padding:0;">
+          <li><a href="/city/Lahore" style="color:#00FF88;">Lahore Internet Speed</a></li>
+          <li><a href="/city/Karachi" style="color:#00FF88;">Karachi Internet Speed</a></li>
+          <li><a href="/city/Islamabad" style="color:#00FF88;">Islamabad Internet Speed</a></li>
+          <li><a href="/city/Rawalpindi" style="color:#00FF88;">Rawalpindi Internet Speed</a></li>
+          <li><a href="/city/Faisalabad" style="color:#00FF88;">Faisalabad Internet Speed</a></li>
+          <li><a href="/city/Multan" style="color:#00FF88;">Multan Internet Speed</a></li>
+          <li><a href="/city/Peshawar" style="color:#00FF88;">Peshawar Internet Speed</a></li>
+          <li><a href="/city/Quetta" style="color:#00FF88;">Quetta Internet Speed</a></li>
+          <li><a href="/city/Sialkot" style="color:#00FF88;">Sialkot Internet Speed</a></li>
+          <li><a href="/city/Gujranwala" style="color:#00FF88;">Gujranwala Internet Speed</a></li>
+          <li><a href="/city/Hyderabad" style="color:#00FF88;">Hyderabad Internet Speed</a></li>
+          <li><a href="/city/Bahawalpur" style="color:#00FF88;">Bahawalpur Internet Speed</a></li>
+          <li><a href="/city/Sargodha" style="color:#00FF88;">Sargodha Internet Speed</a></li>
+          <li><a href="/city/Sukkur" style="color:#00FF88;">Sukkur Internet Speed</a></li>
+          <li><a href="/city/Larkana" style="color:#00FF88;">Larkana Internet Speed</a></li>
+          <li><a href="/city/Mardan" style="color:#00FF88;">Mardan Internet Speed</a></li>
+          <li><a href="/city/Gujrat" style="color:#00FF88;">Gujrat Internet Speed</a></li>
+          <li><a href="/city/Abbottabad" style="color:#00FF88;">Abbottabad Internet Speed</a></li>
+          <li><a href="/city/Sahiwal" style="color:#00FF88;">Sahiwal Internet Speed</a></li>
+          <li><a href="/city/Okara" style="color:#00FF88;">Okara Internet Speed</a></li>
+        </ul>
+
+        <h2 style="color:#fff; font-size:1.3rem; margin:1.5rem 0 1rem;">Compare ISP Speeds</h2>
+        <ul style="columns:2; column-gap:2rem; list-style:none; padding:0;">
+          <li><a href="/isp/PTCL" style="color:#00FF88;">PTCL Speed Data</a></li>
+          <li><a href="/isp/Jazz" style="color:#00FF88;">Jazz Speed Data</a></li>
+          <li><a href="/isp/Zong" style="color:#00FF88;">Zong Speed Data</a></li>
+          <li><a href="/isp/Telenor" style="color:#00FF88;">Telenor Speed Data</a></li>
+          <li><a href="/isp/Ufone" style="color:#00FF88;">Ufone Speed Data</a></li>
+          <li><a href="/isp/StormFiber" style="color:#00FF88;">StormFiber Speed Data</a></li>
+          <li><a href="/isp/Nayatel" style="color:#00FF88;">Nayatel Speed Data</a></li>
+          <li><a href="/isp/Transworld" style="color:#00FF88;">Transworld Speed Data</a></li>
+        </ul>
+
+        <p style="margin-top:1.5rem;"><a href="/leaderboard.html" style="color:#00FF88;">📊 City Rankings</a> · <a href="/" style="color:#00FF88;">🚀 Run Speed Test</a> · <a href="/guide.html" style="color:#00FF88;">📖 Speed Guide</a></p>
+      </div>
+    </noscript>
+
+    <div id="city-content" style="display:none;">
+
+      <div class="city-header">
+        <h1 class="city-name" id="city-name"></h1>
+        <p class="city-subtitle" id="city-subtitle"></p>
+      </div>
+
+      <div class="city-hero">
+        <div class="city-stat-card">
+          <div class="city-stat-label" id="lbl-dl">Avg Download</div>
+          <div class="city-stat-value stat-download" id="val-dl">—</div>
+          <div class="city-stat-unit">Mbps</div>
+        </div>
+        <div class="city-stat-card">
+          <div class="city-stat-label" id="lbl-ul">Avg Upload</div>
+          <div class="city-stat-value stat-upload" id="val-ul">—</div>
+          <div class="city-stat-unit">Mbps</div>
+        </div>
+        <div class="city-stat-card">
+          <div class="city-stat-label" id="lbl-ping">Avg Ping</div>
+          <div class="city-stat-value stat-ping" id="val-ping">—</div>
+          <div class="city-stat-unit">ms</div>
+        </div>
+        <div class="city-stat-card">
+          <div class="city-stat-label" id="lbl-peak">Peak Speed</div>
+          <div class="city-stat-value stat-peak" id="val-peak">—</div>
+          <div class="city-stat-unit">Mbps</div>
+        </div>
+      </div>
+
+      <div class="city-comparison" id="comparison-box"></div>
+
+      <h2 class="city-section-title" id="isp-title">ISPs in this city</h2>
+      <div class="isp-table-wrap">
+        <table class="isp-table">
+          <thead>
+            <tr>
+              <th id="th-isp">ISP</th>
+              <th id="th-dl">Download</th>
+              <th id="th-ping">Ping</th>
+              <th id="th-tests">Tests</th>
+            </tr>
+          </thead>
+          <tbody id="isp-body"></tbody>
+        </table>
+      </div>
+
+      <div id="city-reviews-section" style="display:none;margin-bottom:2rem;">
+        <h2 class="section-title" id="city-reviews-title">جائزے</h2>
+        <div id="city-reviews-list"></div>
+      </div>
+
+      <div class="city-explore" id="explore-section">
+        <h3 id="explore-title">مزید دریافت کریں</h3>
+        <div class="explore-links" id="explore-links"></div>
+      </div>
+
+      <div class="city-cta">
+        <p class="city-cta-text" id="cta-text"></p>
+        <a href="/" class="city-cta-btn" id="cta-btn">Speed Test</a>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="https://www.urduai.org" target="_blank" rel="noopener noreferrer"
+          style="text-decoration: none; font-family: 'Montserrat', sans-serif; font-weight: 800; color: white;">Urdu<span
+            style="color: #FFB300;">AI</span></a> <span id="footer-init-text">کی ایک پہل</span>
+      </div>
+      <div class="made-in-pk">
+        <span class="pk-flag">🇵🇰</span>
+        <span id="footer-madein">پاکستان میں بنایا گیا</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Extract city (and optional ISP) from clean URL: /city/Lahore or /city/Lahore/PTCL
+    const pathMatch = window.location.pathname.match(/^\/city\/([^\/]+)(?:\/([^\/]+))?$/);
+    const cityName = pathMatch ? decodeURIComponent(pathMatch[1]) : new URLSearchParams(window.location.search).get('city');
+    const focusedIsp = pathMatch && pathMatch[2] ? decodeURIComponent(pathMatch[2]) : new URLSearchParams(window.location.search).get('isp');
+    let currentLang = localStorage.getItem('pakspeed_lang') || 'ur';
+
+    if (!cityName) {
+      window.location.href = '/leaderboard.html';
+    }
+
+    function applyLang(lang) {
+      currentLang = lang;
+      localStorage.setItem('pakspeed_lang', lang);
+      document.documentElement.lang = lang;
+      document.documentElement.dir = lang === 'ur' ? 'rtl' : 'ltr';
+      document.body.className = lang === 'ur' ? 'lang-ur' : 'lang-en';
+      document.getElementById('btn-lang').textContent = lang === 'ur' ? 'English' : 'اردو';
+      document.getElementById('back-text').textContent = lang === 'ur' ? 'رینکنگ' : 'Rankings';
+      document.getElementById('footer-madein').textContent = lang === 'ur' ? 'پاکستان میں بنایا گیا' : 'Made in Pakistan';
+      document.getElementById('footer-init-text').textContent = lang === 'ur' ? 'کی ایک پہل' : 'An initiative by';
+    }
+
+    applyLang(currentLang);
+    document.getElementById('btn-lang').addEventListener('click', () => {
+      applyLang(currentLang === 'ur' ? 'en' : 'ur');
+      if (window._cityData) renderCity(window._cityData);
+      if (window._reviewData) renderCityReviews(window._reviewData);
+    });
+
+    const API = `https://pakspeed-worker.qaisar-roonjha.workers.dev/api/city-stats?city=${encodeURIComponent(cityName)}`;
+
+    function renderCity(data) {
+      const { city, national_avg, isps } = data;
+      if (!city || !city.total_tests) {
+        document.getElementById('city-loading').textContent = 'No data for this city';
+        return;
+      }
+
+      const isUrdu = currentLang === 'ur';
+
+      // Find focused ISP data if present
+      const focusedIspData = focusedIsp ? isps.find(i => i.isp_name.toLowerCase() === focusedIsp.toLowerCase()) : null;
+
+      // SEO title and description — adapt for City×ISP pages
+      const titleText = focusedIspData
+        ? (isUrdu
+          ? `${cityName} میں ${focusedIsp} سپیڈ ${focusedIspData.avg_download} Mbps — PakSpeed`
+          : `${focusedIsp} Speed in ${cityName} ${focusedIspData.avg_download} Mbps — PakSpeed`)
+        : (isUrdu
+          ? `${cityName} انٹرنیٹ سپیڈ — PakSpeed`
+          : `Internet Speed in ${cityName} — PakSpeed`);
+      const descText = focusedIspData
+        ? (isUrdu
+          ? `${cityName} میں ${focusedIsp} کی اوسط سپیڈ ${focusedIspData.avg_download} Mbps ہے۔ شہر اوسط ${city.avg_download} Mbps۔`
+          : `${focusedIsp} average speed in ${cityName}: ${focusedIspData.avg_download} Mbps. City average: ${city.avg_download} Mbps.`)
+        : (isUrdu
+          ? `${cityName} میں اوسط انٹرنیٹ سپیڈ ${city.avg_download} Mbps ہے۔ ${city.total_tests} ٹیسٹ کے نتائج۔`
+          : `Average internet speed in ${cityName} is ${city.avg_download} Mbps based on ${city.total_tests} tests.`);
+
+      document.getElementById('page-title').textContent = titleText;
+      document.getElementById('page-desc').setAttribute('content', descText);
+
+      // Update canonical & OG dynamically — use clean URLs
+      const cityUrl = focusedIsp
+        ? `https://pakspeed.com/city/${encodeURIComponent(cityName)}/${encodeURIComponent(focusedIsp)}`
+        : `https://pakspeed.com/city/${encodeURIComponent(cityName)}`;
+      document.getElementById('page-canonical').href = cityUrl;
+      document.getElementById('hreflang-ur').href = cityUrl + '?lang=ur';
+      document.getElementById('hreflang-en').href = cityUrl + '?lang=en';
+      document.getElementById('hreflang-default').href = cityUrl;
+      document.getElementById('og-url').content = cityUrl;
+      document.getElementById('og-title').content = titleText;
+      document.getElementById('og-desc').content = descText;
+      document.getElementById('tw-title').content = titleText;
+      document.getElementById('tw-desc').content = descText;
+
+      // Header — adapt for City×ISP
+      document.getElementById('city-name').textContent = focusedIspData
+        ? (isUrdu ? `${cityName} میں ${focusedIsp} سپیڈ` : `${focusedIsp} Speed in ${cityName}`)
+        : (isUrdu ? `${cityName} میں انٹرنیٹ سپیڈ` : `Internet Speed in ${cityName}`);
+      document.getElementById('city-subtitle').textContent = focusedIspData
+        ? (isUrdu ? `${focusedIspData.tests} ٹیسٹ کے نتائج | شہر اوسط: ${city.avg_download} Mbps` : `Based on ${focusedIspData.tests} tests | City avg: ${city.avg_download} Mbps`)
+        : (isUrdu ? `${city.total_tests} سپیڈ ٹیسٹ کے نتائج پر مبنی` : `Based on ${city.total_tests} speed tests`);
+
+      // Labels
+      document.getElementById('lbl-dl').textContent = isUrdu ? 'اوسط ڈاؤن لوڈ' : 'Avg Download';
+      document.getElementById('lbl-ul').textContent = isUrdu ? 'اوسط اپ لوڈ' : 'Avg Upload';
+      document.getElementById('lbl-ping').textContent = isUrdu ? 'اوسط پنگ' : 'Avg Ping';
+      document.getElementById('lbl-peak').textContent = isUrdu ? 'زیادہ سے زیادہ' : 'Peak Speed';
+
+      // Values — show ISP-specific data when focused
+      if (focusedIspData) {
+        document.getElementById('val-dl').textContent = focusedIspData.avg_download;
+        document.getElementById('val-ul').textContent = focusedIspData.avg_upload || '—';
+        document.getElementById('val-ping').textContent = focusedIspData.avg_ping;
+        document.getElementById('val-peak').textContent = city.max_download;
+        document.getElementById('lbl-peak').textContent = isUrdu ? 'شہر اوسط' : 'City Avg';
+        document.getElementById('val-peak').textContent = city.avg_download;
+      } else {
+        document.getElementById('val-dl').textContent = city.avg_download;
+        document.getElementById('val-ul').textContent = city.avg_upload;
+        document.getElementById('val-ping').textContent = city.avg_ping;
+        document.getElementById('val-peak').textContent = city.max_download;
+      }
+
+      // Comparison — ISP vs city avg (City×ISP) or city vs national avg
+      const compBox = document.getElementById('comparison-box');
+      if (focusedIspData) {
+        const ispDl = Number(focusedIspData.avg_download);
+        const cityDl = Number(city.avg_download);
+        const diff = (ispDl - cityDl).toFixed(1);
+        const pct = ((Math.abs(diff) / cityDl) * 100).toFixed(0);
+        if (diff > 0) {
+          compBox.innerHTML = `<p class="comparison-text">${isUrdu
+            ? `${focusedIsp} شہر اوسط سے <span class="comparison-faster">${pct}% تیز</span> ہے`
+            : `${focusedIsp} is <span class="comparison-faster">${pct}% faster</span> than the ${cityName} average`
+          }</p>`;
+        } else {
+          compBox.innerHTML = `<p class="comparison-text">${isUrdu
+            ? `${focusedIsp} شہر اوسط سے <span class="comparison-slower">${pct}% کم</span> ہے`
+            : `${focusedIsp} is <span class="comparison-slower">${pct}% slower</span> than the ${cityName} average`
+          }</p>`;
+        }
+      } else {
+        const diff = (city.avg_download - national_avg).toFixed(1);
+        const pct = ((Math.abs(diff) / national_avg) * 100).toFixed(0);
+        if (diff > 0) {
+          compBox.innerHTML = `<p class="comparison-text">${isUrdu
+            ? `${cityName} کی سپیڈ قومی اوسط سے <span class="comparison-faster">${pct}% تیز</span> ہے`
+            : `${cityName} is <span class="comparison-faster">${pct}% faster</span> than the national average`
+          }</p>`;
+        } else {
+          compBox.innerHTML = `<p class="comparison-text">${isUrdu
+            ? `${cityName} کی سپیڈ قومی اوسط سے <span class="comparison-slower">${pct}% کم</span> ہے`
+            : `${cityName} is <span class="comparison-slower">${pct}% slower</span> than the national average`
+          }</p>`;
+        }
+      }
+
+      // ISP table
+      document.getElementById('isp-title').textContent = isUrdu
+        ? `${cityName} میں آئی ایس پیز`
+        : `ISPs in ${cityName}`;
+      document.getElementById('th-isp').textContent = isUrdu ? 'آئی ایس پی' : 'ISP';
+      document.getElementById('th-dl').textContent = isUrdu ? 'ڈاؤن لوڈ' : 'Download';
+      document.getElementById('th-ping').textContent = isUrdu ? 'پنگ' : 'Ping';
+      document.getElementById('th-tests').textContent = isUrdu ? 'ٹیسٹ' : 'Tests';
+
+      let ispHtml = '';
+      isps.forEach(row => {
+        const isFocused = focusedIsp && row.isp_name.toLowerCase() === focusedIsp.toLowerCase();
+        const rowStyle = isFocused ? 'background:rgba(0,255,136,0.08);border-left:3px solid var(--neon-green);' : '';
+        const ispLink = `/city/${encodeURIComponent(cityName)}/${encodeURIComponent(row.isp_name)}`;
+        ispHtml += `<tr style="${rowStyle}">
+          <td><a href="${ispLink}" style="color:var(--white);text-decoration:none;border-bottom:1px dashed rgba(255,255,255,0.3);${isFocused ? 'font-weight:700;color:var(--neon-green);' : ''}">${row.isp_name}${isFocused ? ' ★' : ''}</a></td>
+          <td style="color:var(--neon-green);font-weight:700">${row.avg_download} <small style="color:var(--gray-400);font-weight:400">Mbps</small></td>
+          <td style="color:var(--gold);font-weight:600">${row.avg_ping} <small style="color:var(--gray-400);font-weight:400">ms</small></td>
+          <td style="color:var(--gray-400)">${row.tests}</td>
+        </tr>`;
+      });
+      document.getElementById('isp-body').innerHTML = ispHtml;
+
+      // CTA
+      document.getElementById('cta-text').textContent = focusedIspData
+        ? (isUrdu ? `اپنی ${focusedIsp} سپیڈ ${cityName} میں چیک کریں!` : `Test your ${focusedIsp} speed in ${cityName}!`)
+        : (isUrdu ? `${cityName} میں اپنی انٹرنیٹ سپیڈ چیک کریں!` : `Check your internet speed in ${cityName}!`);
+      document.getElementById('cta-btn').textContent = isUrdu ? 'سپیڈ ٹیسٹ شروع کریں' : 'Start Speed Test';
+
+      // Schema.org structured data — WebPage + BreadcrumbList (adapts for City×ISP)
+      const schemaData = [
+        {
+          "@context": "https://schema.org",
+          "@type": "WebPage",
+          "name": titleText,
+          "description": descText,
+          "url": cityUrl,
+          "inLanguage": ["ur", "en"],
+          "mainEntity": {
+            "@type": "Place",
+            "name": cityName,
+            "address": { "@type": "PostalAddress", "addressCountry": "PK", "addressLocality": cityName }
+          },
+          "isPartOf": { "@type": "WebSite", "name": "PakSpeed", "url": "https://pakspeed.com" }
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": focusedIspData
+            ? [
+              { "@type": "ListItem", "position": 1, "name": "PakSpeed", "item": "https://pakspeed.com/" },
+              { "@type": "ListItem", "position": 2, "name": cityName, "item": `https://pakspeed.com/city/${encodeURIComponent(cityName)}` },
+              { "@type": "ListItem", "position": 3, "name": focusedIsp }
+            ]
+            : [
+              { "@type": "ListItem", "position": 1, "name": "PakSpeed", "item": "https://pakspeed.com/" },
+              { "@type": "ListItem", "position": 2, "name": isUrdu ? "شہروں کی رینکنگ" : "City Rankings", "item": "https://pakspeed.com/leaderboard.html" },
+              { "@type": "ListItem", "position": 3, "name": cityName }
+            ]
+        }
+      ];
+
+      // Add FAQ schema for City×ISP pages (targets People Also Ask)
+      if (focusedIspData) {
+        schemaData.push({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": `What is ${focusedIsp} speed in ${cityName}?`,
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": `${focusedIsp} average download speed in ${cityName} is ${focusedIspData.avg_download} Mbps with ${focusedIspData.avg_ping} ms ping, based on ${focusedIspData.tests} real speed tests.`
+              }
+            },
+            {
+              "@type": "Question",
+              "name": `Is ${focusedIsp} good in ${cityName}?`,
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": Number(focusedIspData.avg_download) >= Number(city.avg_download)
+                  ? `Yes, ${focusedIsp} at ${focusedIspData.avg_download} Mbps is above the ${cityName} city average of ${city.avg_download} Mbps.`
+                  : `${focusedIsp} at ${focusedIspData.avg_download} Mbps is below the ${cityName} city average of ${city.avg_download} Mbps.`
+              }
+            }
+          ]
+        });
+      }
+
+      document.getElementById('schema-json').textContent = JSON.stringify(schemaData);
+
+      // Explore links — cross-linking for SEO (adapts for City×ISP)
+      document.getElementById('explore-title').textContent = isUrdu ? 'مزید دریافت کریں' : 'Explore More';
+      const majorCities = ['Lahore','Karachi','Islamabad','Rawalpindi','Faisalabad','Peshawar','Quetta','Multan'];
+      let exploreHtml = '';
+
+      if (focusedIspData) {
+        // City×ISP: cross-link to same ISP in other cities + other ISPs in this city
+        exploreHtml += `<a href="/city/${encodeURIComponent(cityName)}" class="explore-link">${isUrdu ? cityName + ' تمام ISPs' : cityName + ' All ISPs'}</a>`;
+        exploreHtml += `<a href="/isp/${encodeURIComponent(focusedIsp)}" class="explore-link">${focusedIsp} ${isUrdu ? 'تمام شہر' : 'All Cities'}</a>`;
+        majorCities.filter(c => c !== cityName).slice(0, 3).forEach(c => {
+          exploreHtml += `<a href="/city/${encodeURIComponent(c)}/${encodeURIComponent(focusedIsp)}" class="explore-link secondary">${focusedIsp} ${isUrdu ? 'میں' : 'in'} ${c}</a>`;
+        });
+      } else {
+        // Regular city page: link to nearby cities
+        const nearbyCities = majorCities.filter(c => c !== cityName).slice(0, 4);
+        nearbyCities.forEach(c => {
+          exploreHtml += `<a href="/city/${encodeURIComponent(c)}" class="explore-link">${c}</a>`;
+        });
+      }
+
+      exploreHtml += `<a href="/leaderboard.html" class="explore-link secondary">${isUrdu ? 'شہر رینکنگ' : 'City Rankings'}</a>`;
+      exploreHtml += `<a href="/isp.html" class="explore-link secondary">${isUrdu ? 'آئی ایس پی موازنہ' : 'ISP Comparison'}</a>`;
+      exploreHtml += `<a href="/map.html" class="explore-link secondary">${isUrdu ? 'سپیڈ میپ' : 'Speed Map'}</a>`;
+      exploreHtml += `<a href="/guide.html" class="explore-link secondary">${isUrdu ? 'سپیڈ گائیڈ' : 'Speed Guide'}</a>`;
+      exploreHtml += `<a href="/complaint.html" class="explore-link secondary">${isUrdu ? 'PTA شکایت' : 'PTA Complaint'}</a>`;
+      exploreHtml += `<a href="/best-isp.html" class="explore-link secondary">${isUrdu ? 'بہترین ISP 2026' : 'Best ISP 2026'}</a>`;
+      exploreHtml += `<a href="/report.html" class="explore-link secondary">${isUrdu ? 'آج کی رپورٹ' : "Today's Report"}</a>`;
+      document.getElementById('explore-links').innerHTML = exploreHtml;
+
+      document.getElementById('city-loading').style.display = 'none';
+      document.getElementById('city-content').style.display = '';
+    }
+
+    function timeAgo(ts, isUrdu) {
+      const diff = Date.now() - new Date(ts + 'Z').getTime();
+      const mins = Math.floor(diff / 60000);
+      if (mins < 60) return isUrdu ? `${mins} منٹ پہلے` : `${mins}m ago`;
+      const hrs = Math.floor(mins / 60);
+      if (hrs < 24) return isUrdu ? `${hrs} گھنٹے پہلے` : `${hrs}h ago`;
+      const days = Math.floor(hrs / 24);
+      if (days < 30) return isUrdu ? `${days} دن پہلے` : `${days}d ago`;
+      return isUrdu ? `${Math.floor(days / 30)} ماہ پہلے` : `${Math.floor(days / 30)}mo ago`;
+    }
+
+    function renderCityReviews(reviewData) {
+      const isUrdu = currentLang !== 'en';
+      const section = document.getElementById('city-reviews-section');
+      if (!reviewData || !reviewData.stats || reviewData.stats.review_count === 0) {
+        section.style.display = '';
+        document.getElementById('city-reviews-title').textContent = isUrdu ? 'جائزے' : 'Reviews';
+        document.getElementById('city-reviews-list').innerHTML = `<div class="city-review-cta">${
+          focusedIsp
+            ? (isUrdu ? `<a href="/">${focusedIsp} ${cityName} میں پہلا جائزہ لکھیں</a>` : `<a href="/">Be the first to review ${focusedIsp} in ${cityName}</a>`)
+            : (isUrdu ? `<a href="/">${cityName} میں پہلا جائزہ لکھیں</a>` : `<a href="/">Be the first to review in ${cityName}</a>`)
+        }</div>`;
+        return;
+      }
+
+      const { reviews, stats } = reviewData;
+      section.style.display = '';
+      const title = focusedIsp
+        ? (isUrdu ? `${cityName} میں ${focusedIsp} کے جائزے` : `${focusedIsp} Reviews in ${cityName}`)
+        : (isUrdu ? `${cityName} کے جائزے` : `Reviews from ${cityName}`);
+      document.getElementById('city-reviews-title').textContent = title;
+
+      let html = '';
+      if (stats.avg_rating > 0) {
+        const starsStr = '★'.repeat(Math.round(stats.avg_rating)) + '☆'.repeat(5 - Math.round(stats.avg_rating));
+        html += `<div style="margin-bottom:1rem;font-size:0.95rem;color:var(--gray-400);">
+          <span style="color:#FFD700;font-size:1.3rem;font-weight:700;">${stats.avg_rating} ${starsStr}</span>
+          ${isUrdu ? `${stats.review_count} جائزے` : `from ${stats.review_count} review${stats.review_count > 1 ? 's' : ''}`}
+        </div>`;
+      }
+
+      reviews.forEach(r => {
+        const stars = '★'.repeat(r.rating) + '☆'.repeat(5 - r.rating);
+        const ago = timeAgo(r.timestamp, isUrdu);
+        const ispLabel = !focusedIsp ? r.isp_name + ' · ' : '';
+        const speed = r.download_mbps ? r.download_mbps.toFixed(1) + ' Mbps · ' : '';
+        const author = r.reviewer_name || (isUrdu ? 'ایک صارف' : 'A user');
+
+        html += `<div class="city-review-card" data-review-id="${r.id}">
+          <div class="city-review-header">
+            <span class="city-review-stars">${stars}</span>
+            <span>${ispLabel}${speed}${ago}</span>
+          </div>
+          ${r.review_text ? `<div class="city-review-text">"${r.review_text}"</div>` : ''}
+          <div class="city-review-footer">
+            <span class="city-review-author">— ${author}</span>
+            <button class="review-report-btn" onclick="reportReview(${r.id}, this)"
+              title="${isUrdu ? 'نامناسب مواد کی اطلاع دیں' : 'Report inappropriate content'}">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+              <span>${isUrdu ? 'رپورٹ' : 'Report'}</span>
+            </button>
+          </div>
+        </div>`;
+      });
+      document.getElementById('city-reviews-list').innerHTML = html;
+      markAlreadyReported();
+    }
+
+    const reviewsLimit = focusedIsp ? 5 : 3;
+    let REVIEWS_URL = `https://pakspeed-worker.qaisar-roonjha.workers.dev/api/reviews?city=${encodeURIComponent(cityName)}&limit=${reviewsLimit}`;
+    if (focusedIsp) REVIEWS_URL += `&isp=${encodeURIComponent(focusedIsp)}`;
+
+    Promise.all([
+      fetch(API).then(r => r.json()),
+      fetch(REVIEWS_URL).then(r => r.json()).catch(() => null)
+    ]).then(([data, reviewData]) => {
+      window._cityData = data;
+      window._reviewData = reviewData;
+      renderCity(data);
+      if (reviewData) renderCityReviews(reviewData);
+    }).catch(() => {
+      document.getElementById('city-loading').textContent = 'Error loading data';
+    });
+
+    function reportReview(reviewId, btn) {
+      const key = 'pakspeed_report_' + reviewId;
+      const last = localStorage.getItem(key);
+      if (last && Date.now() - Number(last) < 86400000) {
+        btn.classList.add('reported');
+        btn.querySelector('span').textContent = currentLang !== 'en' ? 'رپورٹ ہوگیا' : 'Reported';
+        return;
+      }
+      fetch(`https://pakspeed-worker.qaisar-roonjha.workers.dev/api/reviews/${reviewId}/report`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{}'
+      }).then(r => r.json()).then(data => {
+        if (data.success) {
+          localStorage.setItem(key, Date.now());
+          btn.classList.add('reported');
+          btn.querySelector('span').textContent = currentLang !== 'en' ? 'رپورٹ ہوگیا' : 'Reported';
+          if (data.hidden) {
+            const card = btn.closest('.city-review-card');
+            if (card) { card.style.opacity = '0.3'; setTimeout(() => card.remove(), 1000); }
+          }
+        }
+      }).catch(() => {});
+    }
+
+    function markAlreadyReported() {
+      document.querySelectorAll('.review-report-btn').forEach(btn => {
+        const card = btn.closest('[data-review-id]');
+        if (!card) return;
+        const last = localStorage.getItem('pakspeed_report_' + card.dataset.reviewId);
+        if (last && Date.now() - Number(last) < 86400000) {
+          btn.classList.add('reported');
+          btn.querySelector('span').textContent = currentLang !== 'en' ? 'رپورٹ ہوگیا' : 'Reported';
+        }
+      });
+    }
+  </script>
+</body>
+</html>

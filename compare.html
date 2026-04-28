@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ISP Speed Comparison Tool Pakistan — PakSpeed | سپیڈ موازنہ</title>
+  <meta name="description" content="Compare internet speeds between cities and ISPs in Pakistan. Side-by-side download, upload, and ping comparison based on real speed test data. شہروں اور آئی ایس پیز کی سپیڈ کا موازنہ کریں۔">
+  <link rel="canonical" href="https://pakspeed.com/compare.html">
+  <link rel="alternate" hreflang="ur" href="https://pakspeed.com/compare.html?lang=ur">
+  <link rel="alternate" hreflang="en" href="https://pakspeed.com/compare.html?lang=en">
+  <link rel="alternate" hreflang="x-default" href="https://pakspeed.com/compare.html">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png">
+  <meta name="theme-color" content="#01411C">
+    <meta name="robots" content="index, follow">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://pakspeed.com/compare.html">
+  <meta property="og:title" content="Speed Comparison — PakSpeed | سپیڈ موازنہ">
+  <meta property="og:description" content="Compare internet speeds between cities and ISPs in Pakistan. Real speed test data comparison.">
+  <meta property="og:image" content="https://pakspeed.com/assets/og-image.jpg">
+  <meta property="og:locale" content="ur_PK">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:site_name" content="PakSpeed">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Speed Comparison — PakSpeed">
+  <meta name="twitter:description" content="Compare internet speeds between cities and ISPs in Pakistan.">
+  <meta name="twitter:image" content="https://pakspeed.com/assets/og-image.jpg">
+  <meta name="twitter:site" content="@PakSpeed">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "PakSpeed", "item": "https://pakspeed.com/"},
+      {"@type": "ListItem", "position": 2, "name": "Speed Comparison"}
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Montserrat:wght@800&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" media="print" onload="this.media='all'">
+
+  <!-- Font metric override to reduce CLS -->
+  <style>
+    @font-face { font-family: 'Noto Nastaliq Urdu Fallback'; src: local('Arial'); ascent-override: 110%; descent-override: 50%; line-gap-override: 0%; size-adjust: 120%; }
+  </style>
+  <link rel="stylesheet" href="/css/style.css?v=12" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/css/style.css?v=12"></noscript>
+  <link rel="stylesheet" href="/css/rtl.css?v=4" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/css/rtl.css?v=4"></noscript>
+
+  <style>
+    .cmp-container { max-width: 800px; margin: 0 auto; padding: 2rem 1rem; }
+    .cmp-header { text-align: center; margin-bottom: 2.5rem; }
+    .cmp-title { font-size: 2.2rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .cmp-subtitle { font-size: 1.1rem; color: var(--gray-400); line-height: 1.8; }
+
+    .cmp-cards {
+      display: grid; grid-template-columns: 1fr auto 1fr; gap: 1rem;
+      align-items: stretch; margin-bottom: 2rem;
+    }
+
+    .cmp-card {
+      background: rgba(15, 23, 42, 0.65); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.08); border-radius: 1rem;
+      padding: 1.5rem; text-align: center;
+    }
+
+    .cmp-card-name { font-size: 1.5rem; font-weight: 700; color: var(--white); margin-bottom: 1rem; }
+    .cmp-card-name a { color: var(--white); text-decoration: none; border-bottom: 2px dashed rgba(0,255,136,0.3); }
+    .cmp-card-name a:hover { color: var(--neon-green); border-bottom-color: var(--neon-green); }
+
+    .cmp-stat { margin-bottom: 0.75rem; }
+    .cmp-stat-label { font-size: 0.8rem; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.05em; }
+    .cmp-stat-value { font-family: var(--font-en); font-size: 1.8rem; font-weight: 900; }
+    .cmp-stat-unit { font-size: 0.8rem; color: var(--gray-400); }
+
+    .cmp-vs {
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; font-weight: 900; color: var(--gold);
+      font-family: var(--font-en);
+    }
+
+    .cmp-winner {
+      text-align: center; padding: 1.25rem;
+      background: rgba(0, 255, 136, 0.06); border: 1px solid rgba(0, 255, 136, 0.2);
+      border-radius: 1rem; margin-bottom: 2rem; font-size: 1.1rem; font-weight: 600;
+    }
+    .cmp-winner-name { color: var(--neon-green); font-weight: 800; }
+
+    .cmp-cta { text-align: center; margin-top: 2rem; }
+    .cmp-cta-btn {
+      display: inline-block; padding: 12px 28px; background: var(--neon-green); color: #000;
+      font-weight: 700; font-size: 1rem; border-radius: 12px; text-decoration: none;
+      transition: all 0.2s ease; margin: 0 0.5rem;
+    }
+    .cmp-cta-btn:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(0,255,136,0.3); }
+    .cmp-cta-btn.secondary { background: rgba(255,255,255,0.08); color: var(--white); }
+    .cmp-cta-btn.secondary:hover { background: rgba(255,255,255,0.15); }
+
+    .lb-back {
+      display: inline-flex; align-items: center; gap: 6px; color: var(--neon-green);
+      text-decoration: none; font-weight: 600; font-size: 0.95rem; padding: 8px 16px;
+      border-radius: 8px; background: rgba(0,255,136,0.05); border: 1px solid rgba(0,255,136,0.2);
+      margin-bottom: 2rem; transition: all 0.2s ease;
+    }
+    .lb-back:hover { background: rgba(0,255,136,0.15); }
+
+    .cmp-loading { text-align: center; padding: 4rem; color: var(--gray-400); font-size: 1.1rem; }
+
+    .stat-dl { color: var(--neon-green); }
+    .stat-ul { color: var(--neon-blue); }
+    .stat-ping { color: var(--gold); }
+    .stat-better { position: relative; }
+    .stat-better::after {
+      content: ''; position: absolute; top: -4px; right: -12px;
+      width: 8px; height: 8px; background: var(--neon-green); border-radius: 50%;
+    }
+
+    @media (max-width: 600px) {
+      .cmp-title { font-size: 1.5rem; }
+      .cmp-cards { grid-template-columns: 1fr; }
+      .cmp-vs { padding: 0.5rem 0; }
+      .cmp-stat-value { font-size: 1.5rem; }
+    }
+  </style>    <!-- Google tag (gtag.js) — consent-gated -->
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('consent', 'default', { analytics_storage: 'denied' });
+        function loadGA() {
+            if (document.getElementById('ga-script')) return;
+            var s = document.createElement('script');
+            s.id = 'ga-script'; s.async = true;
+            s.src = 'https://www.googletagmanager.com/gtag/js?id=G-0EGYB6TXS6';
+            document.head.appendChild(s);
+            gtag('js', new Date());
+            gtag('consent', 'update', { analytics_storage: 'granted' });
+            gtag('config', 'G-0EGYB6TXS6');
+        }
+        if (localStorage.getItem('cookie_consent')) loadGA();
+    </script>
+</head>
+
+<body class="lang-ur">
+
+  <header class="header">
+    <div class="header-inner">
+      <a href="/" class="logo">
+        <span class="logo-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00FF88" stroke-width="2.5" stroke-linecap="round">
+            <path d="M12 12L18 6" /><path d="M5 19a9 9 0 0 1 0-14" /><path d="M19 19a9 9 0 0 0 0-14" />
+          </svg>
+        </span>
+        <span class="brand-text" style="font-size: 1.75rem;">Pak<span class="brand-text-accent">Speed</span></span>
+      </a>
+      <div class="header-controls">
+        <a href="/" class="map-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+          </svg>
+          <span class="map-text">Speed Test</span>
+        </a>
+        <button id="btn-lang" class="btn-lang" aria-label="Switch language">English</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="cmp-container">
+    <a href="/" class="lb-back">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+      <span id="back-text">سپیڈ ٹیسٹ</span>
+    </a>
+
+    <div id="cmp-loading" class="cmp-loading">Loading...</div>
+
+    <!-- Noscript fallback: Googlebot sees this content on first crawl pass -->
+    <noscript>
+      <div style="max-width:800px; margin:0 auto; padding:2rem 1rem; color:#94a3b8;">
+        <h1 style="color:#00FF88; font-size:2rem; margin-bottom:1rem;">Compare Internet Speeds in Pakistan — PakSpeed</h1>
+        <p>Compare download speed, upload speed, and ping latency between any two Pakistani cities or ISPs side by side. Based on real crowdsourced speed test data from thousands of users.</p>
+        <p>کسی بھی دو شہروں یا آئی ایس پیز کی انٹرنیٹ سپیڈ کا آمنے سامنے موازنہ کریں۔</p>
+
+        <h2 style="color:#fff; font-size:1.3rem; margin:1.5rem 0 1rem;">Popular Comparisons</h2>
+        <ul style="list-style:none; padding:0;">
+          <li><a href="/compare/PTCL-vs-StormFiber" style="color:#00FF88;">PTCL vs StormFiber</a></li>
+          <li><a href="/compare/Jazz-vs-Zong" style="color:#00FF88;">Jazz vs Zong</a></li>
+          <li><a href="/compare/Lahore-vs-Karachi" style="color:#00FF88;">Lahore vs Karachi</a></li>
+          <li><a href="/compare/Islamabad-vs-Rawalpindi" style="color:#00FF88;">Islamabad vs Rawalpindi</a></li>
+          <li><a href="/compare/Nayatel-vs-PTCL" style="color:#00FF88;">Nayatel vs PTCL</a></li>
+        </ul>
+
+        <h2 style="color:#fff; font-size:1.3rem; margin:1.5rem 0 1rem;">Browse by ISP</h2>
+        <ul style="columns:2; column-gap:2rem; list-style:none; padding:0;">
+          <li><a href="/isp/PTCL" style="color:#00FF88;">PTCL</a></li>
+          <li><a href="/isp/Jazz" style="color:#00FF88;">Jazz</a></li>
+          <li><a href="/isp/Zong" style="color:#00FF88;">Zong</a></li>
+          <li><a href="/isp/Telenor" style="color:#00FF88;">Telenor</a></li>
+          <li><a href="/isp/StormFiber" style="color:#00FF88;">StormFiber</a></li>
+          <li><a href="/isp/Nayatel" style="color:#00FF88;">Nayatel</a></li>
+        </ul>
+
+        <p style="margin-top:1.5rem;"><a href="/leaderboard.html" style="color:#00FF88;">📊 City Rankings</a> · <a href="/" style="color:#00FF88;">🚀 Run Speed Test</a> · <a href="/isp.html" style="color:#00FF88;">📋 ISP Table</a></p>
+      </div>
+    </noscript>
+
+    <div id="cmp-content" style="display:none;">
+
+      <div class="cmp-header">
+        <h1 class="cmp-title" id="cmp-title"></h1>
+        <p class="cmp-subtitle" id="cmp-subtitle"></p>
+      </div>
+
+      <div class="cmp-cards">
+        <div class="cmp-card" id="card-a">
+          <div class="cmp-card-name" id="name-a"></div>
+          <div class="cmp-stat">
+            <div class="cmp-stat-label" id="lbl-dl">Download</div>
+            <div class="cmp-stat-value stat-dl" id="dl-a">—</div>
+            <div class="cmp-stat-unit">Mbps</div>
+          </div>
+          <div class="cmp-stat">
+            <div class="cmp-stat-label" id="lbl-ul">Upload</div>
+            <div class="cmp-stat-value stat-ul" id="ul-a">—</div>
+            <div class="cmp-stat-unit">Mbps</div>
+          </div>
+          <div class="cmp-stat">
+            <div class="cmp-stat-label" id="lbl-ping">Ping</div>
+            <div class="cmp-stat-value stat-ping" id="ping-a">—</div>
+            <div class="cmp-stat-unit">ms</div>
+          </div>
+        </div>
+
+        <div class="cmp-vs">VS</div>
+
+        <div class="cmp-card" id="card-b">
+          <div class="cmp-card-name" id="name-b"></div>
+          <div class="cmp-stat">
+            <div class="cmp-stat-label">Download</div>
+            <div class="cmp-stat-value stat-dl" id="dl-b">—</div>
+            <div class="cmp-stat-unit">Mbps</div>
+          </div>
+          <div class="cmp-stat">
+            <div class="cmp-stat-label">Upload</div>
+            <div class="cmp-stat-value stat-ul" id="ul-b">—</div>
+            <div class="cmp-stat-unit">Mbps</div>
+          </div>
+          <div class="cmp-stat">
+            <div class="cmp-stat-label">Ping</div>
+            <div class="cmp-stat-value stat-ping" id="ping-b">—</div>
+            <div class="cmp-stat-unit">ms</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cmp-winner" id="cmp-winner"></div>
+
+      <div class="cmp-cta" id="cmp-cta"></div>
+    </div>
+    <div style="margin: 2rem auto 0; max-width: 700px; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; padding: 0 1rem;">
+      <a href="/best-isp.html" style="background: rgba(0,255,136,0.08); border: 1px solid rgba(0,255,136,0.2); border-radius: 8px; padding: 10px 16px; color: #00FF88; text-decoration: none; font-size: 0.9rem;" id="cmp-bestisp">بہترین ISP 2026</a>
+      <a href="/leaderboard.html" style="background: rgba(0,255,136,0.08); border: 1px solid rgba(0,255,136,0.2); border-radius: 8px; padding: 10px 16px; color: #00FF88; text-decoration: none; font-size: 0.9rem;" id="cmp-lb">شہروں کی رینکنگ</a>
+      <a href="/isp.html" style="background: rgba(0,255,136,0.08); border: 1px solid rgba(0,255,136,0.2); border-radius: 8px; padding: 10px 16px; color: #00FF88; text-decoration: none; font-size: 0.9rem;" id="cmp-isp">تمام ISPs</a>
+      <a href="/report.html" style="background: rgba(0,255,136,0.08); border: 1px solid rgba(0,255,136,0.2); border-radius: 8px; padding: 10px 16px; color: #00FF88; text-decoration: none; font-size: 0.9rem;" id="cmp-report">آج کی رپورٹ</a>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="https://www.urduai.org" target="_blank" rel="noopener noreferrer"
+          style="text-decoration: none; font-family: 'Montserrat', sans-serif; font-weight: 800; color: white;">Urdu<span
+            style="color: #FFB300;">AI</span></a> <span id="footer-init-text">کی ایک پہل</span>
+      </div>
+      <div class="made-in-pk">
+        <span class="pk-flag">🇵🇰</span>
+        <span id="footer-madein">پاکستان میں بنایا گیا</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const WORKER = 'https://pakspeed-worker.qaisar-roonjha.workers.dev/api';
+    let currentLang = localStorage.getItem('pakspeed_lang') || 'ur';
+
+    // Extract A and B from URL: /compare/X-vs-Y
+    const cmpMatch = window.location.pathname.match(/^\/compare\/(.+)-vs-(.+)$/i);
+    if (!cmpMatch) { window.location.href = '/'; }
+    const nameA = decodeURIComponent(cmpMatch[1]);
+    const nameB = decodeURIComponent(cmpMatch[2]);
+
+    function applyLang(lang) {
+      currentLang = lang;
+      localStorage.setItem('pakspeed_lang', lang);
+      document.documentElement.lang = lang;
+      document.documentElement.dir = lang === 'ur' ? 'rtl' : 'ltr';
+      document.body.className = lang === 'ur' ? 'lang-ur' : 'lang-en';
+      document.getElementById('btn-lang').textContent = lang === 'ur' ? 'English' : 'اردو';
+      document.getElementById('back-text').textContent = lang === 'ur' ? 'سپیڈ ٹیسٹ' : 'Speed Test';
+      document.getElementById('footer-madein').textContent = lang === 'ur' ? 'پاکستان میں بنایا گیا' : 'Made in Pakistan';
+      document.getElementById('footer-init-text').textContent = lang === 'ur' ? 'کی ایک پہل' : 'An initiative by';
+    }
+
+    applyLang(currentLang);
+    document.getElementById('btn-lang').addEventListener('click', () => {
+      applyLang(currentLang === 'ur' ? 'en' : 'ur');
+      if (window._cmpData) renderComparison(window._cmpData);
+    });
+
+    async function loadComparison() {
+      let type = 'city';
+      let dataA, dataB;
+      try {
+        const [rA, rB] = await Promise.all([
+          fetch(`${WORKER}/city-stats?city=${encodeURIComponent(nameA)}`),
+          fetch(`${WORKER}/city-stats?city=${encodeURIComponent(nameB)}`)
+        ]);
+        dataA = await rA.json();
+        dataB = await rB.json();
+
+        if (!dataA?.city?.total_tests || !dataB?.city?.total_tests) {
+          const [iA, iB] = await Promise.all([
+            fetch(`${WORKER}/isp-stats?isp=${encodeURIComponent(nameA)}`),
+            fetch(`${WORKER}/isp-stats?isp=${encodeURIComponent(nameB)}`)
+          ]);
+          dataA = await iA.json();
+          dataB = await iB.json();
+          type = 'isp';
+        }
+      } catch (e) {
+        document.getElementById('cmp-loading').textContent = 'Error loading data';
+        return;
+      }
+
+      window._cmpData = { dataA, dataB, type };
+      renderComparison(window._cmpData);
+    }
+
+    function renderComparison({ dataA, dataB, type }) {
+      const statsA = type === 'city' ? dataA?.city : dataA?.isp;
+      const statsB = type === 'city' ? dataB?.city : dataB?.isp;
+
+      if (!statsA?.total_tests && !statsB?.total_tests) {
+        document.getElementById('cmp-loading').textContent = 'No data available';
+        return;
+      }
+
+      const isUrdu = currentLang === 'ur';
+      const linkBase = type === 'city' ? '/city' : '/isp';
+
+      document.getElementById('cmp-title').textContent = isUrdu
+        ? `${nameA} بمقابلہ ${nameB}`
+        : `${nameA} vs ${nameB}`;
+      document.getElementById('cmp-subtitle').textContent = isUrdu
+        ? 'انٹرنیٹ سپیڈ کا موازنہ — حقیقی ٹیسٹ ڈیٹا پر مبنی'
+        : 'Internet speed comparison — based on real test data';
+
+      document.getElementById('name-a').innerHTML = `<a href="${linkBase}/${encodeURIComponent(nameA)}">${nameA}</a>`;
+      document.getElementById('name-b').innerHTML = `<a href="${linkBase}/${encodeURIComponent(nameB)}">${nameB}</a>`;
+
+      const dlA = statsA?.avg_download || '—';
+      const dlB = statsB?.avg_download || '—';
+      const ulA = statsA?.avg_upload || '—';
+      const ulB = statsB?.avg_upload || '—';
+      const pingA = statsA?.avg_ping || '—';
+      const pingB = statsB?.avg_ping || '—';
+
+      document.getElementById('dl-a').textContent = dlA;
+      document.getElementById('dl-b').textContent = dlB;
+      document.getElementById('ul-a').textContent = ulA;
+      document.getElementById('ul-b').textContent = ulB;
+      document.getElementById('ping-a').textContent = pingA;
+      document.getElementById('ping-b').textContent = pingB;
+
+      // Winner
+      const numDlA = Number(dlA), numDlB = Number(dlB);
+      const winner = document.getElementById('cmp-winner');
+      if (numDlA > numDlB) {
+        winner.innerHTML = isUrdu
+          ? `<span class="cmp-winner-name">${nameA}</span> کی سپیڈ تیز ہے!`
+          : `<span class="cmp-winner-name">${nameA}</span> has faster internet!`;
+      } else if (numDlB > numDlA) {
+        winner.innerHTML = isUrdu
+          ? `<span class="cmp-winner-name">${nameB}</span> کی سپیڈ تیز ہے!`
+          : `<span class="cmp-winner-name">${nameB}</span> has faster internet!`;
+      } else {
+        winner.textContent = isUrdu ? 'دونوں کی سپیڈ برابر ہے' : 'Both have similar speeds';
+      }
+
+      // CTA links
+      document.getElementById('cmp-cta').innerHTML = `
+        <a href="${linkBase}/${encodeURIComponent(nameA)}" class="cmp-cta-btn secondary">${nameA}</a>
+        <a href="/" class="cmp-cta-btn">${isUrdu ? 'سپیڈ ٹیسٹ' : 'Speed Test'}</a>
+        <a href="${linkBase}/${encodeURIComponent(nameB)}" class="cmp-cta-btn secondary">${nameB}</a>
+      `;
+
+      document.getElementById('cmp-loading').style.display = 'none';
+      document.getElementById('cmp-content').style.display = '';
+    }
+
+    loadComparison();
+  </script>
+</body>
+</html>

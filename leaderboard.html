@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Today's City Rankings — PakSpeed | آج کی رینکنگ</title>
+  <meta name="description" content="Which Pakistani city has the fastest internet today? Live rankings of Lahore, Karachi, Islamabad, and 20+ cities by download speed, upload, and ping. آج کون سا شہر سب سے تیز؟ شہروں کی لائیو رینکنگ۔">
+  <link rel="canonical" href="https://pakspeed.com/leaderboard.html">
+  <link rel="alternate" hreflang="ur" href="https://pakspeed.com/leaderboard.html?lang=ur">
+  <link rel="alternate" hreflang="en" href="https://pakspeed.com/leaderboard.html?lang=en">
+  <link rel="alternate" hreflang="x-default" href="https://pakspeed.com/leaderboard.html">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png">
+  <meta name="theme-color" content="#01411C">
+    <meta name="robots" content="index, follow">
+
+  <!-- OG Tags -->
+  <meta property="og:title" content="Today's City Rankings — PakSpeed | آج کی رینکنگ">
+  <meta property="og:description" content="Which Pakistani city has the fastest internet today? Real speed test data updated daily.">
+  <meta property="og:url" content="https://pakspeed.com/leaderboard.html">
+  <meta property="og:image" content="https://pakspeed.com/assets/og-image.jpg">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="PakSpeed">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Today's City Rankings — PakSpeed">
+  <meta name="twitter:description" content="Which Pakistani city has the fastest internet today? آج کون سا شہر سب سے تیز؟">
+  <meta name="twitter:image" content="https://pakspeed.com/assets/og-image.jpg">
+  <meta name="twitter:site" content="@PakSpeed">
+
+  <!-- Breadcrumb + Dataset Schema -->
+  <script type="application/ld+json">
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "PakSpeed", "item": "https://pakspeed.com/"},
+        {"@type": "ListItem", "position": 2, "name": "City Rankings"}
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Dataset",
+      "name": "Pakistan City Internet Speed Rankings",
+      "alternateName": "پاکستان شہروں کی انٹرنیٹ سپیڈ رینکنگ",
+      "description": "Daily crowdsourced internet speed test data for Pakistani cities including download speed, upload speed, and ping latency. Updated in real-time from user speed tests.",
+      "url": "https://pakspeed.com/leaderboard.html",
+      "license": "https://pakspeed.com/terms.html",
+      "isAccessibleForFree": true,
+      "creator": {
+        "@type": "Organization",
+        "name": "PakSpeed",
+        "url": "https://pakspeed.com"
+      },
+      "spatialCoverage": {
+        "@type": "Place",
+        "name": "Pakistan"
+      },
+      "temporalCoverage": "2025/..",
+      "variableMeasured": [
+        {"@type": "PropertyValue", "name": "Download Speed", "unitText": "Mbps"},
+        {"@type": "PropertyValue", "name": "Upload Speed", "unitText": "Mbps"},
+        {"@type": "PropertyValue", "name": "Ping Latency", "unitText": "ms"}
+      ],
+      "measurementTechnique": "Cloudflare Edge CDN speed test with multi-stream TCP connections",
+      "keywords": ["internet speed", "Pakistan", "ISP", "broadband", "city ranking", "download speed"]
+    }
+  ]
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Montserrat:wght@800&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" media="print" onload="this.media='all'">
+
+  <!-- Font metric override to reduce CLS from Nastaliq swap -->
+  <style>
+    @font-face {
+      font-family: 'Noto Nastaliq Urdu Fallback';
+      src: local('Arial');
+      ascent-override: 110%;
+      descent-override: 50%;
+      line-gap-override: 0%;
+      size-adjust: 120%;
+    }
+  </style>
+  <!-- Full CSS loaded async (non-render-blocking) -->
+  <link rel="stylesheet" href="/css/style.css?v=12" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/css/style.css?v=12"></noscript>
+  <link rel="stylesheet" href="/css/rtl.css?v=4" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/css/rtl.css?v=4"></noscript>
+
+  <style>
+    .lb-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+    }
+
+    .lb-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .lb-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .lb-date {
+      font-family: var(--font-en);
+      font-size: 0.95rem;
+      color: var(--neon-green);
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+      opacity: 0.8;
+    }
+
+    .lb-subtitle {
+      font-size: 1.2rem;
+      color: var(--gray-400);
+      line-height: 2;
+    }
+
+    .lb-table-wrap {
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 1.25rem;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    }
+
+    .lb-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+    }
+
+    .lb-table thead {
+      background: rgba(0, 255, 136, 0.06);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .lb-table th {
+      padding: 1rem 0.75rem;
+      font-weight: 700;
+      color: var(--neon-green);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      text-align: center;
+    }
+
+    .lb-table th:first-child,
+    .lb-table td:first-child {
+      text-align: center;
+      width: 50px;
+    }
+
+    .lb-table th:nth-child(2),
+    .lb-table td:nth-child(2) {
+      text-align: start;
+    }
+
+    .lb-table td {
+      padding: 0.875rem 0.75rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      text-align: center;
+    }
+
+    .lb-table tbody tr:hover {
+      background: rgba(0, 255, 136, 0.03);
+    }
+
+    .lb-rank {
+      font-family: var(--font-en);
+      font-weight: 800;
+      font-size: 1.1rem;
+    }
+
+    .lb-rank-1 { color: #FFD700; }
+    .lb-rank-2 { color: #C0C0C0; }
+    .lb-rank-3 { color: #CD7F32; }
+
+    .lb-city {
+      font-weight: 600;
+      color: var(--white);
+    }
+
+    .lb-city a {
+      color: var(--white);
+      text-decoration: none;
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.3);
+      transition: all 0.2s ease;
+    }
+
+    .lb-city a:hover {
+      color: var(--neon-green);
+      border-bottom-color: var(--neon-green);
+    }
+
+    .lb-speed {
+      font-family: var(--font-en);
+      font-weight: 800;
+      color: var(--neon-green);
+    }
+
+    .lb-upload {
+      font-family: var(--font-en);
+      font-weight: 600;
+      color: var(--neon-blue);
+    }
+
+    .lb-ping {
+      font-family: var(--font-en);
+      font-weight: 600;
+      color: var(--gold);
+    }
+
+    .lb-tests {
+      font-family: var(--font-en);
+      font-weight: 500;
+      color: var(--gray-400);
+      font-size: 0.85rem;
+    }
+
+    .lb-medal {
+      font-size: 1.3rem;
+      margin-inline-end: 4px;
+    }
+
+    .lb-loading {
+      text-align: center;
+      padding: 3rem;
+      color: var(--gray-400);
+      font-size: 1.1rem;
+    }
+
+    .lb-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--neon-green);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 8px 16px;
+      border-radius: 8px;
+      background: rgba(0, 255, 136, 0.05);
+      border: 1px solid rgba(0, 255, 136, 0.2);
+      margin-bottom: 2rem;
+      transition: all 0.2s ease;
+    }
+
+    .lb-back:hover {
+      background: rgba(0, 255, 136, 0.15);
+    }
+
+    .lb-nav {
+      display: flex;
+      gap: 0.75rem;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+
+    .lb-nav a {
+      padding: 8px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.2s ease;
+    }
+
+    .lb-nav a.active {
+      background: rgba(0, 255, 136, 0.15);
+      color: var(--neon-green);
+      border: 1px solid rgba(0, 255, 136, 0.3);
+    }
+
+    .lb-nav a:not(.active) {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--gray-400);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .lb-nav a:not(.active):hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--white);
+    }
+
+    @media (max-width: 600px) {
+      .lb-title { font-size: 1.75rem; }
+      .lb-table { font-size: 0.85rem; }
+      .lb-table th, .lb-table td { padding: 0.75rem 0.5rem; }
+      /* Hide upload column on mobile */
+      .lb-table th:nth-child(4),
+      .lb-table td:nth-child(4) { display: none; }
+    }
+  </style>    <!-- Google tag (gtag.js) — consent-gated -->
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('consent', 'default', { analytics_storage: 'denied' });
+        function loadGA() {
+            if (document.getElementById('ga-script')) return;
+            var s = document.createElement('script');
+            s.id = 'ga-script'; s.async = true;
+            s.src = 'https://www.googletagmanager.com/gtag/js?id=G-0EGYB6TXS6';
+            document.head.appendChild(s);
+            gtag('js', new Date());
+            gtag('consent', 'update', { analytics_storage: 'granted' });
+            gtag('config', 'G-0EGYB6TXS6');
+        }
+        if (localStorage.getItem('cookie_consent')) loadGA();
+    </script>
+</head>
+
+<body class="lang-ur">
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-inner">
+      <a href="/" class="logo">
+        <span class="logo-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00FF88" stroke-width="2.5" stroke-linecap="round">
+            <path d="M12 12L18 6" />
+            <path d="M5 19a9 9 0 0 1 0-14" />
+            <path d="M19 19a9 9 0 0 0 0-14" />
+          </svg>
+        </span>
+        <span class="brand-text" style="font-size: 1.75rem;">Pak<span class="brand-text-accent">Speed</span></span>
+      </a>
+      <div class="header-controls">
+        <a href="/ai-reports.html" class="map-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+          </svg>
+          <span class="map-text">AI Reports</span>
+        </a>
+        <a href="/" class="map-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+          </svg>
+          <span class="map-text">Speed Test</span>
+        </a>
+        <button id="btn-lang" class="btn-lang" aria-label="Switch language">English</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="lb-container">
+    <a href="/" class="lb-back">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+      <span id="lb-back-text">Speed Test</span>
+    </a>
+
+    <div class="lb-header">
+      <h1 class="lb-title" id="lb-title">آج کی رینکنگ</h1>
+      <p class="lb-date" id="lb-date"></p>
+      <p class="lb-subtitle" id="lb-subtitle">آج کون سا شہر سب سے تیز؟</p>
+    </div>
+
+    <!-- Tab navigation between City and ISP -->
+    <nav class="lb-nav">
+      <a href="/leaderboard.html" class="active" id="nav-city">
+        <span id="nav-city-text">شہر</span>
+      </a>
+      <a href="/isp.html" id="nav-isp">
+        <span id="nav-isp-text">آئی ایس پی</span>
+      </a>
+    </nav>
+
+    <div class="lb-table-wrap">
+      <div id="lb-loading" class="lb-loading">Loading...</div>
+
+      <!-- Noscript fallback: Googlebot sees this content on first crawl pass -->
+      <noscript>
+        <div style="padding:2rem; color:#94a3b8;">
+          <h2 style="color:#00FF88; font-size:1.5rem; margin-bottom:1rem;">Pakistan City Internet Speed Rankings</h2>
+          <p>Real-time internet speed rankings for Pakistani cities based on crowdsourced speed tests. Data includes average download speed, upload speed, and ping latency measured via Cloudflare Edge CDN.</p>
+          <p>پاکستانی شہروں کی انٹرنیٹ سپیڈ رینکنگ۔ یہ ڈیٹا حقیقی صارفین کے سپیڈ ٹیسٹ سے جمع کیا گیا ہے۔</p>
+
+          <h3 style="color:#fff; font-size:1.2rem; margin:1.5rem 0 0.75rem;">Browse City Speed Data</h3>
+          <ul style="columns:2; column-gap:2rem; list-style:none; padding:0;">
+            <li><a href="/city/Lahore" style="color:#00FF88;">Lahore</a></li>
+            <li><a href="/city/Karachi" style="color:#00FF88;">Karachi</a></li>
+            <li><a href="/city/Islamabad" style="color:#00FF88;">Islamabad</a></li>
+            <li><a href="/city/Rawalpindi" style="color:#00FF88;">Rawalpindi</a></li>
+            <li><a href="/city/Faisalabad" style="color:#00FF88;">Faisalabad</a></li>
+            <li><a href="/city/Multan" style="color:#00FF88;">Multan</a></li>
+            <li><a href="/city/Peshawar" style="color:#00FF88;">Peshawar</a></li>
+            <li><a href="/city/Quetta" style="color:#00FF88;">Quetta</a></li>
+            <li><a href="/city/Sialkot" style="color:#00FF88;">Sialkot</a></li>
+            <li><a href="/city/Gujranwala" style="color:#00FF88;">Gujranwala</a></li>
+          </ul>
+
+          <p style="margin-top:1rem;"><a href="/isp.html" style="color:#00FF88;">📋 ISP Comparison</a> · <a href="/" style="color:#00FF88;">🚀 Run Speed Test</a> · <a href="/compare.html" style="color:#00FF88;">⚖️ Compare Speeds</a></p>
+        </div>
+      </noscript>
+
+      <table class="lb-table" id="lb-table" style="display:none;">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th id="th-city">City</th>
+            <th id="th-dl">Download</th>
+            <th id="th-ul">Upload</th>
+            <th id="th-ping">Ping</th>
+            <th id="th-tests">Tests</th>
+          </tr>
+        </thead>
+        <tbody id="lb-body"></tbody>
+      </table>
+    </div>
+    <div style="margin: 2rem auto 0; max-width: 700px; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; padding: 0 1rem;">
+      <a href="/best-isp.html" style="background: rgba(0,255,136,0.08); border: 1px solid rgba(0,255,136,0.2); border-radius: 8px; padding: 10px 16px; color: #00FF88; text-decoration: none; font-size: 0.9rem;" id="lb-bestisp">بہترین ISP 2026</a>
+      <a href="/report.html" style="background: rgba(0,255,136,0.08); border: 1px solid rgba(0,255,136,0.2); border-radius: 8px; padding: 10px 16px; color: #00FF88; text-decoration: none; font-size: 0.9rem;" id="lb-report">آج کی سپیڈ رپورٹ</a>
+      <a href="/compare.html" style="background: rgba(0,255,136,0.08); border: 1px solid rgba(0,255,136,0.2); border-radius: 8px; padding: 10px 16px; color: #00FF88; text-decoration: none; font-size: 0.9rem;" id="lb-compare">ISP موازنہ</a>
+      <a href="/5g.html" style="background: rgba(0,255,136,0.08); border: 1px solid rgba(0,255,136,0.2); border-radius: 8px; padding: 10px 16px; color: #00FF88; text-decoration: none; font-size: 0.9rem;">5G Pakistan</a>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="https://www.urduai.org" target="_blank" rel="noopener noreferrer"
+          style="text-decoration: none; font-family: 'Montserrat', sans-serif; font-weight: 800; color: white;">Urdu<span
+            style="color: #FFB300;">AI</span></a> <span id="footer-init-text">کی ایک پہل</span>
+      </div>
+      <div class="made-in-pk">
+        <span class="pk-flag">🇵🇰</span>
+        <span id="footer-madein">پاکستان میں بنایا گیا</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Language toggle
+    let currentLang = localStorage.getItem('pakspeed_lang') || 'ur';
+
+    const LABELS = {
+      ur: {
+        title: 'آج کی رینکنگ',
+        subtitle: 'آج کون سا شہر سب سے تیز؟',
+        city: 'شہر',
+        dl: 'ڈاؤن لوڈ',
+        ul: 'اپ لوڈ',
+        ping: 'پنگ',
+        tests: 'ٹیسٹ',
+        loading: 'لوڈ ہو رہا ہے...',
+        toggle: 'English',
+        back: 'سپیڈ ٹیسٹ',
+        madein: 'پاکستان میں بنایا گیا',
+        init: 'کی ایک پہل',
+        navCity: 'شہر',
+        navIsp: 'آئی ایس پی'
+      },
+      en: {
+        title: "Today's Rankings",
+        subtitle: 'Which city is the fastest today?',
+        city: 'City',
+        dl: 'Download',
+        ul: 'Upload',
+        ping: 'Ping',
+        tests: 'Tests',
+        loading: 'Loading...',
+        toggle: 'اردو',
+        back: 'Speed Test',
+        madein: 'Made in Pakistan',
+        init: 'An initiative by',
+        navCity: 'Cities',
+        navIsp: 'ISPs'
+      }
+    };
+
+    function applyLang(lang) {
+      currentLang = lang;
+      localStorage.setItem('pakspeed_lang', lang);
+      document.documentElement.lang = lang;
+      document.documentElement.dir = lang === 'ur' ? 'rtl' : 'ltr';
+      document.body.className = lang === 'ur' ? 'lang-ur' : 'lang-en';
+
+      const l = LABELS[lang];
+      document.getElementById('lb-title').textContent = l.title;
+      document.getElementById('lb-subtitle').textContent = l.subtitle;
+      document.getElementById('th-city').textContent = l.city;
+      document.getElementById('th-dl').textContent = l.dl;
+      document.getElementById('th-ul').textContent = l.ul;
+      document.getElementById('th-ping').textContent = l.ping;
+      document.getElementById('th-tests').textContent = l.tests;
+      document.getElementById('lb-loading').textContent = l.loading;
+      document.getElementById('btn-lang').textContent = l.toggle;
+      document.getElementById('lb-back-text').textContent = l.back;
+      document.getElementById('footer-madein').textContent = l.madein;
+      document.getElementById('footer-init-text').textContent = l.init;
+      document.getElementById('nav-city-text').textContent = l.navCity;
+      document.getElementById('nav-isp-text').textContent = l.navIsp;
+
+      // Show today's date in PKT
+      const now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Karachi' }));
+      const dateStr = now.toLocaleDateString(lang === 'ur' ? 'ur-PK' : 'en-PK', {
+        weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
+        timeZone: 'Asia/Karachi'
+      });
+      document.getElementById('lb-date').textContent = dateStr;
+    }
+
+    applyLang(currentLang);
+
+    document.getElementById('btn-lang').addEventListener('click', () => {
+      applyLang(currentLang === 'ur' ? 'en' : 'ur');
+    });
+
+    // Fetch leaderboard data
+    const API = 'https://pakspeed-worker.qaisar-roonjha.workers.dev/api/leaderboard';
+
+    fetch(API)
+      .then(r => r.json())
+      .then(data => {
+        const loading = document.getElementById('lb-loading');
+        const table = document.getElementById('lb-table');
+        const body = document.getElementById('lb-body');
+
+        if (!data.length) {
+          loading.textContent = 'No data yet';
+          return;
+        }
+
+        let html = '';
+        data.forEach((row, i) => {
+          const rank = i + 1;
+          let medal = '';
+          let rankClass = '';
+          if (rank === 1) { medal = '<span class="lb-medal">🥇</span>'; rankClass = 'lb-rank-1'; }
+          else if (rank === 2) { medal = '<span class="lb-medal">🥈</span>'; rankClass = 'lb-rank-2'; }
+          else if (rank === 3) { medal = '<span class="lb-medal">🥉</span>'; rankClass = 'lb-rank-3'; }
+
+          html += '<tr>';
+          html += '<td><span class="lb-rank ' + rankClass + '">' + medal + rank + '</span></td>';
+          html += '<td class="lb-city"><a href="/city/' + encodeURIComponent(row.city) + '">' + row.city + '</a></td>';
+          html += '<td class="lb-speed">' + row.avg_download + ' <small style="color:var(--gray-400);font-weight:400">Mbps</small></td>';
+          html += '<td class="lb-upload">' + row.avg_upload + ' <small style="color:var(--gray-400);font-weight:400">Mbps</small></td>';
+          html += '<td class="lb-ping">' + row.avg_ping + ' <small style="color:var(--gray-400);font-weight:400">ms</small></td>';
+          html += '<td class="lb-tests">' + row.total_tests + '</td>';
+          html += '</tr>';
+        });
+
+        body.innerHTML = html;
+        loading.style.display = 'none';
+        table.style.display = '';
+      })
+      .catch(err => {
+        document.getElementById('lb-loading').textContent = 'Error loading data';
+      });
+  </script>
+</body>
+</html>

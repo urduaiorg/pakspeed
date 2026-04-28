@@ -1,0 +1,316 @@
+{
+  "articles": [
+    {
+      "id": "5g-launch-guide",
+      "filename": "5g-launch-guide.html",
+      "slug": "5g-launch-guide.html",
+      "publishDate": "2026-03-17",
+      "status": "published",
+      "blog": {
+        "cardId": "post-5glaunch",
+        "tagId": "tag-5glaunch",
+        "tagText": "5G",
+        "tagStyle": "background: linear-gradient(135deg, rgba(0,255,136,0.2), rgba(0,212,255,0.2)); color: var(--neon-green);",
+        "titleUr": "پاکستان 5G لانچ: وہ سب کچھ جو آپ کو جاننا ضروری ہے",
+        "titleEn": "Pakistan 5G Launch: Everything You Need to Know",
+        "descUr": "5G کب آئے گا؟ کتنی سپیڈ ملے گی؟ کون سے فون سپورٹ کرتے ہیں؟ مکمل گائیڈ۔",
+        "descEn": "When is 5G coming? What speeds to expect? Which phones support it? Complete guide.",
+        "metaDate": "March 2026",
+        "author": "PakSpeed Research"
+      },
+      "feed": {
+        "title": "Pakistan 5G Launch: Everything You Need to Know",
+        "description": "Complete guide to Pakistan 5G launch timeline, expected speeds, supported phones, and what consumers need to know after the March 2026 spectrum auction.",
+        "creator": "PakSpeed Research",
+        "category": "5G"
+      },
+      "publishedAt": "2026-04-28"
+    },
+    {
+      "id": "phone-5g-support",
+      "filename": "phone-5g-support.html",
+      "slug": "phone-5g-support.html",
+      "publishDate": "2026-03-19",
+      "status": "published",
+      "blog": {
+        "cardId": "post-phone5g",
+        "tagId": "tag-phone5g",
+        "tagText": "Guide",
+        "tagStyle": "background: rgba(0,212,255,0.1); color: var(--neon-blue);",
+        "titleUr": "کیا آپ کا فون 5G سپورٹ کرتا ہے؟ ایسے چیک کریں",
+        "titleEn": "Does My Phone Support 5G? How to Check",
+        "descUr": "اپنے فون کی 5G سپورٹ چیک کرنے کا آسان طریقہ۔ Samsung، iPhone، Xiaomi، OPPO — کون سے ماڈل تیار ہیں؟",
+        "descEn": "Easy way to check 5G support on your phone. Samsung, iPhone, Xiaomi, OPPO — which models are ready?",
+        "metaDate": "March 2026",
+        "author": "PakSpeed Research"
+      },
+      "feed": {
+        "title": "Does My Phone Support 5G? How to Check",
+        "description": "Step-by-step guide to check if your smartphone supports 5G in Pakistan. Covers Samsung, iPhone, Xiaomi, OPPO, and budget 5G phone options.",
+        "creator": "PakSpeed Research",
+        "category": "Guide"
+      },
+      "publishedAt": "2026-04-28"
+    },
+    {
+      "id": "3g-4g-5g-difference",
+      "filename": "3g-4g-5g-difference.html",
+      "slug": "3g-4g-5g-difference.html",
+      "publishDate": "2026-03-24",
+      "status": "published",
+      "blog": {
+        "cardId": "post-345g",
+        "tagId": "tag-345g",
+        "tagText": "Explainer",
+        "tagStyle": "background: linear-gradient(135deg, rgba(255,215,0,0.15), rgba(0,255,136,0.15)); color: #FFD700;",
+        "titleUr": "3G، 4G اور 5G میں کیا فرق ہے؟ آسان الفاظ میں",
+        "titleEn": "3G vs 4G vs 5G: What's the Difference?",
+        "descUr": "سپیڈ، لیٹنسی، کوریج — ہر نسل کا فرق سادہ زبان میں۔ ٹیبل اور حقیقی نمبرز کے ساتھ۔",
+        "descEn": "Speed, latency, coverage — every generation explained simply. With tables and real numbers.",
+        "metaDate": "March 2026",
+        "author": "PakSpeed Research"
+      },
+      "feed": {
+        "title": "3G vs 4G vs 5G: What's the Difference?",
+        "description": "Simple explanation of the differences between 3G, 4G, and 5G networks. Speed comparisons, real-world impact, and what it means for Pakistan users.",
+        "creator": "PakSpeed Research",
+        "category": "Explainer"
+      },
+      "publishedAt": "2026-04-28"
+    },
+    {
+      "id": "why-internet-slow-pakistan",
+      "filename": "why-internet-slow-pakistan.html",
+      "slug": "why-internet-slow-pakistan.html",
+      "publishDate": "2026-03-26",
+      "status": "published",
+      "blog": {
+        "cardId": "post-slownet",
+        "tagId": "tag-slownet",
+        "tagText": "Analysis",
+        "tagStyle": "background: rgba(248,113,113,0.1); color: #f87171;",
+        "titleUr": "پاکستان میں انٹرنیٹ سست کیوں ہے؟ اصل وجوہات",
+        "titleEn": "Why Is Internet Slow in Pakistan? Real Reasons",
+        "descUr": "انفراسٹرکچر، بینڈوتھ شیئرنگ، VPN تھروٹلنگ — پاکستان کی سست انٹرنیٹ کی حقیقی وجوہات۔",
+        "descEn": "Infrastructure, bandwidth sharing, VPN throttling — the real reasons behind Pakistan's slow internet.",
+        "metaDate": "March 2026",
+        "author": "PakSpeed Research"
+      },
+      "feed": {
+        "title": "Why Is Internet Slow in Pakistan? Real Reasons",
+        "description": "Deep analysis of why Pakistan ranks among the slowest countries for internet speed. Infrastructure gaps, submarine cables, ISP practices, and what needs to change.",
+        "creator": "PakSpeed Research",
+        "category": "Analysis"
+      },
+      "publishedAt": "2026-04-28"
+    },
+    {
+      "id": "best-isp-ranking-2026",
+      "filename": "best-isp-ranking-2026.html",
+      "slug": "best-isp-ranking-2026.html",
+      "publishDate": "2026-03-31",
+      "status": "published",
+      "blog": {
+        "cardId": "post-isprank",
+        "tagId": "tag-isprank",
+        "tagText": "Ranking",
+        "tagStyle": "background: linear-gradient(135deg, rgba(255,215,0,0.2), rgba(0,255,136,0.2)); color: #FFD700;",
+        "titleUr": "پاکستان کا بہترین ISP 2026 — ڈیٹا پر مبنی رینکنگ",
+        "titleEn": "Best ISP in Pakistan 2026 — Data-Driven Ranking",
+        "descUr": "14,000+ سپیڈ ٹیسٹس کی بنیاد پر PTCL، Jazz، Zong، StormFiber، Nayatel کی مکمل رینکنگ۔",
+        "descEn": "Complete ranking of PTCL, Jazz, Zong, StormFiber, Nayatel based on 14,000+ speed tests.",
+        "metaDate": "March 2026",
+        "author": "PakSpeed Research"
+      },
+      "feed": {
+        "title": "Best ISP in Pakistan 2026 — Data-Driven Ranking",
+        "description": "Which ISP is fastest in Pakistan? Data-driven ranking of all major ISPs based on real crowdsourced speed test data from PakSpeed.",
+        "creator": "PakSpeed Research",
+        "category": "Ranking"
+      },
+      "publishedAt": "2026-04-28"
+    },
+    {
+      "id": "internet-slow-at-night",
+      "filename": "internet-slow-at-night.html",
+      "slug": "internet-slow-at-night.html",
+      "publishDate": "2026-04-02",
+      "status": "published",
+      "blog": {
+        "cardId": "post-nightslow",
+        "tagId": "tag-nightslow",
+        "tagText": "Explainer",
+        "tagStyle": "background: rgba(139,92,246,0.1); color: #a78bfa;",
+        "titleUr": "رات کو انٹرنیٹ سست کیوں ہو جاتا ہے؟",
+        "titleEn": "Why Internet Slows Down at Night in Pakistan",
+        "descUr": "شام 7 سے 11 بجے تک سپیڈ کیوں گرتی ہے؟ پیک ٹائم، نیٹورک بھیڑ، اور حل۔",
+        "descEn": "Why does speed drop from 7-11 PM? Peak hours, network congestion, and solutions.",
+        "metaDate": "April 2026",
+        "author": "PakSpeed Research"
+      },
+      "feed": {
+        "title": "Why Internet Slows Down at Night in Pakistan",
+        "description": "Explaining why Pakistani internet speeds drop dramatically during evening peak hours (7-11 PM) and practical tips to improve your connection.",
+        "creator": "PakSpeed Research",
+        "category": "Explainer"
+      },
+      "publishedAt": "2026-04-28"
+    },
+    {
+      "id": "improve-internet-speed",
+      "filename": "improve-internet-speed.html",
+      "slug": "improve-internet-speed.html",
+      "publishDate": "2026-04-07",
+      "status": "published",
+      "blog": {
+        "cardId": "post-improve",
+        "tagId": "tag-improve",
+        "tagText": "Guide",
+        "tagStyle": "background: rgba(0,255,136,0.1); color: var(--neon-green);",
+        "titleUr": "پاکستان میں انٹرنیٹ سپیڈ کیسے بہتر کریں؟",
+        "titleEn": "How to Improve Internet Speed in Pakistan",
+        "descUr": "DNS تبدیل کریں، راؤٹر کی جگہ ٹھیک کریں، بینڈ سوئچ کریں — آزمودہ طریقے جو واقعی کام کرتے ہیں۔",
+        "descEn": "Change DNS, fix router placement, switch bands — tested methods that actually work.",
+        "metaDate": "April 2026",
+        "author": "PakSpeed Research"
+      },
+      "feed": {
+        "title": "How to Improve Internet Speed in Pakistan",
+        "description": "Practical, tested tips to boost your internet speed in Pakistan. DNS changes, router optimization, ISP settings, and when to switch providers.",
+        "creator": "PakSpeed Research",
+        "category": "Guide"
+      },
+      "publishedAt": "2026-04-28"
+    },
+    {
+      "id": "best-wifi-router-2026",
+      "filename": "best-wifi-router-2026.html",
+      "slug": "best-wifi-router-2026.html",
+      "publishDate": "2026-04-09",
+      "status": "published",
+      "blog": {
+        "cardId": "post-router",
+        "tagId": "tag-router",
+        "tagText": "Buying Guide",
+        "tagStyle": "background: rgba(0,212,255,0.1); color: var(--neon-blue);",
+        "titleUr": "پاکستان کے لیے بہترین WiFi راؤٹر 2026",
+        "titleEn": "Best WiFi Router for Pakistan 2026",
+        "descUr": "TP-Link، Tenda، Xiaomi — بجٹ سے پریمیم تک، پاکستان کے ISPs کے ساتھ بہترین راؤٹرز۔",
+        "descEn": "TP-Link, Tenda, Xiaomi — budget to premium, best routers for Pakistani ISPs.",
+        "metaDate": "April 2026",
+        "author": "PakSpeed Research"
+      },
+      "feed": {
+        "title": "Best WiFi Router for Pakistan 2026",
+        "description": "Top WiFi routers for Pakistan in 2026. Budget to premium picks compatible with PTCL, StormFiber, Nayatel, and 4G/5G SIM routers.",
+        "creator": "PakSpeed Research",
+        "category": "Buying Guide"
+      },
+      "publishedAt": "2026-04-28"
+    },
+    {
+      "id": "ptcl-vs-stormfiber-vs-nayatel",
+      "filename": "ptcl-vs-stormfiber-vs-nayatel.html",
+      "slug": "ptcl-vs-stormfiber-vs-nayatel.html",
+      "publishDate": "2026-04-14",
+      "status": "published",
+      "blog": {
+        "cardId": "post-fibercomp",
+        "tagId": "tag-fibercomp",
+        "tagText": "Comparison",
+        "tagStyle": "background: rgba(251,191,36,0.1); color: #fbbf24;",
+        "titleUr": "PTCL vs StormFiber vs Nayatel — فائبر موازنہ",
+        "titleEn": "PTCL vs StormFiber vs Nayatel — Fiber Comparison",
+        "descUr": "سپیڈ، قیمت، کوریج، کسٹمر سروس — تینوں فائبر فراہم کنندگان کا تفصیلی موازنہ۔",
+        "descEn": "Speed, price, coverage, customer service — detailed comparison of all three fiber providers.",
+        "metaDate": "April 2026",
+        "author": "PakSpeed Research"
+      },
+      "feed": {
+        "title": "PTCL vs StormFiber vs Nayatel — Fiber Comparison",
+        "description": "Head-to-head comparison of Pakistan's three major fiber internet providers. Real speed data, pricing, coverage maps, and which one to choose.",
+        "creator": "PakSpeed Research",
+        "category": "Comparison"
+      },
+      "publishedAt": "2026-04-28"
+    },
+    {
+      "id": "speed-needed-streaming",
+      "filename": "speed-needed-streaming.html",
+      "slug": "speed-needed-streaming.html",
+      "publishDate": "2026-04-16",
+      "status": "published",
+      "blog": {
+        "cardId": "post-streaming",
+        "tagId": "tag-streaming",
+        "tagText": "Guide",
+        "tagStyle": "background: rgba(0,255,136,0.1); color: var(--neon-green);",
+        "titleUr": "YouTube، Netflix اور گیمنگ کے لیے کتنی انٹرنیٹ سپیڈ چاہیے؟",
+        "titleEn": "Internet Speed Needed for YouTube, Netflix & Gaming",
+        "descUr": "HD ویڈیو، آن لائن گیمنگ، ویڈیو کال — ہر کام کے لیے کتنے Mbps درکار ہیں؟",
+        "descEn": "HD video, online gaming, video calls — how many Mbps do you need for each activity?",
+        "metaDate": "April 2026",
+        "author": "PakSpeed Research"
+      },
+      "feed": {
+        "title": "Internet Speed Needed for YouTube, Netflix & Gaming",
+        "description": "How much internet speed do you actually need? Recommended Mbps for YouTube, Netflix, online gaming, Zoom calls, and working from home in Pakistan.",
+        "creator": "PakSpeed Research",
+        "category": "Guide"
+      },
+      "publishedAt": "2026-04-28"
+    },
+    {
+      "id": "pta-complaint-guide",
+      "filename": "pta-complaint-guide.html",
+      "slug": "pta-complaint-guide.html",
+      "publishDate": "2026-04-21",
+      "status": "published",
+      "blog": {
+        "cardId": "post-ptacomplaint",
+        "tagId": "tag-ptacomplaint",
+        "tagText": "Guide",
+        "tagStyle": "background: rgba(248,113,113,0.1); color: #f87171;",
+        "titleUr": "PTA میں سست انٹرنیٹ کی شکایت کیسے درج کریں؟",
+        "titleEn": "How to File a PTA Complaint About Slow Internet",
+        "descUr": "PTA شکایت پورٹل، ہیلپ لائن 0800-28786 — قدم بہ قدم طریقہ جو واقعی کام کرتا ہے۔",
+        "descEn": "PTA complaint portal, helpline 0800-28786 — step-by-step method that actually works.",
+        "metaDate": "April 2026",
+        "author": "PakSpeed Research"
+      },
+      "feed": {
+        "title": "How to File a PTA Complaint About Slow Internet",
+        "description": "Step-by-step guide to filing a complaint with Pakistan Telecommunication Authority about slow internet. Portal, helpline, and tips for getting results.",
+        "creator": "PakSpeed Research",
+        "category": "Guide"
+      },
+      "publishedAt": "2026-04-28"
+    },
+    {
+      "id": "internet-speed-by-province",
+      "filename": "internet-speed-by-province.html",
+      "slug": "internet-speed-by-province.html",
+      "publishDate": "2026-04-23",
+      "status": "published",
+      "blog": {
+        "cardId": "post-province",
+        "tagId": "tag-province",
+        "tagText": "Data",
+        "tagStyle": "background: linear-gradient(135deg, rgba(0,255,136,0.15), rgba(0,212,255,0.15)); color: var(--neon-green);",
+        "titleUr": "پاکستان کی انٹرنیٹ سپیڈ صوبے کے لحاظ سے — 2026 ڈیٹا",
+        "titleEn": "Pakistan Internet Speed by Province — 2026 Data",
+        "descUr": "پنجاب، سندھ، KPK، بلوچستان — کس صوبے میں سب سے تیز انٹرنیٹ ہے؟ حقیقی ڈیٹا۔",
+        "descEn": "Punjab, Sindh, KPK, Balochistan — which province has the fastest internet? Real data.",
+        "metaDate": "April 2026",
+        "author": "PakSpeed Research"
+      },
+      "feed": {
+        "title": "Pakistan Internet Speed by Province — 2026 Data",
+        "description": "Province-by-province breakdown of internet speeds in Pakistan. Real crowdsourced data comparing Punjab, Sindh, KPK, Balochistan, and more.",
+        "creator": "PakSpeed Research",
+        "category": "Data"
+      },
+      "publishedAt": "2026-04-28"
+    }
+  ]
+}

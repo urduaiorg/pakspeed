@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 — Page Not Found | PakSpeed</title>
+    <meta name="description" content="Page not found. Return to PakSpeed to run a free internet speed test, compare ISPs, or explore city rankings across Pakistan. یہ صفحہ موجود نہیں — واپس جائیں۔">
+    <meta name="robots" content="noindex, follow">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png">
+    <meta name="theme-color" content="#01411C">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Montserrat:wght@800&display=swap">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #050b14;
+            color: #f8fafc;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+        }
+        .error-code {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(5rem, 15vw, 10rem);
+            font-weight: 800;
+            color: #00FF88;
+            line-height: 1;
+            opacity: 0.15;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -60%);
+            z-index: 0;
+            user-select: none;
+        }
+        .content {
+            position: relative;
+            z-index: 1;
+            max-width: 520px;
+        }
+        .brand {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 1.6rem;
+            margin-bottom: 24px;
+        }
+        .brand-accent { color: #00FF88; }
+        h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #fff;
+        }
+        p {
+            color: #94a3b8;
+            font-size: 1.05rem;
+            margin-bottom: 28px;
+            line-height: 1.6;
+        }
+        .links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+        }
+        .links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 12px 22px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+        }
+        .btn-primary {
+            background: #00FF88;
+            color: #050b14;
+        }
+        .btn-primary:hover { background: #00e67a; }
+        .btn-secondary {
+            background: rgba(30, 41, 59, 0.6);
+            color: #f8fafc;
+            border: 1px solid #334155;
+        }
+        .btn-secondary:hover { background: rgba(30, 41, 59, 0.9); }
+        .footer-note {
+            margin-top: 48px;
+            color: #475569;
+            font-size: 0.85rem;
+        }
+    </style>    <!-- Google tag (gtag.js) — consent-gated -->
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('consent', 'default', { analytics_storage: 'denied' });
+        function loadGA() {
+            if (document.getElementById('ga-script')) return;
+            var s = document.createElement('script');
+            s.id = 'ga-script'; s.async = true;
+            s.src = 'https://www.googletagmanager.com/gtag/js?id=G-0EGYB6TXS6';
+            document.head.appendChild(s);
+            gtag('js', new Date());
+            gtag('consent', 'update', { analytics_storage: 'granted' });
+            gtag('config', 'G-0EGYB6TXS6');
+        }
+        if (localStorage.getItem('cookie_consent')) loadGA();
+    </script>
+</head>
+
+<body>
+    <div class="error-code">404</div>
+    <div class="content">
+        <div class="brand">Pak<span class="brand-accent">Speed</span></div>
+        <h1>Page Not Found</h1>
+        <p>The page you're looking for doesn't exist or has been moved. Test your internet speed or explore Pakistan's ISP rankings below.</p>
+        <div class="links">
+            <a href="/" class="btn-primary">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                Speed Test
+            </a>
+            <a href="/leaderboard.html" class="btn-secondary">City Rankings</a>
+            <a href="/isp.html" class="btn-secondary">ISP Comparison</a>
+            <a href="/guide.html" class="btn-secondary">Speed Guide</a>
+        </div>
+        <p class="footer-note">یہ صفحہ موجود نہیں ہے۔ اپنی انٹرنیٹ سپیڈ چیک کرنے کے لیے اوپر کلک کریں۔</p>
+    </div>
+</body>
+
+</html>

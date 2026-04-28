@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Monthly Internet Report — PakSpeed | ماہانہ انٹرنیٹ رپورٹ</title>
+  <meta name="description" content="Monthly Pakistan internet speed report with average download and upload speeds by city and ISP. Track broadband trends, insights, and infrastructure health. پاکستان ماہانہ انٹرنیٹ سپیڈ رپورٹ اور تجزیات۔">
+  <link rel="canonical" href="https://pakspeed.com/report.html">
+  <link rel="alternate" hreflang="ur" href="https://pakspeed.com/report.html?lang=ur">
+  <link rel="alternate" hreflang="en" href="https://pakspeed.com/report.html?lang=en">
+  <link rel="alternate" hreflang="x-default" href="https://pakspeed.com/report.html">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png">
+  <meta name="theme-color" content="#01411C">
+    <meta name="robots" content="index, follow">
+
+  <meta property="og:title" content="Monthly Internet Report — PakSpeed">
+  <meta property="og:description" content="Monthly Pakistan internet speed data. Trends by city and ISP.">
+  <meta property="og:url" content="https://pakspeed.com/report.html">
+  <meta property="og:image" content="https://pakspeed.com/assets/og-image.jpg">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="PakSpeed">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Monthly Internet Report — PakSpeed">
+  <meta name="twitter:description" content="Monthly Pakistan internet speed report with city and ISP trends.">
+  <meta name="twitter:image" content="https://pakspeed.com/assets/og-image.jpg">
+  <meta name="twitter:site" content="@PakSpeed">
+
+  <script type="application/ld+json">
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "PakSpeed", "item": "https://pakspeed.com/"},
+        {"@type": "ListItem", "position": 2, "name": "Monthly Report"}
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Report",
+      "name": "Pakistan Monthly Internet Speed Report",
+      "description": "Monthly aggregated internet speed test data for Pakistan cities and ISPs.",
+      "url": "https://pakspeed.com/report.html",
+      "publisher": {"@type": "Organization", "name": "PakSpeed", "url": "https://pakspeed.com"},
+      "about": {"@type": "Thing", "name": "Internet Speed in Pakistan"},
+      "inLanguage": ["ur", "en"]
+    }
+  ]
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Montserrat:wght@800&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" media="print" onload="this.media='all'">
+
+  <!-- Font metric override to reduce CLS from Nastaliq swap -->
+  <style>
+    @font-face {
+      font-family: 'Noto Nastaliq Urdu Fallback';
+      src: local('Arial');
+      ascent-override: 110%;
+      descent-override: 50%;
+      line-gap-override: 0%;
+      size-adjust: 120%;
+    }
+  </style>
+  <!-- Full CSS loaded async (non-render-blocking) -->
+  <link rel="stylesheet" href="/css/style.css?v=12" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/css/style.css?v=12"></noscript>
+  <link rel="stylesheet" href="/css/rtl.css?v=4" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/css/rtl.css?v=4"></noscript>
+
+  <style>
+    .rpt-container { max-width: 800px; margin: 0 auto; padding: 2rem 1rem; }
+    .rpt-header { text-align: center; margin-bottom: 2rem; }
+    .rpt-title { font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .rpt-month { font-family: var(--font-en); color: var(--neon-green); font-weight: 700; font-size: 1.1rem; }
+    .rpt-subtitle { font-size: 1.1rem; color: var(--gray-400); line-height: 2; margin-top: 0.5rem; }
+
+    .rpt-section {
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 1.25rem;
+      padding: 1.75rem;
+      margin-bottom: 1.5rem;
+    }
+    .rpt-section h2 { color: var(--neon-green); font-size: 1.3rem; margin-bottom: 1rem; }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    .stat-box {
+      background: rgba(0, 255, 136, 0.04);
+      border: 1px solid rgba(0, 255, 136, 0.15);
+      border-radius: 12px;
+      padding: 1.25rem;
+      text-align: center;
+    }
+    .stat-value {
+      font-family: var(--font-en);
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--neon-green);
+    }
+    .stat-label { color: var(--gray-400); font-size: 0.85rem; margin-top: 4px; }
+    .stat-unit { color: #64748b; font-size: 0.8rem; font-family: var(--font-en); }
+
+    .rpt-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+    .rpt-table thead { background: rgba(0, 255, 136, 0.06); }
+    .rpt-table th {
+      padding: 0.75rem;
+      color: var(--neon-green);
+      font-weight: 700;
+      text-align: center;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+    }
+    .rpt-table th:first-child, .rpt-table td:first-child { text-align: start; }
+    .rpt-table td {
+      padding: 0.75rem;
+      text-align: center;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      font-family: var(--font-en);
+    }
+    .rpt-table td:first-child { font-family: inherit; font-weight: 600; color: var(--white); }
+
+    .rpt-loading { text-align: center; padding: 2rem; color: var(--gray-400); }
+
+    .lb-back {
+      display: inline-flex; align-items: center; gap: 6px; color: var(--neon-green);
+      text-decoration: none; font-weight: 600; font-size: 0.95rem; padding: 8px 16px;
+      border-radius: 8px; background: rgba(0,255,136,0.05); border: 1px solid rgba(0,255,136,0.2);
+      margin-bottom: 2rem; transition: all 0.2s ease;
+    }
+    .lb-back:hover { background: rgba(0,255,136,0.15); }
+
+    /* AI Alerts Section */
+    .alert-card {
+      background: rgba(15, 23, 42, 0.65);
+      border-radius: 12px;
+      padding: 1.25rem;
+      border-left: 4px solid;
+      margin-bottom: 0.75rem;
+    }
+    .alert-throttle { border-left-color: #E74C3C; }
+    .alert-degrade { border-left-color: #F39C12; }
+    .alert-card-header {
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.75rem;
+    }
+    .alert-isp { font-weight: 700; font-size: 1.05rem; color: #fff; }
+    .alert-city { color: var(--gray-400); font-size: 0.85rem; }
+    .alert-type {
+      font-family: var(--font-en); font-size: 0.75rem; font-weight: 700;
+      padding: 3px 10px; border-radius: 20px; text-transform: uppercase;
+    }
+    .alert-type-throttle { background: rgba(231,76,60,0.2); color: #E74C3C; }
+    .alert-type-degrade { background: rgba(243,156,18,0.2); color: #F39C12; }
+    .alert-meta {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 0.5rem; font-size: 0.85rem;
+    }
+    .alert-meta-item { color: var(--gray-400); }
+    .alert-meta-item span { font-family: var(--font-en); font-weight: 600; }
+    .alert-meta-item .speed-expected { color: var(--neon-green); }
+    .alert-meta-item .speed-actual { color: #E74C3C; }
+
+    .alert-count-badge {
+      display: inline-block; font-family: var(--font-en); font-weight: 700;
+      font-size: 0.85rem; padding: 4px 12px; border-radius: 20px;
+      background: rgba(231,76,60,0.15); color: #E74C3C; margin-inline-start: 0.5rem;
+    }
+    .alert-count-badge.none { background: rgba(0,255,136,0.1); color: var(--neon-green); }
+
+    .alert-empty {
+      text-align: center; padding: 2rem; color: var(--gray-400);
+      font-size: 0.95rem;
+    }
+
+    .confidence-bar {
+      height: 6px; border-radius: 3px; background: rgba(255,255,255,0.08);
+      margin-top: 0.5rem; overflow: hidden;
+    }
+    .confidence-fill { height: 100%; border-radius: 3px; transition: width 0.4s ease; }
+
+    /* Citizen Voice Section */
+    .sentiment-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1rem; margin-bottom: 1.25rem;
+    }
+    .sentiment-box {
+      background: rgba(0, 255, 136, 0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px; padding: 1.25rem; text-align: center;
+    }
+    .sentiment-box .stat-value { font-size: 1.75rem; }
+    .sentiment-positive { color: #00FF88; }
+    .sentiment-neutral { color: #FFD700; }
+    .sentiment-negative { color: #E74C3C; }
+
+    .isp-sentiment-card {
+      background: rgba(15, 23, 42, 0.65);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px; padding: 1.25rem; margin-bottom: 0.75rem;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 0.75rem;
+    }
+    .isp-sentiment-name { font-weight: 700; font-size: 1.05rem; color: #fff; }
+    .isp-sentiment-stats { display: flex; gap: 1.5rem; align-items: center; }
+    .isp-sentiment-stats .stat-mini {
+      text-align: center; font-size: 0.85rem; color: var(--gray-400);
+    }
+    .isp-sentiment-stats .stat-mini .val {
+      font-family: var(--font-en); font-weight: 700; font-size: 1.15rem; display: block;
+    }
+
+    @media (max-width: 600px) {
+      .rpt-title { font-size: 1.75rem; }
+      .stat-value { font-size: 1.5rem; }
+      .sentiment-grid { grid-template-columns: 1fr; }
+      .alert-meta { grid-template-columns: 1fr 1fr; }
+      .isp-sentiment-card { flex-direction: column; align-items: stretch; }
+      .isp-sentiment-stats { justify-content: space-around; }
+    }
+  </style>    <!-- Google tag (gtag.js) — consent-gated -->
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('consent', 'default', { analytics_storage: 'denied' });
+        function loadGA() {
+            if (document.getElementById('ga-script')) return;
+            var s = document.createElement('script');
+            s.id = 'ga-script'; s.async = true;
+            s.src = 'https://www.googletagmanager.com/gtag/js?id=G-0EGYB6TXS6';
+            document.head.appendChild(s);
+            gtag('js', new Date());
+            gtag('consent', 'update', { analytics_storage: 'granted' });
+            gtag('config', 'G-0EGYB6TXS6');
+        }
+        if (localStorage.getItem('cookie_consent')) loadGA();
+    </script>
+</head>
+
+<body class="lang-ur">
+
+  <header class="header">
+    <div class="header-inner">
+      <a href="/" class="logo">
+        <span class="logo-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00FF88" stroke-width="2.5" stroke-linecap="round">
+            <path d="M12 12L18 6" /><path d="M5 19a9 9 0 0 1 0-14" /><path d="M19 19a9 9 0 0 0 0-14" />
+          </svg>
+        </span>
+        <span class="brand-text" style="font-size: 1.75rem;">Pak<span class="brand-text-accent">Speed</span></span>
+      </a>
+      <div class="header-controls">
+        <a href="/ai-reports.html" class="map-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+          </svg>
+          <span class="map-text" id="nav-ai">AI رپورٹیں</span>
+        </a>
+        <a href="/" class="map-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+          </svg>
+          <span class="map-text" id="nav-speed">سپیڈ ٹیسٹ</span>
+        </a>
+        <button id="btn-lang" class="btn-lang" aria-label="Switch language">English</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="rpt-container">
+    <a href="/" class="lb-back">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+      <span id="back-text">سپیڈ ٹیسٹ</span>
+    </a>
+
+    <div class="rpt-header">
+      <h1 class="rpt-title" id="rpt-title">ماہانہ انٹرنیٹ رپورٹ</h1>
+      <p class="rpt-month" id="rpt-month"></p>
+      <p class="rpt-subtitle" id="rpt-subtitle">پاکستان کی انٹرنیٹ سپیڈ کا ماہانہ جائزہ</p>
+    </div>
+
+    <!-- National Summary -->
+    <div class="rpt-section">
+      <h2 id="sec-national">قومی اوسط</h2>
+      <div class="stat-grid">
+        <div class="stat-box">
+          <div class="stat-value" id="nat-dl">—</div>
+          <div class="stat-unit">Mbps</div>
+          <div class="stat-label" id="lbl-dl">ڈاؤن لوڈ</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-value" id="nat-ul" style="color: var(--neon-blue);">—</div>
+          <div class="stat-unit">Mbps</div>
+          <div class="stat-label" id="lbl-ul">اپ لوڈ</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-value" id="nat-ping" style="color: var(--gold);">—</div>
+          <div class="stat-unit">ms</div>
+          <div class="stat-label" id="lbl-ping">پنگ</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-value" id="nat-tests" style="color: #B48EFF;">—</div>
+          <div class="stat-unit"></div>
+          <div class="stat-label" id="lbl-tests">کل ٹیسٹ</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Top Cities -->
+    <div class="rpt-section">
+      <h2 id="sec-cities">تیز ترین شہر</h2>
+      <div id="city-loading" class="rpt-loading">Loading...</div>
+      <table class="rpt-table" id="city-table" style="display:none;">
+        <thead>
+          <tr>
+            <th id="th-city">شہر</th>
+            <th id="th-dl2">ڈاؤن لوڈ</th>
+            <th id="th-ul2">اپ لوڈ</th>
+            <th id="th-ping2">پنگ</th>
+          </tr>
+        </thead>
+        <tbody id="city-body"></tbody>
+      </table>
+    </div>
+
+    <!-- Top ISPs -->
+    <div class="rpt-section">
+      <h2 id="sec-isps">تیز ترین ISPs</h2>
+      <div id="isp-loading" class="rpt-loading">Loading...</div>
+      <table class="rpt-table" id="isp-table" style="display:none;">
+        <thead>
+          <tr>
+            <th id="th-isp">ISP</th>
+            <th id="th-dl3">ڈاؤن لوڈ</th>
+            <th id="th-ul3">اپ لوڈ</th>
+            <th id="th-ping3">پنگ</th>
+          </tr>
+        </thead>
+        <tbody id="isp-body"></tbody>
+      </table>
+    </div>
+
+    <!-- AI Throttling Alerts -->
+    <div class="rpt-section">
+      <h2 id="sec-alerts">AI الرٹس — تھروٹلنگ کی نشاندہی <span class="alert-count-badge none" id="alert-count">—</span></h2>
+      <p style="color: var(--gray-400); font-size: 0.9rem; line-height: 1.8; margin-bottom: 1rem;" id="alerts-explainer">تھروٹلنگ کا مطلب ہے کہ آپ کا ISP جان بوجھ کر آپ کی انٹرنیٹ سپیڈ سست کر رہا ہے۔ ہمارا AI ہر سپیڈ ٹیسٹ کا موازنہ اس ISP کی عام سپیڈ سے کرتا ہے۔ اگر سپیڈ غیر معمولی طور پر کم ہو تو الرٹ جاری ہوتا ہے۔</p>
+      <div id="alerts-loading" class="rpt-loading">Loading...</div>
+      <div id="alerts-empty" class="alert-empty" style="display:none;">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--neon-green)" stroke-width="1.5" stroke-linecap="round" style="margin-bottom:0.5rem;"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+        <p id="alerts-empty-text">کوئی غیر معمولی سرگرمی نہیں ملی</p>
+      </div>
+      <div id="alerts-list"></div>
+    </div>
+
+    <!-- Citizen Voice — Sentiment -->
+    <div class="rpt-section">
+      <h2 id="sec-sentiment">عوامی آواز — جذبات کا تجزیہ</h2>
+      <p style="color: var(--gray-400); font-size: 0.9rem; line-height: 1.8; margin-bottom: 1rem;" id="sentiment-explainer">جب صارفین اپنے ISP کا جائزہ لکھتے ہیں تو ہمارا AI خودکار طریقے سے ان کے جذبات (مثبت، منفی، غیر جانبدار) اور زبان (اردو، انگریزی، رومن اردو) کی شناخت کرتا ہے۔ یہ ڈیٹا ظاہر کرتا ہے کہ لوگ اپنے انٹرنیٹ کے بارے میں کیا محسوس کرتے ہیں۔</p>
+      <div id="sentiment-loading" class="rpt-loading">Loading...</div>
+      <div id="sentiment-content" style="display:none;">
+        <div class="sentiment-grid">
+          <div class="sentiment-box">
+            <div class="stat-value sentiment-positive" id="sent-pos" style="font-family:var(--font-en);">—</div>
+            <div class="stat-label" id="lbl-positive">مثبت</div>
+          </div>
+          <div class="sentiment-box">
+            <div class="stat-value sentiment-neutral" id="sent-neu" style="font-family:var(--font-en);">—</div>
+            <div class="stat-label" id="lbl-neutral">غیر جانبدار</div>
+          </div>
+          <div class="sentiment-box">
+            <div class="stat-value sentiment-negative" id="sent-neg" style="font-family:var(--font-en);">—</div>
+            <div class="stat-label" id="lbl-negative">منفی</div>
+          </div>
+        </div>
+        <h3 style="color:var(--gray-400); font-size:0.95rem; margin-bottom:0.75rem;" id="sentiment-isp-heading">ISP کے لحاظ سے جذبات</h3>
+        <div id="sentiment-isp-list"></div>
+      </div>
+      <div id="sentiment-empty" class="alert-empty" style="display:none;">
+        <p id="sentiment-empty-text">ابھی کوئی جائزے دستیاب نہیں</p>
+      </div>
+    </div>
+
+    <!-- Methodology note -->
+    <div class="rpt-section" style="background: rgba(0,255,136,0.03); border-color: rgba(0,255,136,0.12);">
+      <h2 id="sec-method">منہج / Methodology</h2>
+      <p style="color: var(--gray-400); line-height: 1.8; font-size: 0.95rem;" id="method-text">
+        یہ ڈیٹا PakSpeed پر چلائے گئے حقیقی سپیڈ ٹیسٹ سے جمع کیا گیا ہے۔ ہر ٹیسٹ Cloudflare Edge CDN کے ذریعے پاکستانی شہروں میں موجود سرورز سے ناپا جاتا ہے۔ کوئی مصنوعی ٹیسٹ شامل نہیں۔
+      </p>
+    </div>
+    <div style="margin: 2rem auto 0; max-width: 700px; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; padding: 0 1rem;">
+      <a href="/leaderboard.html" style="background: rgba(0,255,136,0.08); border: 1px solid rgba(0,255,136,0.2); border-radius: 8px; padding: 10px 16px; color: #00FF88; text-decoration: none; font-size: 0.9rem;" id="rpt-lb">شہروں کی رینکنگ</a>
+      <a href="/best-isp.html" style="background: rgba(0,255,136,0.08); border: 1px solid rgba(0,255,136,0.2); border-radius: 8px; padding: 10px 16px; color: #00FF88; text-decoration: none; font-size: 0.9rem;" id="rpt-bestisp">بہترین ISP 2026</a>
+      <a href="/isp.html" style="background: rgba(0,255,136,0.08); border: 1px solid rgba(0,255,136,0.2); border-radius: 8px; padding: 10px 16px; color: #00FF88; text-decoration: none; font-size: 0.9rem;" id="rpt-isp">تمام ISPs</a>
+      <a href="/compare.html" style="background: rgba(0,255,136,0.08); border: 1px solid rgba(0,255,136,0.2); border-radius: 8px; padding: 10px 16px; color: #00FF88; text-decoration: none; font-size: 0.9rem;" id="rpt-compare">ISP موازنہ</a>
+      <a href="/ai-reports.html" style="background: rgba(0,212,255,0.08); border: 1px solid rgba(0,212,255,0.2); border-radius: 8px; padding: 10px 16px; color: #00D4FF; text-decoration: none; font-size: 0.9rem;" id="rpt-ai">AI ہفتہ وار رپورٹ</a>
+      <a href="/5g.html" style="background: rgba(0,255,136,0.08); border: 1px solid rgba(0,255,136,0.2); border-radius: 8px; padding: 10px 16px; color: #00FF88; text-decoration: none; font-size: 0.9rem;">5G Pakistan</a>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="https://www.urduai.org" target="_blank" rel="noopener noreferrer"
+          style="text-decoration: none; font-family: 'Montserrat', sans-serif; font-weight: 800; color: white;">Urdu<span
+            style="color: #FFB300;">AI</span></a> <span id="footer-init-text">کی ایک پہل</span>
+      </div>
+      <div class="made-in-pk">
+        <span class="pk-flag">🇵🇰</span>
+        <span id="footer-madein">پاکستان میں بنایا گیا</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    let currentLang = localStorage.getItem('pakspeed_lang') || 'ur';
+    const API_BASE = 'https://pakspeed-worker.qaisar-roonjha.workers.dev/api';
+
+    const LABELS = {
+      ur: {
+        title: 'ماہانہ انٹرنیٹ رپورٹ', subtitle: 'پاکستان کی انٹرنیٹ سپیڈ کا ماہانہ جائزہ',
+        back: 'سپیڈ ٹیسٹ', toggle: 'English',
+        national: 'قومی اوسط', cities: 'تیز ترین شہر', isps: 'تیز ترین ISPs', method: 'منہج / Methodology',
+        dl: 'ڈاؤن لوڈ', ul: 'اپ لوڈ', ping: 'پنگ', tests: 'کل ٹیسٹ',
+        city: 'شہر', isp: 'ISP',
+        madein: 'پاکستان میں بنایا گیا', init: 'کی ایک پہل',
+        methodText: 'یہ ڈیٹا PakSpeed پر چلائے گئے حقیقی سپیڈ ٹیسٹ سے جمع کیا گیا ہے۔ ہر ٹیسٹ Cloudflare Edge CDN کے ذریعے پاکستانی شہروں میں موجود سرورز سے ناپا جاتا ہے۔ کوئی مصنوعی ٹیسٹ شامل نہیں۔',
+        alerts: 'AI الرٹس — تھروٹلنگ کی نشاندہی',
+        alertsEmpty: 'کوئی غیر معمولی سرگرمی نہیں ملی',
+        activeAlerts: 'فعال الرٹس',
+        expected: 'متوقع',
+        actual: 'حقیقی',
+        confidence: 'اعتماد',
+        zScore: 'Z-Score',
+        detected: 'شناخت',
+        throttling: 'تھروٹلنگ',
+        degradation: 'کمزوری',
+        outage: 'بندش',
+        sentiment: 'عوامی آواز — جذبات کا تجزیہ',
+        positive: 'مثبت',
+        neutral: 'غیر جانبدار',
+        negative: 'منفی',
+        sentimentByIsp: 'ISP کے لحاظ سے جذبات',
+        sentimentEmpty: 'ابھی کوئی جائزے دستیاب نہیں',
+        avgSentiment: 'اوسط جذبات',
+        totalReviews: 'کل جائزے',
+        navAi: 'AI رپورٹیں',
+        navSpeed: 'سپیڈ ٹیسٹ',
+        alertsExplainer: 'تھروٹلنگ کا مطلب ہے کہ آپ کا ISP جان بوجھ کر آپ کی انٹرنیٹ سپیڈ سست کر رہا ہے۔ ہمارا AI ہر سپیڈ ٹیسٹ کا موازنہ اس ISP کی عام سپیڈ سے کرتا ہے۔ اگر سپیڈ غیر معمولی طور پر کم ہو تو الرٹ جاری ہوتا ہے۔',
+        sentimentExplainer: 'جب صارفین اپنے ISP کا جائزہ لکھتے ہیں تو ہمارا AI خودکار طریقے سے ان کے جذبات (مثبت، منفی، غیر جانبدار) اور زبان (اردو، انگریزی، رومن اردو) کی شناخت کرتا ہے۔ یہ ڈیٹا ظاہر کرتا ہے کہ لوگ اپنے انٹرنیٹ کے بارے میں کیا محسوس کرتے ہیں۔'
+      },
+      en: {
+        title: 'Monthly Internet Report', subtitle: 'Monthly overview of Pakistan internet speed',
+        back: 'Speed Test', toggle: 'اردو',
+        national: 'National Average', cities: 'Fastest Cities', isps: 'Fastest ISPs', method: 'Methodology',
+        dl: 'Download', ul: 'Upload', ping: 'Ping', tests: 'Total Tests',
+        city: 'City', isp: 'ISP',
+        madein: 'Made in Pakistan', init: 'An initiative by',
+        methodText: 'This data is collected from real speed tests run on PakSpeed. Each test is measured through Cloudflare Edge CDN servers located in Pakistani cities. No synthetic tests are included.',
+        alerts: 'AI Alerts — Throttling Detection',
+        alertsEmpty: 'No anomalies detected',
+        activeAlerts: 'Active Alerts',
+        expected: 'Expected',
+        actual: 'Actual',
+        confidence: 'Confidence',
+        zScore: 'Z-Score',
+        detected: 'Detected',
+        throttling: 'Throttling',
+        degradation: 'Degradation',
+        outage: 'Outage',
+        sentiment: 'Citizen Voice — Sentiment Analysis',
+        positive: 'Positive',
+        neutral: 'Neutral',
+        negative: 'Negative',
+        sentimentByIsp: 'Sentiment by ISP',
+        sentimentEmpty: 'No reviews available yet',
+        avgSentiment: 'Avg Sentiment',
+        totalReviews: 'Total Reviews',
+        navAi: 'AI Reports',
+        navSpeed: 'Speed Test',
+        alertsExplainer: 'Throttling means your ISP is intentionally slowing down your internet speed. Our AI compares every speed test against that ISP\'s normal baseline speed for that city and time of day. If the speed drops unusually low, an alert is triggered.',
+        sentimentExplainer: 'When users write reviews about their ISP, our AI automatically detects their sentiment (positive, negative, neutral) and language (Urdu, English, Roman Urdu). This data shows how people really feel about their internet service.'
+      }
+    };
+
+    function applyLang(lang) {
+      currentLang = lang;
+      localStorage.setItem('pakspeed_lang', lang);
+      document.documentElement.lang = lang;
+      document.documentElement.dir = lang === 'ur' ? 'rtl' : 'ltr';
+      document.body.className = lang === 'ur' ? 'lang-ur' : 'lang-en';
+
+      const l = LABELS[lang];
+      document.getElementById('rpt-title').textContent = l.title;
+      document.getElementById('rpt-subtitle').textContent = l.subtitle;
+      document.getElementById('back-text').textContent = l.back;
+      document.getElementById('btn-lang').textContent = l.toggle;
+      document.getElementById('sec-national').textContent = l.national;
+      document.getElementById('sec-cities').textContent = l.cities;
+      document.getElementById('sec-isps').textContent = l.isps;
+      document.getElementById('sec-method').textContent = l.method;
+      document.getElementById('lbl-dl').textContent = l.dl;
+      document.getElementById('lbl-ul').textContent = l.ul;
+      document.getElementById('lbl-ping').textContent = l.ping;
+      document.getElementById('lbl-tests').textContent = l.tests;
+      document.getElementById('th-city').textContent = l.city;
+      document.getElementById('th-dl2').textContent = l.dl;
+      document.getElementById('th-ul2').textContent = l.ul;
+      document.getElementById('th-ping2').textContent = l.ping;
+      document.getElementById('th-isp').textContent = l.isp;
+      document.getElementById('th-dl3').textContent = l.dl;
+      document.getElementById('th-ul3').textContent = l.ul;
+      document.getElementById('th-ping3').textContent = l.ping;
+      document.getElementById('footer-madein').textContent = l.madein;
+      document.getElementById('footer-init-text').textContent = l.init;
+      document.getElementById('method-text').textContent = l.methodText;
+      document.getElementById('nav-ai').textContent = l.navAi;
+      document.getElementById('nav-speed').textContent = l.navSpeed;
+      document.getElementById('alerts-explainer').textContent = l.alertsExplainer;
+      document.getElementById('sentiment-explainer').textContent = l.sentimentExplainer;
+
+      // AI Alerts section
+      var alertBadge = document.getElementById('alert-count');
+      document.getElementById('sec-alerts').innerHTML = l.alerts + ' ';
+      document.getElementById('sec-alerts').appendChild(alertBadge);
+      document.getElementById('alerts-empty-text').textContent = l.alertsEmpty;
+
+      // Citizen Voice section
+      document.getElementById('sec-sentiment').textContent = l.sentiment;
+      document.getElementById('lbl-positive').textContent = l.positive;
+      document.getElementById('lbl-neutral').textContent = l.neutral;
+      document.getElementById('lbl-negative').textContent = l.negative;
+      document.getElementById('sentiment-isp-heading').textContent = l.sentimentByIsp;
+      document.getElementById('sentiment-empty-text').textContent = l.sentimentEmpty;
+
+      // Re-render dynamic alert cards if data loaded
+      if (window._anomalyData) renderAlerts(window._anomalyData, l);
+      if (window._sentimentIspData) renderSentimentIsps(window._sentimentIspData, l);
+
+      // Month display
+      const now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Karachi' }));
+      const monthStr = now.toLocaleDateString(lang === 'ur' ? 'ur-PK' : 'en-PK', {
+        year: 'numeric', month: 'long', timeZone: 'Asia/Karachi'
+      });
+      document.getElementById('rpt-month').textContent = monthStr;
+    }
+
+    applyLang(currentLang);
+    document.getElementById('btn-lang').addEventListener('click', () => {
+      applyLang(currentLang === 'ur' ? 'en' : 'ur');
+    });
+
+    // Fetch city leaderboard
+    fetch(API_BASE + '/leaderboard')
+      .then(r => r.json())
+      .then(data => {
+        if (!data.length) return;
+
+        // National averages
+        let totalDl = 0, totalUl = 0, totalPing = 0, totalTests = 0;
+        data.forEach(r => {
+          totalDl += parseFloat(r.avg_download) * r.total_tests;
+          totalUl += parseFloat(r.avg_upload) * r.total_tests;
+          totalPing += parseFloat(r.avg_ping) * r.total_tests;
+          totalTests += r.total_tests;
+        });
+
+        document.getElementById('nat-dl').textContent = (totalDl / totalTests).toFixed(1);
+        document.getElementById('nat-ul').textContent = (totalUl / totalTests).toFixed(1);
+        document.getElementById('nat-ping').textContent = (totalPing / totalTests).toFixed(0);
+        document.getElementById('nat-tests').textContent = totalTests.toLocaleString();
+
+        // Top 10 cities
+        const top10 = data.slice(0, 10);
+        let html = '';
+        top10.forEach(row => {
+          html += '<tr>';
+          html += '<td>' + row.city + '</td>';
+          html += '<td style="color:var(--neon-green);font-weight:700;">' + row.avg_download + ' Mbps</td>';
+          html += '<td style="color:var(--neon-blue);font-weight:600;">' + row.avg_upload + ' Mbps</td>';
+          html += '<td style="color:var(--gold);font-weight:600;">' + row.avg_ping + ' ms</td>';
+          html += '</tr>';
+        });
+        document.getElementById('city-body').innerHTML = html;
+        document.getElementById('city-loading').style.display = 'none';
+        document.getElementById('city-table').style.display = '';
+      })
+      .catch(() => {
+        document.getElementById('city-loading').textContent = 'Error loading data';
+      });
+
+    // Fetch ISP leaderboard
+    fetch(API_BASE + '/isp-leaderboard')
+      .then(r => r.json())
+      .then(data => {
+        if (!data.length) return;
+        const top10 = data.slice(0, 10);
+        let html = '';
+        top10.forEach(row => {
+          html += '<tr>';
+          html += '<td>' + row.isp + '</td>';
+          html += '<td style="color:var(--neon-green);font-weight:700;">' + row.avg_download + ' Mbps</td>';
+          html += '<td style="color:var(--neon-blue);font-weight:600;">' + row.avg_upload + ' Mbps</td>';
+          html += '<td style="color:var(--gold);font-weight:600;">' + row.avg_ping + ' ms</td>';
+          html += '</tr>';
+        });
+        document.getElementById('isp-body').innerHTML = html;
+        document.getElementById('isp-loading').style.display = 'none';
+        document.getElementById('isp-table').style.display = '';
+      })
+      .catch(() => {
+        document.getElementById('isp-loading').textContent = 'Error loading data';
+      });
+
+    // --- AI Throttling Alerts ---
+    function getAnomalyTypeClass(type) {
+      if (type === 'throttling') return 'throttle';
+      return 'degrade';
+    }
+    function getAnomalyTypeLabel(type, l) {
+      if (type === 'throttling') return l.throttling;
+      if (type === 'degradation') return l.degradation;
+      if (type === 'outage') return l.outage;
+      return type;
+    }
+    function renderAlerts(anomalies, l) {
+      var container = document.getElementById('alerts-list');
+      if (!anomalies.length) { container.innerHTML = ''; return; }
+      var html = '';
+      anomalies.forEach(function(a) {
+        var cls = getAnomalyTypeClass(a.anomaly_type || a.type || 'degradation');
+        var typeLabel = getAnomalyTypeLabel(a.anomaly_type || a.type || 'degradation', l);
+        var confidence = a.confidence_score != null ? a.confidence_score : a.confidence;
+        var zScore = a.z_score != null ? a.z_score : a.zscore;
+        var expected = a.expected_speed != null ? a.expected_speed : a.expected;
+        var actual = a.actual_speed != null ? a.actual_speed : a.actual;
+        var detected = a.detected_at || a.time_detected || a.created_at || '';
+        var detectedShort = detected ? new Date(detected).toLocaleString('en-PK', { timeZone: 'Asia/Karachi', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }) : '—';
+        var confPct = confidence != null ? (parseFloat(confidence) * 100).toFixed(0) : '—';
+        var confColor = cls === 'throttle' ? '#E74C3C' : '#F39C12';
+
+        html += '<div class="alert-card alert-' + cls + '">';
+        html += '<div class="alert-card-header">';
+        html += '<div><span class="alert-isp">' + (a.isp || a.isp_name || '—') + '</span> <span class="alert-city">' + (a.city || '—') + '</span></div>';
+        html += '<span class="alert-type alert-type-' + cls + '">' + typeLabel + '</span>';
+        html += '</div>';
+        html += '<div class="alert-meta">';
+        html += '<div class="alert-meta-item">' + l.expected + ': <span class="speed-expected">' + (expected != null ? parseFloat(expected).toFixed(1) : '—') + ' Mbps</span></div>';
+        html += '<div class="alert-meta-item">' + l.actual + ': <span class="speed-actual">' + (actual != null ? parseFloat(actual).toFixed(1) : '—') + ' Mbps</span></div>';
+        html += '<div class="alert-meta-item">' + l.zScore + ': <span>' + (zScore != null ? parseFloat(zScore).toFixed(2) : '—') + '</span></div>';
+        html += '<div class="alert-meta-item">' + l.detected + ': <span>' + detectedShort + '</span></div>';
+        html += '</div>';
+        if (confidence != null) {
+          html += '<div class="confidence-bar"><div class="confidence-fill" style="width:' + confPct + '%; background:' + confColor + ';"></div></div>';
+          html += '<div style="font-size:0.75rem; color:var(--gray-400); margin-top:4px;">' + l.confidence + ': <span style="font-family:var(--font-en); font-weight:600;">' + confPct + '%</span></div>';
+        }
+        html += '</div>';
+      });
+      container.innerHTML = html;
+    }
+
+    fetch(API_BASE + '/anomalies')
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        var anomalies = Array.isArray(data) ? data : (data.anomalies || data.results || []);
+        window._anomalyData = anomalies;
+        var badge = document.getElementById('alert-count');
+        document.getElementById('alerts-loading').style.display = 'none';
+        if (!anomalies.length) {
+          badge.textContent = '0';
+          badge.className = 'alert-count-badge none';
+          document.getElementById('alerts-empty').style.display = '';
+        } else {
+          var l = LABELS[currentLang];
+          badge.textContent = anomalies.length + ' ' + l.activeAlerts;
+          badge.className = 'alert-count-badge';
+          renderAlerts(anomalies, l);
+        }
+      })
+      .catch(function() {
+        document.getElementById('alerts-loading').textContent = 'Error loading alerts';
+      });
+
+    // --- Citizen Voice — Sentiment ---
+    function getSentimentColor(score) {
+      if (score >= 0.3) return '#00FF88';
+      if (score <= -0.3) return '#E74C3C';
+      return '#FFD700';
+    }
+    function renderSentimentIsps(ispList, l) {
+      var container = document.getElementById('sentiment-isp-list');
+      var html = '';
+      ispList.forEach(function(isp) {
+        var score = parseFloat(isp.avg_sentiment || isp.sentiment_score || 0);
+        var reviews = isp.total_reviews || isp.review_count || 0;
+        var color = getSentimentColor(score);
+        html += '<div class="isp-sentiment-card">';
+        html += '<div class="isp-sentiment-name">' + (isp.isp || isp.isp_name || '—') + '</div>';
+        html += '<div class="isp-sentiment-stats">';
+        html += '<div class="stat-mini"><span class="val" style="color:' + color + ';">' + score.toFixed(2) + '</span>' + l.avgSentiment + '</div>';
+        html += '<div class="stat-mini"><span class="val" style="color:var(--neon-blue);">' + reviews.toLocaleString() + '</span>' + l.totalReviews + '</div>';
+        html += '</div>';
+        html += '</div>';
+      });
+      container.innerHTML = html;
+    }
+
+    fetch(API_BASE + '/review-insights')
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        document.getElementById('sentiment-loading').style.display = 'none';
+        var overall = data.overall || data.summary || data;
+        var ispList = data.by_isp || data.isp_sentiments || data.isps || [];
+        window._sentimentIspData = ispList;
+
+        var posCount = overall.positive || overall.positive_count || 0;
+        var neuCount = overall.neutral || overall.neutral_count || 0;
+        var negCount = overall.negative || overall.negative_count || 0;
+
+        if (!posCount && !neuCount && !negCount && !ispList.length) {
+          document.getElementById('sentiment-empty').style.display = '';
+          return;
+        }
+        document.getElementById('sent-pos').textContent = posCount;
+        document.getElementById('sent-neu').textContent = neuCount;
+        document.getElementById('sent-neg').textContent = negCount;
+        document.getElementById('sentiment-content').style.display = '';
+
+        if (ispList.length) {
+          renderSentimentIsps(ispList, LABELS[currentLang]);
+        }
+      })
+      .catch(function() {
+        document.getElementById('sentiment-loading').textContent = 'Error loading sentiment data';
+      });
+  </script>
+</body>
+</html>

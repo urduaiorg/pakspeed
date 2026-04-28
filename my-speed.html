@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Speed History — PakSpeed | میری سپیڈ ہسٹری</title>
+  <meta name="description" content="Track your personal internet speed history on PakSpeed. See trends in download, upload, and ping over time with interactive charts and ISP comparisons. آپ کی انٹرنیٹ سپیڈ کی مکمل تاریخ دیکھیں۔">
+  <link rel="canonical" href="https://pakspeed.com/my-speed.html">
+  <link rel="alternate" hreflang="ur" href="https://pakspeed.com/my-speed.html?lang=ur">
+  <link rel="alternate" hreflang="en" href="https://pakspeed.com/my-speed.html?lang=en">
+  <link rel="alternate" hreflang="x-default" href="https://pakspeed.com/my-speed.html">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png">
+  <meta name="theme-color" content="#01411C">
+    <meta name="robots" content="index, follow">
+
+  <meta property="og:title" content="My Speed History — PakSpeed">
+  <meta property="og:description" content="Track your personal internet speed history over time.">
+  <meta property="og:url" content="https://pakspeed.com/my-speed.html">
+  <meta property="og:image" content="https://pakspeed.com/assets/og-image.jpg">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="PakSpeed">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="My Speed History — PakSpeed">
+  <meta name="twitter:description" content="Track your personal internet speed history over time.">
+  <meta name="twitter:image" content="https://pakspeed.com/assets/og-image.jpg">
+  <meta name="twitter:site" content="@PakSpeed">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "PakSpeed", "item": "https://pakspeed.com/"},
+      {"@type": "ListItem", "position": 2, "name": "My Speed History"}
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Montserrat:wght@800&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" media="print" onload="this.media='all'">
+
+  <!-- Font metric override to reduce CLS -->
+  <style>
+    @font-face { font-family: 'Noto Nastaliq Urdu Fallback'; src: local('Arial'); ascent-override: 110%; descent-override: 50%; line-gap-override: 0%; size-adjust: 120%; }
+  </style>
+  <link rel="stylesheet" href="/css/style.css?v=12" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/css/style.css?v=12"></noscript>
+  <link rel="stylesheet" href="/css/rtl.css?v=4" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/css/rtl.css?v=4"></noscript>
+
+  <style>
+    .dash-container { max-width: 800px; margin: 0 auto; padding: 2rem 1rem; }
+    .dash-header { text-align: center; margin-bottom: 2rem; }
+    .dash-title { font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .dash-subtitle { font-size: 1.1rem; color: var(--gray-400); line-height: 2; }
+
+    .dash-section {
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 1.25rem;
+      padding: 1.75rem;
+      margin-bottom: 1.5rem;
+    }
+    .dash-section h2 { color: var(--neon-green); font-size: 1.3rem; margin-bottom: 1rem; }
+
+    .avg-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 1rem;
+    }
+    .avg-box {
+      background: rgba(0, 255, 136, 0.04);
+      border: 1px solid rgba(0, 255, 136, 0.15);
+      border-radius: 12px;
+      padding: 1.25rem;
+      text-align: center;
+    }
+    .avg-value {
+      font-family: var(--font-en);
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--neon-green);
+    }
+    .avg-label { color: var(--gray-400); font-size: 0.85rem; margin-top: 4px; }
+    .avg-unit { color: #64748b; font-size: 0.75rem; font-family: var(--font-en); }
+
+    .history-item {
+      display: grid;
+      grid-template-columns: 1fr repeat(3, auto);
+      gap: 1rem;
+      align-items: center;
+      padding: 0.875rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      font-family: var(--font-en);
+      font-size: 0.9rem;
+    }
+    .history-item:last-child { border-bottom: none; }
+    .history-date { color: var(--gray-400); font-size: 0.85rem; }
+    .history-dl { color: var(--neon-green); font-weight: 700; }
+    .history-ul { color: var(--neon-blue); font-weight: 600; }
+    .history-ping { color: var(--gold); font-weight: 600; }
+
+    .empty-state {
+      text-align: center;
+      padding: 3rem 1rem;
+      color: var(--gray-400);
+    }
+    .empty-state p { margin-bottom: 1rem; line-height: 1.8; }
+    .cta-btn {
+      display: inline-block;
+      padding: 12px 28px;
+      background: var(--neon-green);
+      color: #000;
+      font-weight: 700;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(0,255,136,0.3); }
+
+    .btn-clear {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.15);
+      color: var(--gray-400);
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+      margin-top: 1rem;
+    }
+    .btn-clear:hover { border-color: #E74C3C; color: #E74C3C; }
+
+    .bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+    .bar-label { width: 90px; font-size: 0.8rem; color: var(--gray-400); text-align: end; flex-shrink: 0; font-family: var(--font-en); }
+    .bar-track { flex: 1; height: 20px; background: rgba(255,255,255,0.05); border-radius: 10px; overflow: hidden; }
+    .bar-fill { height: 100%; border-radius: 10px; transition: width 0.5s ease; }
+    .bar-val { width: 70px; font-family: var(--font-en); font-size: 0.85rem; font-weight: 700; flex-shrink: 0; }
+
+    .lb-back {
+      display: inline-flex; align-items: center; gap: 6px; color: var(--neon-green);
+      text-decoration: none; font-weight: 600; font-size: 0.95rem; padding: 8px 16px;
+      border-radius: 8px; background: rgba(0,255,136,0.05); border: 1px solid rgba(0,255,136,0.2);
+      margin-bottom: 2rem; transition: all 0.2s ease;
+    }
+    .lb-back:hover { background: rgba(0,255,136,0.15); }
+
+    @media (max-width: 600px) {
+      .dash-title { font-size: 1.75rem; }
+      .avg-value { font-size: 1.4rem; }
+      .history-item { gap: 0.5rem; font-size: 0.8rem; }
+    }
+  </style>    <!-- Google tag (gtag.js) — consent-gated -->
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('consent', 'default', { analytics_storage: 'denied' });
+        function loadGA() {
+            if (document.getElementById('ga-script')) return;
+            var s = document.createElement('script');
+            s.id = 'ga-script'; s.async = true;
+            s.src = 'https://www.googletagmanager.com/gtag/js?id=G-0EGYB6TXS6';
+            document.head.appendChild(s);
+            gtag('js', new Date());
+            gtag('consent', 'update', { analytics_storage: 'granted' });
+            gtag('config', 'G-0EGYB6TXS6');
+        }
+        if (localStorage.getItem('cookie_consent')) loadGA();
+    </script>
+</head>
+
+<body class="lang-ur">
+
+  <header class="header">
+    <div class="header-inner">
+      <a href="/" class="logo">
+        <span class="logo-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00FF88" stroke-width="2.5" stroke-linecap="round">
+            <path d="M12 12L18 6" /><path d="M5 19a9 9 0 0 1 0-14" /><path d="M19 19a9 9 0 0 0 0-14" />
+          </svg>
+        </span>
+        <span class="brand-text" style="font-size: 1.75rem;">Pak<span class="brand-text-accent">Speed</span></span>
+      </a>
+      <div class="header-controls">
+        <a href="/" class="map-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+          </svg>
+          <span class="map-text">Speed Test</span>
+        </a>
+        <button id="btn-lang" class="btn-lang" aria-label="Switch language">English</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="dash-container">
+    <a href="/" class="lb-back">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+      <span id="back-text">سپیڈ ٹیسٹ</span>
+    </a>
+
+    <div class="dash-header">
+      <h1 class="dash-title" id="dash-title">میری سپیڈ ہسٹری</h1>
+      <p class="dash-subtitle" id="dash-subtitle">آپ کے تمام سپیڈ ٹیسٹ کا ریکارڈ</p>
+    </div>
+
+    <div id="dash-content"></div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="https://www.urduai.org" target="_blank" rel="noopener noreferrer"
+          style="text-decoration: none; font-family: 'Montserrat', sans-serif; font-weight: 800; color: white;">Urdu<span
+            style="color: #FFB300;">AI</span></a> <span id="footer-init-text">کی ایک پہل</span>
+      </div>
+      <div class="made-in-pk">
+        <span class="pk-flag">🇵🇰</span>
+        <span id="footer-madein">پاکستان میں بنایا گیا</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    let currentLang = localStorage.getItem('pakspeed_lang') || 'ur';
+    var STORAGE_KEY = 'pakspeed_history';
+
+    var L = {
+      ur: {
+        title: 'میری سپیڈ ہسٹری', subtitle: 'آپ کے تمام سپیڈ ٹیسٹ کا ریکارڈ',
+        back: 'سپیڈ ٹیسٹ', toggle: 'English',
+        avg: 'آپ کی اوسط', history: 'ٹیسٹ کی تاریخ',
+        chart: 'ڈاؤن لوڈ سپیڈ (آخری ٹیسٹ)',
+        dl: 'ڈاؤن لوڈ', ul: 'اپ لوڈ', ping: 'پنگ', tests: 'کل ٹیسٹ',
+        empty: 'ابھی تک کوئی سپیڈ ٹیسٹ نہیں ہوا', emptySub: 'اپنا پہلا سپیڈ ٹیسٹ چلائیں — نتائج خودکار طور پر یہاں محفوظ ہو جائیں گے',
+        cta: 'سپیڈ ٹیسٹ شروع کریں', clear: 'تاریخ صاف کریں',
+        confirmClear: 'کیا آپ واقعی تاریخ صاف کرنا چاہتے ہیں؟',
+        madein: 'پاکستان میں بنایا گیا', init: 'کی ایک پہل'
+      },
+      en: {
+        title: 'My Speed History', subtitle: 'Your complete speed test history',
+        back: 'Speed Test', toggle: 'اردو',
+        avg: 'Your Averages', history: 'Test History',
+        chart: 'Download Speed (Recent Tests)',
+        dl: 'Download', ul: 'Upload', ping: 'Ping', tests: 'Total Tests',
+        empty: 'No speed tests yet', emptySub: 'Run your first speed test — results will be saved here automatically',
+        cta: 'Start Speed Test', clear: 'Clear History',
+        confirmClear: 'Are you sure you want to clear your history?',
+        madein: 'Made in Pakistan', init: 'An initiative by'
+      }
+    };
+
+    function applyLang(lang) {
+      currentLang = lang;
+      localStorage.setItem('pakspeed_lang', lang);
+      document.documentElement.lang = lang;
+      document.documentElement.dir = lang === 'ur' ? 'rtl' : 'ltr';
+      document.body.className = lang === 'ur' ? 'lang-ur' : 'lang-en';
+      document.getElementById('btn-lang').textContent = L[lang].toggle;
+      document.getElementById('dash-title').textContent = L[lang].title;
+      document.getElementById('dash-subtitle').textContent = L[lang].subtitle;
+      document.getElementById('back-text').textContent = L[lang].back;
+      document.getElementById('footer-madein').textContent = L[lang].madein;
+      document.getElementById('footer-init-text').textContent = L[lang].init;
+      renderDashboard();
+    }
+
+    function getHistory() {
+      try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
+      catch(e) { return []; }
+    }
+
+    function renderDashboard() {
+      var history = getHistory();
+      var container = document.getElementById('dash-content');
+      var l = L[currentLang];
+
+      if (!history.length) {
+        container.innerHTML =
+          '<div class="empty-state">' +
+            '<p style="font-size:3rem;margin-bottom:0.5rem;">📊</p>' +
+            '<p><strong>' + l.empty + '</strong></p>' +
+            '<p>' + l.emptySub + '</p>' +
+            '<a href="/" class="cta-btn">' + l.cta + '</a>' +
+          '</div>';
+        return;
+      }
+
+      var totalDl = 0, totalUl = 0, totalPing = 0;
+      history.forEach(function(h) {
+        totalDl += parseFloat(h.download) || 0;
+        totalUl += parseFloat(h.upload) || 0;
+        totalPing += parseFloat(h.ping) || 0;
+      });
+      var count = history.length;
+      var avgDl = (totalDl / count).toFixed(1);
+      var avgUl = (totalUl / count).toFixed(1);
+      var avgPing = (totalPing / count).toFixed(0);
+
+      // Bar chart from last 10 tests
+      var recent = history.slice(-10);
+      var maxDl = Math.max.apply(null, recent.map(function(h) { return parseFloat(h.download) || 0; }).concat([1]));
+      var barsHtml = '';
+      recent.forEach(function(h) {
+        var dl = parseFloat(h.download) || 0;
+        var pct = Math.round((dl / maxDl) * 100);
+        var date = new Date(h.timestamp);
+        var dateStr = date.toLocaleDateString(currentLang === 'ur' ? 'ur-PK' : 'en-PK', { month: 'short', day: 'numeric' });
+        barsHtml +=
+          '<div class="bar-row">' +
+            '<span class="bar-label">' + dateStr + '</span>' +
+            '<div class="bar-track"><div class="bar-fill" style="width:' + pct + '%;background:var(--neon-green);"></div></div>' +
+            '<span class="bar-val" style="color:var(--neon-green);">' + dl + ' Mbps</span>' +
+          '</div>';
+      });
+
+      // History list (newest first)
+      var reversed = history.slice().reverse().slice(0, 20);
+      var listHtml = '';
+      reversed.forEach(function(h) {
+        var date = new Date(h.timestamp);
+        var dateStr = date.toLocaleDateString(currentLang === 'ur' ? 'ur-PK' : 'en-PK', {
+          month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'
+        });
+        listHtml +=
+          '<div class="history-item">' +
+            '<span class="history-date">' + dateStr + (h.isp ? ' — ' + h.isp : '') + '</span>' +
+            '<span class="history-dl">' + (h.download || '—') + ' Mbps</span>' +
+            '<span class="history-ul">' + (h.upload || '—') + ' Mbps</span>' +
+            '<span class="history-ping">' + (h.ping || '—') + ' ms</span>' +
+          '</div>';
+      });
+
+      container.innerHTML =
+        '<div class="dash-section"><h2>' + l.avg + '</h2>' +
+          '<div class="avg-grid">' +
+            '<div class="avg-box"><div class="avg-value">' + avgDl + '</div><div class="avg-unit">Mbps</div><div class="avg-label">' + l.dl + '</div></div>' +
+            '<div class="avg-box"><div class="avg-value" style="color:var(--neon-blue);">' + avgUl + '</div><div class="avg-unit">Mbps</div><div class="avg-label">' + l.ul + '</div></div>' +
+            '<div class="avg-box"><div class="avg-value" style="color:var(--gold);">' + avgPing + '</div><div class="avg-unit">ms</div><div class="avg-label">' + l.ping + '</div></div>' +
+            '<div class="avg-box"><div class="avg-value" style="color:#B48EFF;">' + count + '</div><div class="avg-unit"></div><div class="avg-label">' + l.tests + '</div></div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="dash-section"><h2>' + l.chart + '</h2>' + barsHtml + '</div>' +
+        '<div class="dash-section"><h2>' + l.history + '</h2>' + listHtml +
+          '<div style="text-align:center;"><button class="btn-clear" id="btn-clear">' + l.clear + '</button></div>' +
+        '</div>';
+
+      document.getElementById('btn-clear').addEventListener('click', function() {
+        if (confirm(l.confirmClear)) {
+          localStorage.removeItem(STORAGE_KEY);
+          renderDashboard();
+        }
+      });
+    }
+
+    applyLang(currentLang);
+    document.getElementById('btn-lang').addEventListener('click', function() {
+      applyLang(currentLang === 'ur' ? 'en' : 'ur');
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!-- Primary SEO -->
+  <title>PakSpeed — Pakistan Internet Speed Test | انٹرنیٹ سپیڈ ٹیسٹ</title>
+  <meta name="description"
+    content="Free internet speed test for Pakistan. Check PTCL, Jazz, Zong, Telenor, StormFiber, and Nayatel download, upload, and ping speeds instantly. پاکستان کا پہلا اردو انٹرنیٹ سپیڈ ٹیسٹ۔ ڈاؤن لوڈ، اپ لوڈ اور پنگ چیک کریں۔">
+  <meta name="keywords"
+    content="internet speed test pakistan, speed test, انٹرنیٹ سپیڈ ٹیسٹ, PTCL speed test, Jazz 4G speed, Jazz 5G speed, Zong speed check, Zong 5G speed test, Ufone 5G speed, StormFiber speed, best ISP Pakistan, Nayatel speed test, 5G speed test Pakistan, پاکستان 5G سپیڈ ٹیسٹ">
+  <meta name="author" content="PakSpeed - WANG &amp; Urdu AI">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://pakspeed.com/">
+  <meta property="og:title" content="PakSpeed — Check Your Internet Speed">
+  <meta property="og:description"
+    content="Pakistan's first Urdu internet speed checker. Test download, upload &amp; ping. Free, fast, mobile-friendly.">
+  <meta property="og:image" content="https://pakspeed.com/assets/og-image.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="ur_PK">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:site_name" content="PakSpeed">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PakSpeed — Pakistan Internet Speed Test">
+  <meta name="twitter:description"
+    content="Free Urdu internet speed test. Check your PTCL, Jazz, Zong, StormFiber speed.">
+  <meta name="twitter:image" content="https://pakspeed.com/assets/og-image.jpg">
+  <meta name="twitter:site" content="@PakSpeed">
+
+  <!-- Canonical & Alternates -->
+  <link rel="canonical" href="https://pakspeed.com/">
+  <link rel="alternate" hreflang="ur" href="https://pakspeed.com/?lang=ur">
+  <link rel="alternate" hreflang="en" href="https://pakspeed.com/?lang=en">
+  <link rel="alternate" hreflang="x-default" href="https://pakspeed.com/">
+
+  <!-- RSS Feed -->
+  <link rel="alternate" type="application/rss+xml" title="PakSpeed — Internet Speed Insights" href="https://pakspeed.com/feed.xml">
+
+  <!-- Favicon & PWA -->
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png">
+  <link rel="apple-touch-icon" href="/assets/icon-192.png">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#01411C">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <!-- Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://esm.sh" crossorigin>
+  <link rel="dns-prefetch" href="//ip-api.com">
+
+  <!-- Fonts: Inter + Montserrat + Noto Naskh Arabic + Noto Nastaliq Urdu (all with display=swap) -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=optional">
+  <link rel="stylesheet" fetchpriority="high"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Montserrat:wght@800&family=Noto+Naskh+Arabic:wght@400;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=optional">
+  <!-- Font metric override to reduce CLS from Nastaliq swap -->
+  <style>
+    @font-face {
+      font-family: 'Noto Nastaliq Urdu Fallback';
+      src: local('Arial');
+      ascent-override: 110%;
+      descent-override: 50%;
+      line-gap-override: 0%;
+      size-adjust: 120%;
+    }
+  </style>
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=optional">
+  </noscript>
+
+  <!-- Critical CSS inlined for instant FCP -->
+  <style>
+    :root{--pk-green:#01411C;--dark-bg:#0A1628;--neon-green:#00FF88;--neon-blue:#00D4FF;--white:#FFFFFF;--gold:#FFD700;--speed-red:#E74C3C;--speed-yellow:#F39C12;--speed-green:#27AE60;--gray-800:#1a202c;--gray-700:#2d3748;--gray-900:#171923;--gray-400:#cbd5e0;--gray-300:#e2e8f0;--font-en:'Inter',sans-serif;--font-ur:'Noto Nastaliq Urdu','Noto Nastaliq Urdu Fallback',serif}*{box-sizing:border-box;margin:0;padding:0}body{font-family:var(--font-en);background-color:var(--dark-bg);color:var(--white);line-height:1.5;min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden}.hidden{display:none!important}.header{position:sticky;top:0;z-index:50;background-color:rgba(10,22,40,.9);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid var(--gray-700)}.header-inner{max-width:900px;margin:0 auto;padding:1rem;display:flex;justify-content:space-between;align-items:center;direction:ltr;flex-direction:row-reverse}.header-controls{display:flex;align-items:center;gap:15px}.map-link{display:flex;align-items:center;gap:6px;color:var(--neon-green);text-decoration:none;font-weight:600;font-size:.95rem;padding:6px 12px;border-radius:8px;background:rgba(0,255,136,.05);border:1px solid rgba(0,255,136,.2);transition:all .2s ease}@media(max-width:480px){.map-text{display:none}.map-link{padding:8px}.header-controls{gap:10px}}.main{flex:1;width:100%;max-width:900px;margin:0 auto;padding:2rem 1rem;display:flex;flex-direction:column;align-items:center}.logo{display:flex;align-items:center;gap:.5rem;direction:ltr;text-decoration:none}html[dir="rtl"] .logo{flex-direction:row-reverse}.brand-text{font-family:'Montserrat',sans-serif;font-weight:800;color:var(--white);letter-spacing:-.05em;direction:ltr;display:inline-block;unicode-bidi:isolate}.brand-text-accent{color:#FFB300}.btn-lang{background-color:var(--gray-800);border:1px solid var(--gray-700);color:var(--white);padding:.5rem 1.25rem;border-radius:9999px;font-size:.875rem;font-weight:600;cursor:pointer;transition:background-color .2s,color .2s;font-family:var(--font-en)}.section-idle{text-align:center;width:100%;margin-bottom:3rem}.hero-title{font-size:2.5rem;font-weight:700;margin-bottom:1rem;text-shadow:0 4px 12px rgba(0,0,0,.5);line-height:1.2}.hero-subtitle{font-size:1.25rem;color:var(--gray-400);margin-bottom:2rem}@media(min-width:768px){.hero-title{font-size:3.5rem}.hero-subtitle{font-size:1.5rem}}.btn-start-wrap{position:relative;width:200px;height:200px;margin:3rem auto}@media(min-width:768px){.btn-start-wrap{width:280px;height:280px}}.btn-start{width:100%;height:100%;border-radius:50%;border:4px solid var(--pk-green);background:var(--gray-800);color:var(--white);font-size:2rem;font-weight:700;cursor:pointer;box-shadow:0 0 40px rgba(1,65,28,.6);transition:all .3s ease;position:relative;overflow:hidden;z-index:10}@media(min-width:768px){.btn-start{font-size:2.5rem}}.isp-display{display:inline-block;background-color:rgba(1,65,28,.3);color:var(--neon-green);padding:.375rem 1rem;border-radius:9999px;font-size:.875rem;font-weight:600;margin-top:1rem;transition:opacity .3s}
+    html[dir="rtl"]{font-family:var(--font-ur)}html[dir="rtl"] [data-i18n]{font-family:var(--font-ur)}html[dir="rtl"] .hero-title,html[dir="rtl"] .hero-subtitle,html[dir="rtl"] .btn-start,html[dir="rtl"] .isp-display,html[dir="rtl"] .test-phase,html[dir="rtl"] .result-label,html[dir="rtl"] .btn-restart,html[dir="rtl"] .section-title,html[dir="rtl"] .feedback-summary,html[dir="rtl"] .activity-name,html[dir="rtl"] .share-btn-text,html[dir="rtl"] .data-notice,html[dir="rtl"] .footer-brand,html[dir="rtl"] .footer-links a,html[dir="rtl"] .footer-mission,html[dir="rtl"] .edu-title,html[dir="rtl"] .edu-card-title,html[dir="rtl"] .edu-card-desc{font-family:var(--font-ur);line-height:1.8}html[dir="rtl"] .activity-row{flex-direction:row-reverse}html[dir="rtl"] .activity-name{text-align:right}html[dir="rtl"] .isp-client-label{margin-right:0;margin-left:.75rem}html[dir="rtl"] .isp-ip{margin-left:0!important;margin-right:8px!important}.result-value,.result-unit,.gauge-speed-text,.gauge-unit-text,.isp-name,.isp-city,.isp-type-badge{direction:ltr;unicode-bidi:isolate}
+  /* Review Widget */
+  .review-card{background:rgba(30,41,59,.5);border:1px solid #334155;border-radius:12px;padding:20px;text-align:center;margin-top:1.5rem}.review-prompt{color:var(--white);font-weight:600;font-size:1.1rem;margin-bottom:12px}.review-stars{display:flex;justify-content:center;gap:8px}.star-btn{background:none;border:none;font-size:2rem;color:#334155;cursor:pointer;transition:color .15s,transform .15s;padding:4px;display:flex;flex-direction:column;align-items:center;gap:2px}.star-num{font-size:.7rem;color:#64748b;font-family:var(--font-en)}.star-btn.star-active .star-num,.star-btn.star-hover .star-num{color:#FFD700}.star-btn:hover,.star-btn.star-hover{color:#FFD700;transform:scale(1.15)}.star-btn.star-active{color:#FFD700}.review-submit-btn{margin-top:12px;background:var(--neon-green);color:#050b14;font-weight:700;font-size:.9rem;padding:10px 28px;border:none;border-radius:8px;cursor:pointer;transition:opacity .2s}.review-submit-btn:hover{opacity:.85}.review-thanks{color:var(--neon-green);font-weight:600;font-size:1rem;padding:16px 0}
+  </style>
+  <!-- Full CSS loaded async (non-render-blocking) -->
+  <link rel="stylesheet" href="/css/style.css?v=18" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/css/style.css?v=18"></noscript>
+  <link rel="stylesheet" href="/css/rtl.css?v=4" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/css/rtl.css?v=4"></noscript>
+
+  <!-- BreadcrumbList Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "PakSpeed — Internet Speed Test", "item": "https://pakspeed.com/"}
+    ]
+  }
+  </script>
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "PakSpeed",
+    "alternateName": "پاک سپیڈ",
+    "url": "https://pakspeed.com",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Any",
+    "browserRequirements": "Requires JavaScript",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "inLanguage": ["ur", "en"],
+    "description": "Free internet speed test for Pakistan. Check PTCL, Jazz, Zong, StormFiber speed.",
+    "creator": { "@type": "Organization", "name": "WANG - Welfare Association for New Generation" }
+  }
+  </script>
+
+  <!-- Organization Schema — E-E-A-T Trust Signal -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "PakSpeed",
+    "alternateName": "پاک سپیڈ",
+    "url": "https://pakspeed.com",
+    "logo": "https://pakspeed.com/assets/icon-512.png",
+    "description": "Pakistan's first Urdu internet speed test platform. Powered by Cloudflare.",
+    "foundingDate": "2025",
+    "parentOrganization": {
+      "@type": "Organization",
+      "name": "WANG - Welfare Association for New Generation",
+      "url": "https://www.urduai.org"
+    },
+    "areaServed": {
+      "@type": "Country",
+      "name": "Pakistan"
+    },
+    "knowsLanguage": ["ur", "en"],
+    "sameAs": [
+      "https://play.google.com/store/apps/details?id=com.pakspeed.internettest",
+      "https://play.google.com/store/apps/details?id=org.urduai.app",
+      "https://www.facebook.com/urduaiorg/",
+      "https://www.instagram.com/urduaiorg/",
+      "https://x.com/urduaiorg",
+      "https://www.tiktok.com/@urduaiorg",
+      "https://whatsapp.com/channel/0029VaXXgd00AgW6jAZGw83j"
+    ],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "email": "hello@pakspeed.com",
+      "contactType": "customer support",
+      "availableLanguage": ["ur", "en"]
+    },
+    "founder": {
+      "@type": "Person",
+      "name": "Qaisar Roonjha",
+      "jobTitle": "CEO & Founder"
+    }
+  }
+  </script>
+
+  <!-- FAQ Schema — Rich Snippets in Google + Speakable for Voice Search -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "speakable": {
+      "@type": "SpeakableSpecification",
+      "cssSelector": [".section-education", ".seo-content"]
+    },
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "پاکستان میں انٹرنیٹ کی اوسط سپیڈ کتنی ہے؟",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "پاکستان میں اوسط ڈاؤن لوڈ سپیڈ تقریباً 15-25 Mbps ہے۔ یہ شہر اور ISP کے لحاظ سے مختلف ہوتی ہے۔ PakSpeed پر اپنی اصل سپیڈ چیک کریں۔"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the average internet speed in Pakistan?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The average download speed in Pakistan is approximately 15-25 Mbps, varying by city and ISP. Test your actual speed on PakSpeed for free."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "پاکستان میں سب سے تیز انٹرنیٹ کون سا ہے؟",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "پاکستان میں StormFiber، Nayatel اور PTCL فائبر سب سے تیز ISPs میں شامل ہیں۔ PakSpeed کے ISP موازنہ صفحے پر آج کی تازہ ترین رینکنگ دیکھیں۔"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which is the fastest ISP in Pakistan?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "StormFiber, Nayatel, and PTCL Fiber are among the fastest ISPs in Pakistan. Check today's real-time ISP rankings on PakSpeed's comparison page."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "انٹرنیٹ سپیڈ ٹیسٹ کیسے کریں؟",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "PakSpeed.com پر جائیں اور 'سپیڈ ٹیسٹ شروع کریں' بٹن دبائیں۔ چند سیکنڈ میں آپ کی ڈاؤن لوڈ، اپ لوڈ اور پنگ سپیڈ دکھائی جائے گی۔ یہ مکمل طور پر مفت ہے۔"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- WebSite Schema — Enables Sitelinks in Google -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "PakSpeed",
+    "alternateName": "پاک سپیڈ",
+    "url": "https://pakspeed.com",
+    "inLanguage": ["ur", "en"],
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://pakspeed.com/city/{search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+
+  <!-- SoftwareApplication Schema — Android App -->
+  <script id="schema-app-rating" type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "PakSpeed - Internet Speed Test",
+    "operatingSystem": "Android",
+    "applicationCategory": "UtilitiesApplication",
+    "url": "https://play.google.com/store/apps/details?id=com.pakspeed.internettest",
+    "downloadUrl": "https://play.google.com/store/apps/details?id=com.pakspeed.internettest",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "author": { "@type": "Organization", "name": "WANG - Welfare Association for New Generation" }
+  }
+  </script>
+
+  <!-- Google tag (gtag.js) — consent-gated: only fires after cookie acceptance -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('consent', 'default', { analytics_storage: 'denied' });
+    function loadGA() {
+      if (document.getElementById('ga-script')) return;
+      var s = document.createElement('script');
+      s.id = 'ga-script'; s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-0EGYB6TXS6';
+      document.head.appendChild(s);
+      gtag('js', new Date());
+      gtag('consent', 'update', { analytics_storage: 'granted' });
+      gtag('config', 'G-0EGYB6TXS6');
+    }
+    if (localStorage.getItem('cookie_consent')) loadGA();
+  </script>
+</head>
+
+<body class="lang-ur">
+
+  <!-- ===== APP INSTALL BANNER (Android only) ===== -->
+  <div id="app-banner" class="app-banner">
+    <button class="app-banner-close" onclick="dismissAppBanner()" aria-label="Close">&times;</button>
+    <img class="app-banner-icon" src="/assets/icon-192.png" alt="PakSpeed" width="40" height="40">
+    <div class="app-banner-content">
+      <div class="app-banner-title">PakSpeed</div>
+      <div class="app-banner-subtitle" data-i18n="app.banner.subtitle">اردو میں آسان سپیڈ ٹیسٹ ایپ</div>
+    </div>
+    <a href="https://play.google.com/store/apps/details?id=com.pakspeed.internettest&referrer=utm_source%3Dwebsite%26utm_medium%3Dbanner" target="_blank" rel="noopener noreferrer"
+      class="app-banner-link" data-i18n="app.banner.button">ایپ ڈاؤن لوڈ کریں</a>
+  </div>
+  <script>
+    (function(){
+      var ua = navigator.userAgent;
+      var isAndroid = /Android/i.test(ua);
+      // Comprehensive WebView detection:
+      // 1. Standard WebView markers (wv flag, WebView string)
+      // 2. Missing "Chrome" = old WebView or custom browser
+      // 3. "Version/X.X" pattern = Android WebView
+      // 4. PakSpeed app package name if injected in UA
+      // 5. Standalone mode = installed PWA (don't show banner)
+      var isWebView = /wv|WebView/i.test(ua)
+        || /\bVersion\/\d+\.\d+\b/.test(ua) && /Chrome\/\d+/.test(ua)
+        || /pakspeed/i.test(ua)
+        || (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches)
+        || window.navigator.standalone === true;
+      var dismissed = localStorage.getItem('app-banner-dismissed');
+      if(isAndroid && !isWebView && !dismissed){
+        document.getElementById('app-banner').style.display='flex';
+      }
+      // Show My Speed link only in app
+      var mySpeedLink = document.getElementById('footer-myspeed');
+      if(mySpeedLink && isWebView) mySpeedLink.style.display='';
+    })();
+    function dismissAppBanner(){
+      document.getElementById('app-banner').style.display='none';
+      localStorage.setItem('app-banner-dismissed', Date.now());
+    }
+  </script>
+
+  <!-- ===== HEADER ===== -->
+  <header class="header">
+    <div class="header-inner">
+      <a href="/" class="logo">
+        <span class="logo-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00FF88" stroke-width="2.5"
+            stroke-linecap="round">
+            <path d="M12 12L18 6" />
+            <path d="M5 19a9 9 0 0 1 0-14" />
+            <path d="M19 19a9 9 0 0 0 0-14" />
+          </svg>
+        </span>
+        <span class="brand-text" style="font-size: 1.75rem;">Pak<span class="brand-text-accent">Speed</span></span>
+      </a>
+      <div class="header-controls">
+        <a href="/ai-reports.html" class="map-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+          </svg>
+          <span class="map-text" data-i18n="header.ai">AI Reports</span>
+        </a>
+        <a href="/map.html" class="map-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"></polygon>
+            <line x1="9" y1="3" x2="9" y2="21"></line>
+            <line x1="15" y1="3" x2="15" y2="21"></line>
+          </svg>
+          <span class="map-text" data-i18n="header.map">Speed Map</span>
+        </a>
+        <button id="btn-lang" class="btn-lang" aria-label="Switch language">English</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== MAIN ===== -->
+  <main class="main">
+
+    <!-- IDLE: Hero + Start -->
+    <section id="section-idle" class="section-idle">
+      <h1 class="hero-title" data-i18n="hero.title">اپنی انٹرنیٹ سپیڈ چیک کریں</h1>
+      <p class="hero-subtitle" data-i18n="hero.subtitle">پاکستان کا پہلا اردو انٹرنیٹ سپیڈ ٹیسٹ</p>
+
+      <!-- Community Counter -->
+      <div id="community-counter" class="community-counter">
+        <p id="counter-line" class="counter-line"></p>
+        <p id="counter-cta" class="counter-cta"></p>
+      </div>
+
+      <!-- Android App Trust Badge -->
+      <div id="app-rating-badge" class="app-trust-badge">
+        <span id="app-rating-value">Privacy-first</span>
+        <a id="app-rating-count" href="https://play.google.com/store/apps/details?id=com.pakspeed.internettest&referrer=utm_source%3Dwebsite%26utm_medium%3Dbadge" target="_blank" rel="noopener noreferrer"
+          data-i18n="app.badge">Android app available</a>
+      </div>
+
+      <div class="btn-start-wrap">
+        <button id="btn-start" class="btn-start" aria-label="Start speed test">
+          <span data-i18n="button.start">شروع کریں</span>
+        </button>
+      </div>
+      <p id="isp-display" class="isp-display" aria-live="polite">آپ کا ISP معلوم کیا جا رہا ہے...</p>
+
+      <div class="location-action">
+        <button type="button" id="btn-update-location-idle" class="btn-update-location" title="Update Location">
+          <span data-i18n="isp.update_location">درست مقام اپڈیٹ کریں</span>
+        </button>
+        <div id="loc-error-msg" class="location-error"></div>
+      </div>
+    </section>
+
+    <!-- TESTING: Gauge -->
+    <section id="section-testing" class="section-testing hidden" aria-live="polite">
+      <p id="test-phase" class="test-phase">پنگ ٹیسٹ ہو رہا ہے...</p>
+      <div class="gauge-container">
+        <!-- Ambient glow behind gauge -->
+        <div id="gauge-glow" class="gauge-ambient-glow"></div>
+        <svg class="gauge-svg" viewBox="0 0 280 280" aria-hidden="true">
+          <defs>
+            <!-- Glow filter for the tip dot -->
+            <filter id="glow-tip" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="4" result="blur"/>
+              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+            <!-- Soft glow for the arc -->
+            <filter id="glow-arc" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="6" result="blur"/>
+              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <!-- Outer decorative ring -->
+          <circle class="gauge-ring-outer" cx="140" cy="140" r="128" transform="rotate(135 140 140)"/>
+          <!-- Minor tick marks (every 5 units, 20 ticks across 270°) -->
+          <g class="gauge-ticks-minor" transform="translate(140,140)"></g>
+          <!-- Major tick marks (every 25 units, 4 ticks + endpoints) -->
+          <g class="gauge-ticks-major" transform="translate(140,140)"></g>
+          <!-- Tick labels -->
+          <text x="58" y="242" text-anchor="middle" class="gauge-tick-label">0</text>
+          <text x="18" y="148" text-anchor="middle" class="gauge-tick-label">25</text>
+          <text x="140" y="28" text-anchor="middle" class="gauge-tick-label">50</text>
+          <text x="262" y="148" text-anchor="middle" class="gauge-tick-label">75</text>
+          <text x="222" y="242" text-anchor="middle" class="gauge-tick-label">100</text>
+          <!-- Track arc (270 deg) -->
+          <circle id="gauge-track" class="gauge-track" cx="140" cy="140" r="110" transform="rotate(135 140 140)"/>
+          <!-- Progress arc with glow -->
+          <circle id="gauge-arc" class="gauge-arc" cx="140" cy="140" r="110" transform="rotate(135 140 140)" filter="url(#glow-arc)"/>
+          <!-- Glowing tip dot at arc end -->
+          <circle id="gauge-tip" class="gauge-tip" cx="140" cy="250" r="6" filter="url(#glow-tip)"/>
+        </svg>
+
+        <!-- HTML Overlay for text (Fixes RTL Nastaliq rendering in WebKit!) -->
+        <div class="gauge-text-overlay">
+          <div id="gauge-value" class="gauge-speed-text">0.0</div>
+          <div id="gauge-unit" class="gauge-unit-text">Mbps</div>
+          <div id="gauge-label" class="gauge-label-text">Download</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESULTS -->
+    <section id="section-results" class="section-results hidden">
+      <div id="share-poster-preview" class="share-poster-preview hidden">
+        <div class="share-poster-head">
+          <div>
+            <p class="share-poster-kicker" data-i18n="share.poster.kicker">Share-ready result</p>
+            <h2 class="share-poster-title" data-i18n="share.poster.title">آپ کا PakSpeed کارڈ تیار ہے</h2>
+          </div>
+          <div class="share-poster-actions">
+            <button type="button" id="btn-poster-whatsapp" class="poster-action poster-action-primary" aria-label="Share result card">
+              <span data-i18n="share.whatsapp">WhatsApp پر شیئر کریں</span>
+            </button>
+            <button type="button" id="btn-poster-download" class="poster-action" aria-label="Download result card">
+              <span data-i18n="share.download">تصویر ڈاؤن لوڈ کریں</span>
+            </button>
+            <button type="button" id="btn-poster-retry" class="poster-action" aria-label="Try speed test again">
+              <span data-i18n="button.retry">دوبارہ ٹرائی کریں</span>
+            </button>
+          </div>
+        </div>
+        <div id="result-card-preview" class="share-poster-card" dir="ltr" aria-hidden="true">
+          <div class="rc-bg">
+            <div class="rc-glass">
+              <div class="rc-flag-bar"></div>
+              <div class="rc-city">
+                <span class="rc-city-name"></span>
+              </div>
+              <div class="rc-speed">0.0</div>
+              <div class="rc-unit">Mbps <span class="rc-dl-label">Download</span></div>
+              <div class="rc-upload-line">
+                <span class="rc-upload-label">Upload</span>
+                <span class="rc-upload-val">0.0 Mbps</span>
+              </div>
+              <div class="rc-percentile" style="display:none;"></div>
+              <div class="rc-meta">
+                <span class="rc-isp"></span>
+                <span class="rc-date"></span>
+              </div>
+              <div class="rc-footer">
+                <span class="rc-logo">Pak<span style="color:#FFB300;">Speed</span></span>
+                <span class="rc-cta">pakspeed.com</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="results-grid">
+        <div id="res-download-card" class="result-card">
+          <div class="result-card-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--neon-green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M19 12l-7 7-7-7"/></svg>
+          </div>
+          <div id="res-download-value" class="result-value">0.0</div>
+          <div class="result-unit">Mbps</div>
+          <div class="result-label" data-i18n="result.download">ڈاؤن لوڈ سپیڈ</div>
+          <span id="res-download-quality" class="result-quality"></span>
+        </div>
+        <div id="res-upload-card" class="result-card">
+          <div class="result-card-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--neon-blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>
+          </div>
+          <div id="res-upload-value" class="result-value">0.0</div>
+          <div class="result-unit">Mbps</div>
+          <div class="result-label" data-i18n="result.upload">اپ لوڈ سپیڈ</div>
+          <span id="res-upload-quality" class="result-quality"></span>
+        </div>
+        <div id="res-ping-card" class="result-card">
+          <div class="result-card-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <div id="res-ping-value" class="result-value">0</div>
+          <div class="result-unit">ms</div>
+          <div class="result-label" data-i18n="result.ping">پنگ</div>
+          <span id="res-ping-quality" class="result-quality"></span>
+        </div>
+        <div id="res-jitter-card" class="result-card">
+          <div class="result-card-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#B48EFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          </div>
+          <div id="res-jitter-value" class="result-value">0.0</div>
+          <div class="result-unit">ms</div>
+          <div class="result-label" data-i18n="result.jitter">جٹر</div>
+          <span id="res-jitter-quality" class="result-quality"></span>
+        </div>
+      </div>
+
+      <!-- Verdict -->
+      <div id="verdict-line" class="verdict-line hidden"></div>
+
+      <!-- Percentile -->
+      <div id="percentile-line" class="percentile-line hidden"></div>
+
+      <!-- ISP Comparison -->
+      <div id="isp-comparison" class="isp-comparison hidden"></div>
+
+      <!-- History Comparison -->
+      <div id="history-comparison" class="history-comparison hidden"></div>
+
+      <!-- Quick WhatsApp Share -->
+      <button id="btn-quick-share" class="btn-quick-share hidden" aria-label="Share on WhatsApp">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        <span data-i18n="share.quick">میں نے بھی چیک کیا — آپ بھی کریں!</span>
+      </button>
+
+      <!-- ISP Info -->
+      <div class="isp-result-card">
+        <div class="isp-icon-wrap">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--neon-green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
+        <div class="isp-info">
+          <div class="isp-client-row">
+            <span class="isp-client-label" data-i18n="result.client">Client</span>
+            <span id="res-isp-city" class="isp-city">—</span>,
+            <span id="res-isp-country" class="isp-country">PK</span>
+            <span id="res-isp-ip" class="isp-ip" style="margin-left: 8px; color: #8A9BB3;">—</span>
+            <div style="display: inline-flex; flex-direction: column; align-items: flex-start; margin-left: 8px;">
+              <button type="button" id="btn-update-location" class="btn-update-location" title="Update Location">
+                <span data-i18n="isp.update_location">درست مقام اپڈیٹ کریں</span>
+              </button>
+              <div id="loc-error-msg-res"
+                style="color: #ef4444; font-size: 11px; margin-top: 4px; font-weight: 500; display: none; white-space: normal; max-width: 200px;">
+              </div>
+            </div>
+          </div>
+          <div class="isp-server-row">
+            <span class="isp-client-label" data-i18n="result.server">Server</span>
+            <span id="res-isp-name" class="isp-name">—</span>
+            <span id="res-isp-type" class="isp-type-badge">—</span>
+          </div>
+        </div>
+      </div>
+
+      <button id="btn-restart" class="btn-restart" data-i18n="button.restart">دوبارہ ٹیسٹ کریں</button>
+      <div id="streak-badge" class="streak-badge hidden"></div>
+    </section>
+
+    <!-- FEEDBACK -->
+    <section id="section-feedback" class="section-feedback hidden">
+      <h2 class="section-title" data-i18n="feedback.title">آپ کی سپیڈ سے کیا کیا ہو سکتا ہے؟</h2>
+      <div id="feedback-summary" class="feedback-summary"></div>
+      <div id="feedback-activities" class="feedback-activities"></div>
+    </section>
+
+    <!-- ISP REVIEW WIDGET -->
+    <div id="review-widget" style="display:none; max-width:500px; margin:0 auto; padding:0 1rem; transition:opacity 0.5s;"></div>
+
+    <!-- SHARE -->
+    <section id="section-share" class="section-share hidden">
+      <h2 class="section-title" data-i18n="share.title">اپنی سپیڈ شیئر کریں</h2>
+      <div class="share-buttons">
+        <!-- WhatsApp — MASSIVE -->
+        <button id="btn-whatsapp" class="share-btn btn-whatsapp" aria-label="Share on WhatsApp">
+          <span class="share-btn-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="white">
+              <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+            </svg></span>
+          <span class="share-btn-text" data-i18n="share.whatsapp">WhatsApp پر شیئر کریں</span>
+        </button>
+        <!-- Facebook -->
+        <button id="btn-facebook" class="share-btn btn-facebook" aria-label="Share on Facebook">
+          <span class="share-btn-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="white">
+              <path
+                d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+            </svg></span>
+          <span class="share-btn-text" data-i18n="share.facebook">Facebook پر شیئر کریں</span>
+        </button>
+        <!-- Twitter + Copy row -->
+        <div class="share-secondary">
+          <button id="btn-twitter" class="share-btn" aria-label="Share on Twitter">
+            <span class="share-btn-icon">𝕏</span>
+            <span class="share-btn-text" data-i18n="share.twitter">Twitter</span>
+          </button>
+          <button id="btn-copy" class="share-btn" aria-label="Copy link">
+            <span class="share-btn-icon">Link</span>
+            <span class="share-btn-text" data-i18n="share.copy">لنک کاپی کریں</span>
+          </button>
+        </div>
+        <!-- Download Card -->
+        <button id="btn-download-card" class="share-btn share-btn-download" aria-label="Download result image">
+          <span class="share-btn-icon">PNG</span>
+          <span class="share-btn-text" data-i18n="share.download">تصویر ڈاؤن لوڈ کریں</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- EDUCATION SECTION -->
+    <section id="section-education" class="section-education"
+      style="max-width: 800px; margin: 40px auto 20px; padding: 24px; background: rgba(30, 41, 59, 0.4); border: 1px solid #334155; border-radius: 12px; text-align: start;">
+      <h2 class="section-title edu-title" data-i18n="edu.title"
+        style="margin-bottom: 24px; font-size: 1.5rem; text-align: center;">اپنے سپیڈ ٹیسٹ کے نتائج کو سمجھیں</h2>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 16px; border-radius: 8px; border: 1px solid #1e293b;">
+          <h3 class="edu-card-title" data-i18n="edu.download_title"
+            style="color: #00FF88; margin-bottom: 8px; font-size: 1.1rem; line-height: 1.6;">ڈاؤن لوڈ
+            سپیڈ کیا ہے؟</h3>
+          <p class="edu-card-desc" data-i18n="edu.download_desc"
+            style="color: #94a3b8; font-size: 0.95rem; line-height: 1.8;">یہ وہ رفتار ہے
+            جس سے آپ انٹرنیٹ سے ڈیٹا حاصل کرتے ہیں۔ زیادہ سپیڈ کا مطلب ہے بغیر رکے ویڈیو سٹریمنگ اور جلدی فائل ڈاؤن
+            لوڈنگ۔</p>
+        </div>
+
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 16px; border-radius: 8px; border: 1px solid #1e293b;">
+          <h3 class="edu-card-title" data-i18n="edu.upload_title"
+            style="color: #3b82f6; margin-bottom: 8px; font-size: 1.1rem; line-height: 1.6;">اپ لوڈ سپیڈ
+            کیا ہے؟</h3>
+          <p class="edu-card-desc" data-i18n="edu.upload_desc"
+            style="color: #94a3b8; font-size: 0.95rem; line-height: 1.8;">یہ وہ رفتار ہے جس
+            سے آپ انٹرنیٹ پر ڈیٹا بھیجتے ہیں۔ بڑی فائلیں بھیجنے، یوٹیوب پر ویڈیو اپلوڈ کرنے اور ویڈیو کالنگ کے لیے یہ
+            بہت اہم ہے۔</p>
+        </div>
+
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 16px; border-radius: 8px; border: 1px solid #1e293b;">
+          <h3 class="edu-card-title" data-i18n="edu.ping_title"
+            style="color: #f59e0b; margin-bottom: 8px; font-size: 1.1rem;">پنگ (Ping) کیا
+            ہے؟</h3>
+          <p class="edu-card-desc" data-i18n="edu.ping_desc"
+            style="color: #94a3b8; font-size: 0.95rem; line-height: 1.5;">پنگ سے مراد وہ وقت
+            ہے جو ایک سگنل کو سرور تک جانے اور واپس آنے میں لگتا ہے۔ یہ جتنا کم ہو اتنا اچھا ہے۔ 30ms سے کم پنگ گیمنگ
+            اور ویڈیو کالز کے لیے بہترین ہے۔</p>
+        </div>
+
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 16px; border-radius: 8px; border: 1px solid #1e293b;">
+          <h3 class="edu-card-title" data-i18n="edu.jitter_title"
+            style="color: #B48EFF; margin-bottom: 8px; font-size: 1.1rem;">جٹر (Jitter)
+            کیا ہے؟</h3>
+          <p class="edu-card-desc" data-i18n="edu.jitter_desc"
+            style="color: #94a3b8; font-size: 0.95rem; line-height: 1.5;">جٹر آپ کے پنگ میں
+            ہونے والی تبدیلی کو ماپتا ہے۔ کم جٹر کا مطلب ہے کہ آپ کا انٹرنیٹ کنکشن مستحکم اور قابلِ بھروسہ ہے۔</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHATSAPP CHANNEL CTA -->
+    <section class="newsletter-section" style="text-align: center; margin: 32px auto; max-width: 480px; padding: 0 20px;">
+      <a href="https://whatsapp.com/channel/0029VaXXgd00AgW6jAZGw83j" target="_blank" rel="noopener noreferrer"
+        style="display: inline-flex; align-items: center; gap: 10px; background: #25D366; color: #fff; font-weight: 600; font-size: 1.05rem; padding: 14px 28px; border-radius: 50px; text-decoration: none; transition: background 0.2s;"
+        onmouseover="this.style.background='#1ebe57'" onmouseout="this.style.background='#25D366'">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        <span data-i18n="whatsapp.cta">Urdu AI Updates واٹس ایپ چینل</span>
+      </a>
+      <p style="color: #64748b; font-size: 0.85rem; margin-top: 10px;" data-i18n="whatsapp.subtitle">اردو میں تازہ AI اپڈیٹس حاصل کریں</p>
+    </section>
+
+    <!-- SEO CONTENT FOR ADSENSE -->
+    <section class="seo-content"
+      style="max-width: 800px; margin: 40px auto; padding: 24px; color: #94a3b8; line-height: 1.6; text-align: start; background: rgba(30, 41, 59, 0.3); border-radius: 8px; border: 1px solid #334155;">
+      <h2 style="color: #fff; font-size: 1.5rem; margin-bottom: 16px;" data-i18n="seo.title">How PakSpeed Works</h2>
+      <p style="margin-bottom: 12px;" data-i18n="seo.desc1">PakSpeed is Pakistan's premier internet speed testing tool.
+        By connecting directly to Cloudflare Edge CDN nodes located in major Pakistani cities (such as Karachi, Lahore,
+        and Islamabad), our engine measures your <strong>Ping</strong>, <strong>Jitter</strong>, <strong>Download
+          Speed</strong>, and <strong>Upload Speed</strong> with unparalleled accuracy.</p>
+      <p style="margin-bottom: 12px;" data-i18n="seo.desc2">Unlike other tests that connect to overseas servers,
+        PakSpeed tests your true local ISP performance—whether you are using PTCL, Nayatel, StormFiber, Zong, Jazz, or
+        Telenor. We use this data to power our <a href="/map.html"
+          style="color:#00FF88; text-decoration: none;">Community Speed Map</a>, bringing transparency to internet
+        speeds across the country.</p>
+      <p data-i18n="seo.desc3">Want to learn more? Check out our <a href="/about.html"
+          style="color:#00FF88; text-decoration: none;">About Us</a> page to understand how these metrics impact your
+        daily gaming, streaming, and browsing.</p>
+    </section>
+
+    <section class="partner-ad" aria-label="PakEducate advertisement">
+      <a href="https://www.pakeducate.com" target="_blank" rel="noopener sponsored" class="partner-ad-link">
+        <img
+          src="/assets/pakeducate-banner.png"
+          alt="PakEducate - AI powered school management system"
+          class="partner-ad-image"
+          loading="lazy"
+          decoding="async">
+      </a>
+    </section>
+
+    <!-- Visible FAQ Section — mirrors JSON-LD FAQ schema for Google compliance -->
+    <section class="section-faq" id="faq" style="max-width: 800px; margin: 32px auto; padding: 0 24px;">
+      <h2 style="color: #fff; font-size: 1.4rem; margin-bottom: 16px; text-align: start;" data-i18n="faq.heading">عام سوالات — FAQ</h2>
+
+      <details style="background: rgba(30, 41, 59, 0.4); border: 1px solid #334155; border-radius: 8px; margin-bottom: 8px; overflow: hidden;">
+        <summary style="padding: 14px 18px; color: #fff; cursor: pointer; font-weight: 600; font-size: 1rem; list-style: none; display: flex; align-items: center; gap: 8px;">
+          <span style="color:#00FF88;">▸</span> پاکستان میں انٹرنیٹ کی اوسط سپیڈ کتنی ہے؟
+        </summary>
+        <div style="padding: 0 18px 14px; color: #94a3b8; line-height: 1.7; font-size: 0.95rem;">
+          پاکستان میں اوسط ڈاؤن لوڈ سپیڈ تقریباً 15-25 Mbps ہے۔ یہ شہر اور ISP کے لحاظ سے مختلف ہوتی ہے۔ <a href="/" style="color:#00FF88; text-decoration:none;">PakSpeed پر اپنی اصل سپیڈ چیک کریں۔</a>
+        </div>
+      </details>
+
+      <details style="background: rgba(30, 41, 59, 0.4); border: 1px solid #334155; border-radius: 8px; margin-bottom: 8px; overflow: hidden;">
+        <summary style="padding: 14px 18px; color: #fff; cursor: pointer; font-weight: 600; font-size: 1rem; list-style: none; display: flex; align-items: center; gap: 8px;">
+          <span style="color:#00FF88;">▸</span> What is the average internet speed in Pakistan?
+        </summary>
+        <div style="padding: 0 18px 14px; color: #94a3b8; line-height: 1.7; font-size: 0.95rem;">
+          The average download speed in Pakistan is approximately 15-25 Mbps, varying by city and ISP. Test your actual speed on <a href="/" style="color:#00FF88; text-decoration:none;">PakSpeed</a> for free.
+        </div>
+      </details>
+
+      <details style="background: rgba(30, 41, 59, 0.4); border: 1px solid #334155; border-radius: 8px; margin-bottom: 8px; overflow: hidden;">
+        <summary style="padding: 14px 18px; color: #fff; cursor: pointer; font-weight: 600; font-size: 1rem; list-style: none; display: flex; align-items: center; gap: 8px;">
+          <span style="color:#00FF88;">▸</span> پاکستان میں سب سے تیز انٹرنیٹ کون سا ہے؟
+        </summary>
+        <div style="padding: 0 18px 14px; color: #94a3b8; line-height: 1.7; font-size: 0.95rem;">
+          پاکستان میں StormFiber، Nayatel اور PTCL فائبر سب سے تیز ISPs میں شامل ہیں۔ <a href="/isp.html" style="color:#00FF88; text-decoration:none;">PakSpeed کے ISP موازنہ صفحے</a> پر آج کی تازہ ترین رینکنگ دیکھیں۔
+        </div>
+      </details>
+
+      <details style="background: rgba(30, 41, 59, 0.4); border: 1px solid #334155; border-radius: 8px; margin-bottom: 8px; overflow: hidden;">
+        <summary style="padding: 14px 18px; color: #fff; cursor: pointer; font-weight: 600; font-size: 1rem; list-style: none; display: flex; align-items: center; gap: 8px;">
+          <span style="color:#00FF88;">▸</span> Which is the fastest ISP in Pakistan?
+        </summary>
+        <div style="padding: 0 18px 14px; color: #94a3b8; line-height: 1.7; font-size: 0.95rem;">
+          StormFiber, Nayatel, and PTCL Fiber are among the fastest ISPs in Pakistan. Check today's real-time <a href="/isp.html" style="color:#00FF88; text-decoration:none;">ISP rankings on PakSpeed</a>.
+        </div>
+      </details>
+
+      <details style="background: rgba(30, 41, 59, 0.4); border: 1px solid #334155; border-radius: 8px; margin-bottom: 8px; overflow: hidden;">
+        <summary style="padding: 14px 18px; color: #fff; cursor: pointer; font-weight: 600; font-size: 1rem; list-style: none; display: flex; align-items: center; gap: 8px;">
+          <span style="color:#00FF88;">▸</span> انٹرنیٹ سپیڈ ٹیسٹ کیسے کریں؟
+        </summary>
+        <div style="padding: 0 18px 14px; color: #94a3b8; line-height: 1.7; font-size: 0.95rem;">
+          <a href="/" style="color:#00FF88; text-decoration:none;">PakSpeed.com</a> پر جائیں اور 'سپیڈ ٹیسٹ شروع کریں' بٹن دبائیں۔ چند سیکنڈ میں آپ کی ڈاؤن لوڈ، اپ لوڈ اور پنگ سپیڈ دکھائی جائے گی۔ یہ مکمل طور پر مفت ہے۔
+        </div>
+      </details>
+    </section>
+
+    <p class="data-notice" data-i18n="data.notice">آپ کا ڈیٹا پاکستان کی ڈجیٹل تقسیم کی تحقیق میں مدد کرتا ہے</p>
+
+    <!-- Live Activity Toast -->
+    <div id="activity-toast" class="activity-toast hidden" aria-live="polite" role="status">
+      <span class="toast-dot"></span>
+      <span id="toast-text" class="toast-text"></span>
+      <button id="toast-dismiss" class="toast-dismiss" aria-label="Dismiss">&times;</button>
+    </div>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand" data-i18n="footer.powered">
+        <a href="https://www.urduai.org" target="_blank" rel="noopener noreferrer"
+          style="text-decoration: none; font-family: 'Montserrat', sans-serif; font-weight: 800; color: white;">Urdu<span
+            style="color: #FFB300;">AI</span></a> کی ایک پہل
+      </div>
+      <div class="footer-links"
+        style="margin: 16px 0; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+        <a href="/about.html" style="color: #94a3b8; text-decoration: none; font-size: 0.9rem;">About Us</a>
+        <a href="/leaderboard.html" style="color: #00FF88; text-decoration: none; font-size: 0.9rem; font-weight: 600;" data-i18n="leaderboard.title">شہروں کی رینکنگ</a>
+        <a href="/isp.html" style="color: #00FF88; text-decoration: none; font-size: 0.9rem; font-weight: 600;" data-i18n="isp.title">آئی ایس پی موازنہ</a>
+        <a href="/guide.html" style="color: #00FF88; text-decoration: none; font-size: 0.9rem; font-weight: 600;" data-i18n="guide.title">سپیڈ گائیڈ</a>
+        <a id="footer-myspeed" href="/my-speed.html" style="display:none; color: #00FF88; text-decoration: none; font-size: 0.9rem; font-weight: 600;" data-i18n="myspeed.title">میری سپیڈ</a>
+        <a href="/complaint.html" style="color: #00FF88; text-decoration: none; font-size: 0.9rem; font-weight: 600;" data-i18n="complaint.title">PTA شکایت</a>
+        <a href="/best-isp.html" style="color: #00FF88; text-decoration: none; font-size: 0.9rem; font-weight: 600;" data-i18n="bestisp.title">بہترین ISP</a>
+        <a href="/5g.html" style="color: #00FF88; text-decoration: none; font-size: 0.9rem; font-weight: 600;">5G Pakistan</a>
+        <a href="/report.html" style="color: #00FF88; text-decoration: none; font-size: 0.9rem; font-weight: 600;" data-i18n="report.title">آج کی رپورٹ</a>
+        <a href="/blog.html" style="color: #94a3b8; text-decoration: none; font-size: 0.9rem;">Blog</a>
+        <a href="/privacy.html" style="color: #94a3b8; text-decoration: none; font-size: 0.9rem;">Privacy Policy</a>
+        <a href="/terms.html" style="color: #94a3b8; text-decoration: none; font-size: 0.9rem;">Terms of Service</a>
+        <a href="mailto:hello@pakspeed.com" style="color: #94a3b8; text-decoration: none; font-size: 0.9rem;">Contact</a>
+      </div>
+      <div class="made-in-pk">
+        <span data-i18n="footer.madein">پاکستان میں بنایا گیا</span>
+      </div>
+      <p class="footer-mission">
+        <span data-i18n="footer.mission">پاکستان کی ڈجیٹل تقسیم کا نقشہ</span>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Hidden Result Card for html2canvas (Speed Poster) -->
+  <div id="result-card" class="result-card-hidden" dir="ltr" aria-hidden="true">
+    <div class="rc-bg">
+      <div class="rc-glass">
+        <div class="rc-flag-bar"></div>
+        <div class="rc-city">
+          <span class="rc-city-name"></span>
+        </div>
+        <div class="rc-speed">0.0</div>
+        <div class="rc-unit">Mbps <span class="rc-dl-label">Download</span></div>
+        <div class="rc-upload-line">
+          <span class="rc-upload-label">Upload</span>
+          <span class="rc-upload-val">0.0 Mbps</span>
+        </div>
+        <div class="rc-percentile" style="display:none;"></div>
+        <div class="rc-meta">
+          <span class="rc-isp"></span>
+          <span class="rc-date"></span>
+        </div>
+        <div class="rc-footer">
+          <span class="rc-logo">Pak<span style="color:#FFB300;">Speed</span></span>
+          <span class="rc-cta">pakspeed.com</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cloudflare Speed Test (ESM → global, loaded async to not block DOMContentLoaded) -->
+  <script>
+    import('https://esm.sh/@cloudflare/speedtest').then(function (module) {
+      window.CloudflareSpeedTest = module.default;
+      window.dispatchEvent(new Event('speedtest-ready'));
+    }).catch(function (err) {
+      console.error('SpeedTest module failed to load:', err);
+    });
+  </script>
+
+  <!-- Scripts (no build step, vanilla JS) -->
+  <script src="js/i18n.js?v=12" defer></script>
+  <script src="js/isp-detect.js?v=4" defer></script>
+  <script src="js/feedback.js?v=4" defer></script>
+  <script src="js/review.js?v=1" defer></script>
+  <script src="js/share.js?v=8" defer></script>
+  <script src="js/app.js?v=18" defer></script>
+  <script>document.body.classList.add('loaded');</script>
+  <script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js');</script>
+
+  <!-- Cookie Consent Banner -->
+  <div id="cookie-consent" style="display:none; position:fixed; bottom:0; left:0; right:0; z-index:9999; background:rgba(10,22,40,0.97); border-top:1px solid rgba(0,255,136,0.2); padding:14px 24px; -webkit-backdrop-filter:blur(16px); backdrop-filter:blur(16px);">
+    <div style="max-width:800px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;">
+      <p style="color:#94a3b8; font-size:0.85rem; margin:0; flex:1; min-width:200px;">
+        We use cookies for analytics to improve your experience. <a href="/privacy.html" style="color:#00FF88; text-decoration:none;">Privacy Policy</a>
+      </p>
+      <button onclick="document.getElementById('cookie-consent').style.display='none'; localStorage.setItem('cookie_consent','1'); if(typeof loadGA==='function')loadGA();" style="background:#00FF88; color:#000; border:none; padding:8px 20px; border-radius:8px; font-weight:700; font-size:0.85rem; cursor:pointer; white-space:nowrap;">Accept</button>
+    </div>
+  </div>
+  <script>if(!localStorage.getItem('cookie_consent'))document.getElementById('cookie-consent').style.display='';</script>
+</body>
+
+</html>

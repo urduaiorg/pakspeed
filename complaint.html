@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PTA Complaint Generator — PakSpeed | PTA شکایت جنریٹر</title>
+  <meta name="description" content="Generate a formal PTA complaint about slow internet speed in Pakistan. Use your PakSpeed test results as evidence to hold your ISP accountable. PTA کو شکایت بھیجیں۔">
+  <link rel="canonical" href="https://pakspeed.com/complaint.html">
+  <link rel="alternate" hreflang="ur" href="https://pakspeed.com/complaint.html?lang=ur">
+  <link rel="alternate" hreflang="en" href="https://pakspeed.com/complaint.html?lang=en">
+  <link rel="alternate" hreflang="x-default" href="https://pakspeed.com/complaint.html">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png">
+  <meta name="theme-color" content="#01411C">
+    <meta name="robots" content="index, follow">
+
+  <meta property="og:title" content="PTA Complaint Generator — PakSpeed">
+  <meta property="og:description" content="Generate a formal PTA complaint about slow internet. Use speed test evidence.">
+  <meta property="og:url" content="https://pakspeed.com/complaint.html">
+  <meta property="og:image" content="https://pakspeed.com/assets/og-image.jpg">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="PakSpeed">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PTA Complaint Generator — PakSpeed">
+  <meta name="twitter:description" content="Generate a formal PTA complaint about slow internet. Use speed test evidence.">
+  <meta name="twitter:image" content="https://pakspeed.com/assets/og-image.jpg">
+  <meta name="twitter:site" content="@PakSpeed">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "PakSpeed", "item": "https://pakspeed.com/"},
+      {"@type": "ListItem", "position": 2, "name": "PTA Complaint Generator"}
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Montserrat:wght@800&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" media="print" onload="this.media='all'">
+
+  <!-- Font metric override to reduce CLS -->
+  <style>
+    @font-face { font-family: 'Noto Nastaliq Urdu Fallback'; src: local('Arial'); ascent-override: 110%; descent-override: 50%; line-gap-override: 0%; size-adjust: 120%; }
+  </style>
+  <link rel="stylesheet" href="/css/style.css?v=12" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/css/style.css?v=12"></noscript>
+  <link rel="stylesheet" href="/css/rtl.css?v=4" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/css/rtl.css?v=4"></noscript>
+
+  <style>
+    .cmp-container { max-width: 700px; margin: 0 auto; padding: 2rem 1rem; }
+    .cmp-header { text-align: center; margin-bottom: 2rem; }
+    .cmp-title { font-size: 2.2rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .cmp-subtitle { font-size: 1.1rem; color: var(--gray-400); line-height: 2; }
+
+    .cmp-section {
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 1.25rem;
+      padding: 1.75rem;
+      margin-bottom: 1.5rem;
+    }
+    .cmp-section h2 { color: var(--neon-green); font-size: 1.2rem; margin-bottom: 1rem; }
+
+    .form-group { margin-bottom: 1.25rem; }
+    .form-label {
+      display: block;
+      color: var(--gray-300);
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .form-input, .form-select, .form-textarea {
+      width: 100%;
+      padding: 12px 16px;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 10px;
+      color: var(--white);
+      font-size: 0.95rem;
+      font-family: var(--font-en);
+      transition: border-color 0.2s;
+    }
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      outline: none;
+      border-color: var(--neon-green);
+    }
+    .form-select { cursor: pointer; }
+    .form-textarea {
+      min-height: 200px;
+      resize: vertical;
+      line-height: 1.7;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .btn-generate {
+      display: block;
+      width: 100%;
+      padding: 14px;
+      background: var(--neon-green);
+      color: #000;
+      font-weight: 700;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-generate:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(0,255,136,0.3); }
+
+    .btn-copy-complaint {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      background: rgba(0,255,136,0.1);
+      color: var(--neon-green);
+      font-weight: 700;
+      font-size: 1rem;
+      border: 1px solid rgba(0,255,136,0.3);
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 1rem;
+      transition: all 0.2s;
+    }
+    .btn-copy-complaint:hover { background: rgba(0,255,136,0.2); }
+
+    .evidence-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(0,255,136,0.08);
+      color: var(--neon-green);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      font-family: var(--font-en);
+      margin-bottom: 1rem;
+    }
+
+    .pta-info {
+      background: rgba(255,215,0,0.06);
+      border: 1px solid rgba(255,215,0,0.2);
+      border-radius: 10px;
+      padding: 1rem;
+      margin-top: 1rem;
+    }
+    .pta-info p { color: var(--gray-400); font-size: 0.9rem; line-height: 1.8; margin-bottom: 4px; }
+    .pta-info a { color: var(--gold); text-decoration: none; font-weight: 600; }
+    .pta-info a:hover { text-decoration: underline; }
+
+    .lb-back {
+      display: inline-flex; align-items: center; gap: 6px; color: var(--neon-green);
+      text-decoration: none; font-weight: 600; font-size: 0.95rem; padding: 8px 16px;
+      border-radius: 8px; background: rgba(0,255,136,0.05); border: 1px solid rgba(0,255,136,0.2);
+      margin-bottom: 2rem; transition: all 0.2s ease;
+    }
+    .lb-back:hover { background: rgba(0,255,136,0.15); }
+
+    @media (max-width: 600px) {
+      .cmp-title { font-size: 1.6rem; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>    <!-- Google tag (gtag.js) — consent-gated -->
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('consent', 'default', { analytics_storage: 'denied' });
+        function loadGA() {
+            if (document.getElementById('ga-script')) return;
+            var s = document.createElement('script');
+            s.id = 'ga-script'; s.async = true;
+            s.src = 'https://www.googletagmanager.com/gtag/js?id=G-0EGYB6TXS6';
+            document.head.appendChild(s);
+            gtag('js', new Date());
+            gtag('consent', 'update', { analytics_storage: 'granted' });
+            gtag('config', 'G-0EGYB6TXS6');
+        }
+        if (localStorage.getItem('cookie_consent')) loadGA();
+    </script>
+</head>
+
+<body class="lang-ur">
+
+  <header class="header">
+    <div class="header-inner">
+      <a href="/" class="logo">
+        <span class="logo-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00FF88" stroke-width="2.5" stroke-linecap="round">
+            <path d="M12 12L18 6" /><path d="M5 19a9 9 0 0 1 0-14" /><path d="M19 19a9 9 0 0 0 0-14" />
+          </svg>
+        </span>
+        <span class="brand-text" style="font-size: 1.75rem;">Pak<span class="brand-text-accent">Speed</span></span>
+      </a>
+      <div class="header-controls">
+        <a href="/" class="map-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+          </svg>
+          <span class="map-text">Speed Test</span>
+        </a>
+        <button id="btn-lang" class="btn-lang" aria-label="Switch language">English</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="cmp-container">
+    <a href="/" class="lb-back">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+      <span id="back-text">سپیڈ ٹیسٹ</span>
+    </a>
+
+    <div class="cmp-header">
+      <h1 class="cmp-title" id="cmp-title">PTA شکایت جنریٹر</h1>
+      <p class="cmp-subtitle" id="cmp-subtitle">اپنے سپیڈ ٹیسٹ کے نتائج کو ثبوت کے طور پر استعمال کریں اور PTA کو شکایت بھیجیں</p>
+      <p class="cmp-disclaimer" id="cmp-disclaimer" style="font-size:0.8rem; color:#64748b; margin-top:0.75rem; line-height:1.8;">یہ ٹول PTA صارف تحفظ ضوابط کے تحت آپ کے حق شکایت کو آسان بناتا ہے۔ صرف حقیقی مسائل کے لیے استعمال کریں۔</p>
+    </div>
+
+    <!-- Step 1: Input Form -->
+    <div class="cmp-section" id="step-form">
+      <h2 id="form-title">معلومات درج کریں</h2>
+
+      <div id="evidence-area"></div>
+
+      <div class="form-group">
+        <label class="form-label" id="lbl-isp" for="sel-isp">ISP (انٹرنیٹ فراہم کنندہ)</label>
+        <select class="form-select" id="sel-isp">
+          <option value="">-- منتخب کریں --</option>
+          <option value="PTCL">PTCL</option>
+          <option value="Jazz (Mobilink)">Jazz (Mobilink)</option>
+          <option value="Zong (CMPak)">Zong (CMPak)</option>
+          <option value="Telenor Pakistan">Telenor Pakistan</option>
+          <option value="Ufone (PTML)">Ufone (PTML)</option>
+          <option value="StormFiber (Cybernet)">StormFiber (Cybernet)</option>
+          <option value="Nayatel">Nayatel</option>
+          <option value="Transworld (TWA)">Transworld (TWA)</option>
+          <option value="Fiberlink">Fiberlink</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" id="lbl-plan" for="inp-plan">آپ کا پلان / پیکیج</label>
+          <input class="form-input" id="inp-plan" placeholder="مثال: 50 Mbps">
+        </div>
+        <div class="form-group">
+          <label class="form-label" id="lbl-city" for="inp-city">شہر</label>
+          <input class="form-input" id="inp-city" placeholder="مثال: لاہور">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" id="lbl-dl" for="inp-dl">ڈاؤن لوڈ سپیڈ (Mbps)</label>
+          <input class="form-input" id="inp-dl" type="number" step="0.1" placeholder="0.0">
+        </div>
+        <div class="form-group">
+          <label class="form-label" id="lbl-ul" for="inp-ul">اپ لوڈ سپیڈ (Mbps)</label>
+          <input class="form-input" id="inp-ul" type="number" step="0.1" placeholder="0.0">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" id="lbl-ping" for="inp-ping">پنگ (ms)</label>
+        <input class="form-input" id="inp-ping" type="number" placeholder="0" style="max-width:200px;">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" id="lbl-issue" for="inp-issue">اضافی مسئلہ (اختیاری)</label>
+        <input class="form-input" id="inp-issue" placeholder="مثال: شام 7 بجے کے بعد سپیڈ بہت کم ہو جاتی ہے">
+      </div>
+
+      <button class="btn-generate" id="btn-generate" onclick="generateComplaint()">
+        <span id="btn-gen-text">شکایت تیار کریں</span>
+      </button>
+    </div>
+
+    <!-- Step 2: Generated Complaint -->
+    <div class="cmp-section" id="step-result" style="display:none;">
+      <h2 id="result-title">آپ کی شکایت تیار ہے</h2>
+      <textarea class="form-textarea" id="complaint-text" readonly></textarea>
+      <button class="btn-copy-complaint" id="btn-copy" onclick="copyComplaint()">
+        <span id="copy-text">کاپی کریں</span>
+      </button>
+      <a class="btn-copy-complaint" id="btn-email" style="display:block;text-align:center;text-decoration:none;margin-top:0.5rem;background:rgba(255,215,0,0.08);color:var(--gold);border-color:rgba(255,215,0,0.3);" href="#" onclick="sendEmail(); return false;">
+        <span id="email-text">PTA کو ای میل بھیجیں</span>
+      </a>
+
+      <div class="pta-info">
+        <p id="pta-info-text"><strong>PTA شکایت درج کریں:</strong></p>
+        <p><a href="https://complaint.pta.gov.pk/" target="_blank" rel="noopener noreferrer">complaint.pta.gov.pk</a> — PTA آن لائن شکایت پورٹل</p>
+        <p><a href="tel:0800-55-055">0800-55-055</a> — PTA ہیلپ لائن (مفت)</p>
+        <p><a href="mailto:complaint@pta.gov.pk">complaint@pta.gov.pk</a> — PTA ای میل</p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="https://www.urduai.org" target="_blank" rel="noopener noreferrer"
+          style="text-decoration: none; font-family: 'Montserrat', sans-serif; font-weight: 800; color: white;">Urdu<span
+            style="color: #FFB300;">AI</span></a> <span id="footer-init-text">کی ایک پہل</span>
+      </div>
+      <div class="made-in-pk">
+        <span class="pk-flag">🇵🇰</span>
+        <span id="footer-madein">پاکستان میں بنایا گیا</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    let currentLang = localStorage.getItem('pakspeed_lang') || 'ur';
+
+    const LABELS = {
+      ur: {
+        title: 'PTA شکایت جنریٹر',
+        subtitle: 'اپنے سپیڈ ٹیسٹ کے نتائج کو ثبوت کے طور پر استعمال کریں اور PTA کو شکایت بھیجیں',
+        back: 'سپیڈ ٹیسٹ', toggle: 'English',
+        formTitle: 'معلومات درج کریں',
+        lblIsp: 'ISP (انٹرنیٹ فراہم کنندہ)', lblPlan: 'آپ کا پلان / پیکیج',
+        lblCity: 'شہر', lblDl: 'ڈاؤن لوڈ سپیڈ (Mbps)', lblUl: 'اپ لوڈ سپیڈ (Mbps)',
+        lblPing: 'پنگ (ms)', lblIssue: 'اضافی مسئلہ (اختیاری)',
+        btnGen: 'شکایت تیار کریں', resultTitle: 'آپ کی شکایت تیار ہے',
+        copy: 'کاپی کریں', copied: 'کاپی ہو گیا!',
+        ptaInfo: 'PTA شکایت درج کریں:',
+        evidence: 'آپ کے آخری ٹیسٹ سے ڈیٹا شامل',
+        email: 'PTA کو ای میل بھیجیں',
+        disclaimer: 'یہ ٹول PTA صارف تحفظ ضوابط کے تحت آپ کے حق شکایت کو آسان بناتا ہے۔ صرف حقیقی مسائل کے لیے استعمال کریں۔',
+        madein: 'پاکستان میں بنایا گیا', init: 'کی ایک پہل'
+      },
+      en: {
+        title: 'PTA Complaint Generator',
+        subtitle: 'Use your speed test results as evidence and file a complaint with PTA',
+        back: 'Speed Test', toggle: 'اردو',
+        formTitle: 'Enter Details',
+        lblIsp: 'ISP (Internet Provider)', lblPlan: 'Your Plan / Package',
+        lblCity: 'City', lblDl: 'Download Speed (Mbps)', lblUl: 'Upload Speed (Mbps)',
+        lblPing: 'Ping (ms)', lblIssue: 'Additional Issue (optional)',
+        btnGen: 'Generate Complaint', resultTitle: 'Your Complaint is Ready',
+        copy: 'Copy to Clipboard', copied: 'Copied!',
+        ptaInfo: 'File PTA Complaint:',
+        evidence: 'Data from your last speed test included',
+        email: 'Email PTA Directly',
+        disclaimer: 'This tool helps you exercise your right to file complaints under PTA Consumer Protection Regulations. Use only for genuine service issues.',
+        madein: 'Made in Pakistan', init: 'An initiative by'
+      }
+    };
+
+    function applyLang(lang) {
+      currentLang = lang;
+      localStorage.setItem('pakspeed_lang', lang);
+      document.documentElement.lang = lang;
+      document.documentElement.dir = lang === 'ur' ? 'rtl' : 'ltr';
+      document.body.className = lang === 'ur' ? 'lang-ur' : 'lang-en';
+
+      const l = LABELS[lang];
+      document.getElementById('cmp-title').textContent = l.title;
+      document.getElementById('cmp-subtitle').textContent = l.subtitle;
+      document.getElementById('back-text').textContent = l.back;
+      document.getElementById('btn-lang').textContent = l.toggle;
+      document.getElementById('form-title').textContent = l.formTitle;
+      document.getElementById('lbl-isp').textContent = l.lblIsp;
+      document.getElementById('lbl-plan').textContent = l.lblPlan;
+      document.getElementById('lbl-city').textContent = l.lblCity;
+      document.getElementById('lbl-dl').textContent = l.lblDl;
+      document.getElementById('lbl-ul').textContent = l.lblUl;
+      document.getElementById('lbl-ping').textContent = l.lblPing;
+      document.getElementById('lbl-issue').textContent = l.lblIssue;
+      document.getElementById('btn-gen-text').textContent = l.btnGen;
+      document.getElementById('result-title').textContent = l.resultTitle;
+      document.getElementById('copy-text').textContent = l.copy;
+      document.getElementById('pta-info-text').innerHTML = '<strong>' + l.ptaInfo + '</strong>';
+      document.getElementById('email-text').textContent = l.email;
+      document.getElementById('cmp-disclaimer').textContent = l.disclaimer;
+      document.getElementById('footer-madein').textContent = l.madein;
+      document.getElementById('footer-init-text').textContent = l.init;
+    }
+
+    // Prefill from last speed test (localStorage)
+    function prefillFromHistory() {
+      try {
+        const history = JSON.parse(localStorage.getItem('pakspeed_history')) || [];
+        if (!history.length) return;
+        const last = history[history.length - 1];
+        if (last.download) document.getElementById('inp-dl').value = last.download;
+        if (last.upload) document.getElementById('inp-ul').value = last.upload;
+        if (last.ping) document.getElementById('inp-ping').value = last.ping;
+        if (last.isp) {
+          const sel = document.getElementById('sel-isp');
+          for (let i = 0; i < sel.options.length; i++) {
+            if (sel.options[i].value.toLowerCase().includes(last.isp.toLowerCase())) {
+              sel.selectedIndex = i;
+              break;
+            }
+          }
+        }
+        if (last.city) document.getElementById('inp-city').value = last.city;
+
+        // Show evidence badge
+        const l = LABELS[currentLang];
+        document.getElementById('evidence-area').innerHTML =
+          '<div class="evidence-badge">&#x2713; ' + l.evidence + '</div>';
+      } catch {}
+    }
+
+    function generateComplaint() {
+      const isp = document.getElementById('sel-isp').value;
+      const plan = document.getElementById('inp-plan').value;
+      const city = document.getElementById('inp-city').value;
+      const dl = document.getElementById('inp-dl').value;
+      const ul = document.getElementById('inp-ul').value;
+      const ping = document.getElementById('inp-ping').value;
+      const issue = document.getElementById('inp-issue').value;
+
+      if (!isp) {
+        alert(currentLang === 'ur' ? 'براہ کرم ISP منتخب کریں' : 'Please select an ISP');
+        return;
+      }
+
+      const today = new Date().toLocaleDateString('en-PK', { year: 'numeric', month: 'long', day: 'numeric' });
+
+      let complaint;
+      if (currentLang === 'ur') {
+        complaint = 'محترم PTA حکام،\n\n';
+        complaint += 'میں ' + (city || '___') + ' سے ' + isp + ' کا صارف ہوں۔ ';
+        if (plan) complaint += 'میرا انٹرنیٹ پلان ' + plan + ' ہے۔ ';
+        complaint += 'مجھے اپنی انٹرنیٹ سروس سے شدید مسائل کا سامنا ہے۔\n\n';
+        complaint += 'PakSpeed.com پر سپیڈ ٹیسٹ کے نتائج (تاریخ: ' + today + '):\n';
+        if (dl) complaint += '- ڈاؤن لوڈ سپیڈ: ' + dl + ' Mbps\n';
+        if (ul) complaint += '- اپ لوڈ سپیڈ: ' + ul + ' Mbps\n';
+        if (ping) complaint += '- پنگ: ' + ping + ' ms\n';
+        if (plan) complaint += '\nمیرے پلان (' + plan + ') کے مطابق مجھے جو سپیڈ ملنی چاہیے وہ نہیں مل رہی۔ ';
+        if (issue) complaint += '\n\nاضافی مسئلہ: ' + issue;
+        complaint += '\n\nبراہ کرم ' + isp + ' کو ہدایت کریں کہ وہ میری سروس فوری طور پر درست کریں۔ ';
+        complaint += 'PTA لائسنس کی شرائط کے مطابق ISPs کو اشتہار شدہ سپیڈ فراہم کرنا لازمی ہے۔\n\n';
+        complaint += 'شکریہ۔\n';
+        complaint += '(آپ کا نام)\n';
+        complaint += '(فون نمبر)';
+      } else {
+        complaint = 'Dear PTA Authorities,\n\n';
+        complaint += 'I am a ' + isp + ' subscriber from ' + (city || '___') + '. ';
+        if (plan) complaint += 'My internet plan is ' + plan + '. ';
+        complaint += 'I am experiencing severe issues with my internet service.\n\n';
+        complaint += 'Speed Test Results from PakSpeed.com (Date: ' + today + '):\n';
+        if (dl) complaint += '- Download Speed: ' + dl + ' Mbps\n';
+        if (ul) complaint += '- Upload Speed: ' + ul + ' Mbps\n';
+        if (ping) complaint += '- Ping: ' + ping + ' ms\n';
+        if (plan) complaint += '\nThe speed I am receiving is significantly below my subscribed plan (' + plan + '). ';
+        if (issue) complaint += '\n\nAdditional Issue: ' + issue;
+        complaint += '\n\nI request PTA to direct ' + isp + ' to rectify my service immediately. ';
+        complaint += 'As per PTA license conditions, ISPs are obligated to deliver the advertised speeds to consumers.\n\n';
+        complaint += 'Thank you.\n';
+        complaint += '(Your Name)\n';
+        complaint += '(Phone Number)';
+      }
+
+      document.getElementById('complaint-text').value = complaint;
+      document.getElementById('step-result').style.display = '';
+      document.getElementById('step-result').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function copyComplaint() {
+      const text = document.getElementById('complaint-text').value;
+      navigator.clipboard.writeText(text).then(() => {
+        const l = LABELS[currentLang];
+        document.getElementById('copy-text').textContent = l.copied;
+        setTimeout(() => {
+          document.getElementById('copy-text').textContent = l.copy;
+        }, 2000);
+      });
+    }
+
+    function sendEmail() {
+      const body = document.getElementById('complaint-text').value;
+      const isp = document.getElementById('sel-isp').value || 'ISP';
+      const city = document.getElementById('inp-city').value || '';
+      const subject = currentLang === 'ur'
+        ? 'انٹرنیٹ سپیڈ شکایت — ' + isp + (city ? ' — ' + city : '')
+        : 'Internet Speed Complaint — ' + isp + (city ? ' — ' + city : '');
+      window.open('mailto:complaint@pta.gov.pk?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body));
+    }
+
+    applyLang(currentLang);
+    prefillFromHistory();
+
+    document.getElementById('btn-lang').addEventListener('click', () => {
+      applyLang(currentLang === 'ur' ? 'en' : 'ur');
+    });
+  </script>
+</body>
+</html>

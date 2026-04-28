@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weekly AI Accountability Reports — PakSpeed | ہفتہ وار AI احتساب رپورٹ</title>
+  <meta name="description" content="AI-generated weekly accountability reports on Pakistan's internet performance. ISP rankings, throttling detection, and citizen sentiment analysis. پاکستان کی انٹرنیٹ کارکردگی پر ہفتہ وار AI رپورٹ۔">
+  <link rel="canonical" href="https://pakspeed.com/ai-reports.html">
+  <link rel="alternate" hreflang="ur" href="https://pakspeed.com/ai-reports.html?lang=ur">
+  <link rel="alternate" hreflang="en" href="https://pakspeed.com/ai-reports.html?lang=en">
+  <link rel="alternate" hreflang="x-default" href="https://pakspeed.com/ai-reports.html">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png">
+  <meta name="theme-color" content="#01411C">
+  <meta name="robots" content="index, follow">
+
+  <meta property="og:title" content="Weekly AI Reports — PakSpeed">
+  <meta property="og:description" content="AI-powered weekly accountability reports on Pakistan internet performance.">
+  <meta property="og:url" content="https://pakspeed.com/ai-reports.html">
+  <meta property="og:image" content="https://pakspeed.com/assets/og-image.jpg">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="PakSpeed">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Weekly AI Reports — PakSpeed">
+  <meta name="twitter:description" content="AI-powered weekly accountability reports on Pakistan internet.">
+  <meta name="twitter:image" content="https://pakspeed.com/assets/og-image.jpg">
+
+  <script type="application/ld+json">
+  [{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "PakSpeed", "item": "https://pakspeed.com/"},
+      {"@type": "ListItem", "position": 2, "name": "AI Reports"}
+    ]
+  }]
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Montserrat:wght@800&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" media="print" onload="this.media='all'">
+
+  <style>
+    @font-face {
+      font-family: 'Noto Nastaliq Urdu Fallback';
+      src: local('Arial');
+      ascent-override: 110%; descent-override: 50%; line-gap-override: 0%; size-adjust: 120%;
+    }
+  </style>
+  <link rel="stylesheet" href="/css/style.css?v=12" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/css/style.css?v=12"></noscript>
+  <link rel="stylesheet" href="/css/rtl.css?v=4" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/css/rtl.css?v=4"></noscript>
+
+  <style>
+    .rpt-container { max-width: 800px; margin: 0 auto; padding: 2rem 1rem; }
+    .rpt-header { text-align: center; margin-bottom: 2rem; }
+    .rpt-title { font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .rpt-subtitle { font-size: 1.1rem; color: #cbd5e0; line-height: 2; margin-top: 0.5rem; }
+
+    .rpt-section {
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 1.25rem;
+      padding: 1.75rem;
+      margin-bottom: 1.5rem;
+    }
+    .rpt-section h2 { color: #00FF88; font-size: 1.3rem; margin-bottom: 1rem; }
+
+    .rpt-loading { text-align: center; padding: 2rem; color: #cbd5e0; }
+    .rpt-empty { text-align: center; padding: 3rem 1rem; color: #cbd5e0; }
+
+    .lb-back {
+      display: inline-flex; align-items: center; gap: 6px; color: #00FF88;
+      text-decoration: none; font-weight: 600; font-size: 0.95rem; padding: 8px 16px;
+      border-radius: 8px; background: rgba(0,255,136,0.05); border: 1px solid rgba(0,255,136,0.2);
+      margin-bottom: 2rem; transition: all 0.2s ease;
+    }
+    .lb-back:hover { background: rgba(0,255,136,0.15); }
+
+    /* AI Badge */
+    .ai-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: 'Inter', sans-serif; font-size: 0.8rem; font-weight: 600;
+      padding: 4px 12px; border-radius: 20px;
+      background: rgba(0, 212, 255, 0.1); color: #00D4FF; border: 1px solid rgba(0, 212, 255, 0.2);
+      margin-bottom: 1.5rem;
+    }
+
+    /* Report list */
+    .report-list-item {
+      background: rgba(15, 23, 42, 0.65);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 1.25rem;
+      margin-bottom: 0.75rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 0.75rem;
+    }
+    .report-list-item:hover {
+      border-color: rgba(0, 255, 136, 0.3);
+      background: rgba(15, 23, 42, 0.85);
+    }
+    .report-list-item.active {
+      border-color: #00FF88;
+      background: rgba(0, 255, 136, 0.05);
+    }
+    .report-date {
+      font-family: 'Inter', sans-serif; font-weight: 700; font-size: 1rem; color: #fff;
+    }
+    .report-date-range {
+      font-family: 'Inter', sans-serif; font-size: 0.8rem; color: #cbd5e0;
+    }
+    .report-arrow {
+      color: #00FF88; font-size: 1.2rem; transition: transform 0.2s ease;
+    }
+    .report-list-item:hover .report-arrow { transform: scale(1.2); }
+
+    /* Full report view */
+    .report-view {
+      display: none;
+    }
+    .report-view.visible { display: block; }
+
+    .report-content {
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 1.25rem;
+      padding: 2rem;
+      line-height: 2;
+      color: #e2e8f0;
+      font-size: 0.95rem;
+    }
+    .report-content h1, .report-content h2, .report-content h3 {
+      color: #00FF88; margin-top: 1.5rem; margin-bottom: 0.75rem;
+    }
+    .report-content h1 { font-size: 1.4rem; }
+    .report-content h2 { font-size: 1.2rem; }
+    .report-content h3 { font-size: 1.05rem; }
+    .report-content p { margin-bottom: 1rem; }
+    .report-content strong { color: #fff; }
+    .report-content ul, .report-content ol {
+      padding-inline-start: 1.5rem; margin-bottom: 1rem;
+    }
+    .report-content li { margin-bottom: 0.5rem; }
+
+    .report-lang-toggle {
+      display: inline-flex; gap: 0; margin-bottom: 1.5rem;
+      border-radius: 8px; overflow: hidden; border: 1px solid rgba(0, 255, 136, 0.3);
+    }
+    .report-lang-btn {
+      padding: 8px 20px; font-size: 0.9rem; font-weight: 600;
+      background: transparent; color: #00FF88; border: none; cursor: pointer;
+      transition: all 0.2s ease; font-family: 'Inter', sans-serif;
+    }
+    .report-lang-btn.active {
+      background: #00FF88; color: #0A1628;
+    }
+    .report-lang-btn:not(.active):hover {
+      background: rgba(0, 255, 136, 0.1);
+    }
+
+    .report-back-btn {
+      display: inline-flex; align-items: center; gap: 6px; color: #00FF88;
+      text-decoration: none; font-weight: 600; font-size: 0.9rem; cursor: pointer;
+      background: none; border: none; margin-bottom: 1.25rem; padding: 0;
+    }
+    .report-back-btn:hover { text-decoration: underline; }
+
+    /* Stats preview in list */
+    .report-stats-preview {
+      display: flex; gap: 1.5rem; flex-wrap: wrap;
+    }
+    .report-stat-mini {
+      font-family: 'Inter', sans-serif; font-size: 0.8rem; color: #cbd5e0;
+    }
+    .report-stat-mini .val {
+      font-weight: 700; font-size: 1rem; display: block;
+    }
+
+    @media (max-width: 600px) {
+      .rpt-title { font-size: 1.75rem; }
+      .report-content { padding: 1.25rem; }
+      .report-list-item { flex-direction: column; align-items: flex-start; }
+      .report-stats-preview { gap: 1rem; }
+    }
+  </style>
+  <!-- Google tag (gtag.js) — consent-gated -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('consent', 'default', { analytics_storage: 'denied' });
+    function loadGA() {
+      if (document.getElementById('ga-script')) return;
+      var s = document.createElement('script');
+      s.id = 'ga-script'; s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-0EGYB6TXS6';
+      document.head.appendChild(s);
+      gtag('js', new Date());
+      gtag('consent', 'update', { analytics_storage: 'granted' });
+      gtag('config', 'G-0EGYB6TXS6');
+    }
+    if (localStorage.getItem('cookie_consent')) loadGA();
+  </script>
+</head>
+
+<body class="lang-ur">
+
+  <header class="header">
+    <div class="header-inner">
+      <a href="/" class="logo">
+        <span class="logo-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00FF88" stroke-width="2.5" stroke-linecap="round">
+            <path d="M12 12L18 6" /><path d="M5 19a9 9 0 0 1 0-14" /><path d="M19 19a9 9 0 0 0 0-14" />
+          </svg>
+        </span>
+        <span class="brand-text" style="font-size: 1.75rem;">Pak<span class="brand-text-accent">Speed</span></span>
+      </a>
+      <div class="header-controls">
+        <a href="/report.html" class="map-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>
+          </svg>
+          <span class="map-text" id="nav-report">رپورٹ</span>
+        </a>
+        <a href="/" class="map-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+          </svg>
+          <span class="map-text" id="nav-speedtest">سپیڈ ٹیسٹ</span>
+        </a>
+        <button id="btn-lang" class="btn-lang" aria-label="Switch language">English</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="rpt-container">
+    <a href="/report.html" class="lb-back">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+      <span id="back-text">ماہانہ رپورٹ</span>
+    </a>
+
+    <div class="rpt-header">
+      <h1 class="rpt-title" id="page-title">ہفتہ وار AI احتساب رپورٹ</h1>
+      <p class="rpt-subtitle" id="page-subtitle">AI کے ذریعے تیار کردہ ہفتہ وار انٹرنیٹ کارکردگی رپورٹ</p>
+      <div class="ai-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        <span id="ai-badge-text">Powered by Cloudflare Workers AI</span>
+      </div>
+      <p style="color: #cbd5e0; font-size: 0.9rem; line-height: 1.8; margin-top: 1rem; max-width: 600px; margin-left: auto; margin-right: auto;" id="page-explainer">ہر ہفتے ہمارا AI پاکستان کی انٹرنیٹ کارکردگی کا جائزہ لیتا ہے — کون سا ISP تیز ہے، کون سست، کہاں تھروٹلنگ ہوئی، اور عوام کیا کہتے ہیں۔ یہ رپورٹ اردو اور انگریزی دونوں میں دستیاب ہے۔</p>
+    </div>
+
+    <!-- Report List View -->
+    <div id="report-list-view">
+      <div id="reports-loading" class="rpt-loading">Loading...</div>
+      <div id="reports-empty" class="rpt-empty" style="display:none;">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#cbd5e0" stroke-width="1.5" stroke-linecap="round" style="margin-bottom:1rem; opacity:0.5;">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>
+        </svg>
+        <p id="empty-text">ابھی کوئی ہفتہ وار رپورٹ دستیاب نہیں</p>
+        <p style="font-size:0.85rem; color:#64748b; margin-top:0.5rem;" id="empty-subtext">پہلی رپورٹ جلد شائع ہوگی</p>
+      </div>
+      <div id="reports-list"></div>
+    </div>
+
+    <!-- Single Report View -->
+    <div id="report-detail-view" class="report-view">
+      <button class="report-back-btn" id="btn-back-list">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+        <span id="btn-back-text">تمام رپورٹیں</span>
+      </button>
+
+      <div class="report-lang-toggle" id="report-lang-toggle">
+        <button class="report-lang-btn active" data-report-lang="en">English</button>
+        <button class="report-lang-btn" data-report-lang="ur">اردو</button>
+      </div>
+
+      <div id="report-body" class="report-content"></div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="https://www.urduai.org" target="_blank" rel="noopener noreferrer"
+          style="text-decoration: none; font-family: 'Montserrat', sans-serif; font-weight: 800; color: white;">Urdu<span
+            style="color: #FFB300;">AI</span></a> <span id="footer-init-text">کی ایک پہل</span>
+      </div>
+      <div class="made-in-pk">
+        <span class="pk-flag">🇵🇰</span>
+        <span id="footer-madein">پاکستان میں بنایا گیا</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    var currentLang = localStorage.getItem('pakspeed_lang') || 'ur';
+    var API_BASE = 'https://pakspeed-worker.qaisar-roonjha.workers.dev/api';
+    var allReports = [];
+    var currentReport = null;
+    var reportLang = 'en'; // default report content language
+
+    var LABELS = {
+      ur: {
+        title: 'ہفتہ وار AI احتساب رپورٹ',
+        subtitle: 'AI کے ذریعے تیار کردہ ہفتہ وار انٹرنیٹ کارکردگی رپورٹ',
+        back: 'ماہانہ رپورٹ', toggle: 'English',
+        navReport: 'رپورٹ', navSpeed: 'سپیڈ ٹیسٹ',
+        empty: 'ابھی کوئی ہفتہ وار رپورٹ دستیاب نہیں',
+        emptySub: 'پہلی رپورٹ جلد شائع ہوگی',
+        allReports: 'تمام رپورٹیں',
+        weekOf: 'ہفتہ',
+        madein: 'پاکستان میں بنایا گیا', init: 'کی ایک پہل',
+        aiBadge: 'Cloudflare Workers AI سے تیار شدہ',
+        explainer: 'ہر ہفتے ہمارا AI پاکستان کی انٹرنیٹ کارکردگی کا جائزہ لیتا ہے — کون سا ISP تیز ہے، کون سست، کہاں تھروٹلنگ ہوئی، اور عوام کیا کہتے ہیں۔ یہ رپورٹ اردو اور انگریزی دونوں میں دستیاب ہے۔'
+      },
+      en: {
+        title: 'Weekly AI Accountability Reports',
+        subtitle: 'AI-generated weekly internet performance reports for Pakistan',
+        back: 'Monthly Report', toggle: 'اردو',
+        navReport: 'Report', navSpeed: 'Speed Test',
+        empty: 'No weekly reports available yet',
+        emptySub: 'First report will be published soon',
+        allReports: 'All Reports',
+        weekOf: 'Week of',
+        madein: 'Made in Pakistan', init: 'An initiative by',
+        aiBadge: 'Powered by Cloudflare Workers AI',
+        explainer: 'Every week, our AI reviews Pakistan\'s internet performance — which ISP is fastest, which is slowest, where throttling was detected, and what citizens are saying. Reports are available in both Urdu and English.'
+      }
+    };
+
+    function applyLang(lang, isSwitch) {
+      currentLang = lang;
+      localStorage.setItem('pakspeed_lang', lang);
+      document.documentElement.lang = lang;
+      document.documentElement.dir = lang === 'ur' ? 'rtl' : 'ltr';
+      document.body.className = lang === 'ur' ? 'lang-ur' : 'lang-en';
+
+      var l = LABELS[lang];
+      document.getElementById('page-title').textContent = l.title;
+      document.getElementById('page-subtitle').textContent = l.subtitle;
+      document.getElementById('back-text').textContent = l.back;
+      document.getElementById('btn-lang').textContent = l.toggle;
+      document.getElementById('nav-report').textContent = l.navReport;
+      document.getElementById('nav-speedtest').textContent = l.navSpeed;
+      document.getElementById('empty-text').textContent = l.empty;
+      document.getElementById('empty-subtext').textContent = l.emptySub;
+      document.getElementById('btn-back-text').textContent = l.allReports;
+      document.getElementById('footer-madein').textContent = l.madein;
+      document.getElementById('footer-init-text').textContent = l.init;
+      document.getElementById('ai-badge-text').textContent = l.aiBadge;
+      document.getElementById('page-explainer').textContent = l.explainer;
+
+      if (allReports.length) renderReportList(allReports, l);
+    }
+
+    applyLang(currentLang);
+    document.getElementById('btn-lang').addEventListener('click', function() {
+      applyLang(currentLang === 'ur' ? 'en' : 'ur', true);
+    });
+
+    function formatDateRange(start, end) {
+      if (!start) return '';
+      try {
+        var s = new Date(start);
+        var e = end ? new Date(end) : s;
+        var opts = { month: 'short', day: 'numeric', timeZone: 'Asia/Karachi' };
+        return s.toLocaleDateString('en-PK', opts) + ' — ' + e.toLocaleDateString('en-PK', { ...opts, year: 'numeric' });
+      } catch(err) { return start + ' — ' + (end || ''); }
+    }
+
+    function parseStats(report) {
+      if (!report.stats_json) return null;
+      try {
+        return typeof report.stats_json === 'string' ? JSON.parse(report.stats_json) : report.stats_json;
+      } catch(e) { return null; }
+    }
+
+    function renderReportList(reports, l) {
+      var container = document.getElementById('reports-list');
+      var html = '';
+      reports.forEach(function(r, i) {
+        var dateRange = formatDateRange(r.week_start, r.week_end);
+        var stats = parseStats(r);
+        html += '<div class="report-list-item" data-idx="' + i + '">';
+        html += '<div>';
+        html += '<div class="report-date">' + l.weekOf + ': ' + dateRange + '</div>';
+        if (stats) {
+          html += '<div class="report-stats-preview" style="margin-top:0.5rem;">';
+          if (stats.total_tests != null) html += '<div class="report-stat-mini"><span class="val" style="color:#00FF88;">' + stats.total_tests.toLocaleString() + '</span>Tests</div>';
+          if (stats.avg_download != null) html += '<div class="report-stat-mini"><span class="val" style="color:#00D4FF;">' + parseFloat(stats.avg_download).toFixed(1) + '</span>Avg DL (Mbps)</div>';
+          if (stats.anomaly_count != null) html += '<div class="report-stat-mini"><span class="val" style="color:#E74C3C;">' + stats.anomaly_count + '</span>Anomalies</div>';
+          html += '</div>';
+        }
+        html += '</div>';
+        html += '<span class="report-arrow">&rarr;</span>';
+        html += '</div>';
+      });
+      container.innerHTML = html;
+
+      // Bind clicks
+      container.querySelectorAll('.report-list-item').forEach(function(el) {
+        el.addEventListener('click', function() {
+          var idx = parseInt(el.getAttribute('data-idx'));
+          showReport(reports[idx]);
+        });
+      });
+    }
+
+    function formatReportContent(text) {
+      if (!text) return '<p style="color:#64748b;">No content available.</p>';
+      // Convert markdown-like headers and formatting to HTML
+      var html = text
+        .replace(/^### (.+)$/gm, '<h3>$1</h3>')
+        .replace(/^## (.+)$/gm, '<h2>$1</h2>')
+        .replace(/^# (.+)$/gm, '<h1>$1</h1>')
+        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+        .replace(/^\- (.+)$/gm, '<li>$1</li>')
+        .replace(/^\* (.+)$/gm, '<li>$1</li>')
+        .replace(/\n{2,}/g, '</p><p>')
+        .replace(/\n/g, '<br>');
+      // Wrap loose <li> in <ul>
+      html = html.replace(/(<li>.*?<\/li>)/gs, function(match) {
+        if (!match.startsWith('<ul>')) return '<ul>' + match + '</ul>';
+        return match;
+      });
+      return '<p>' + html + '</p>';
+    }
+
+    function showReport(report) {
+      currentReport = report;
+      reportLang = 'en';
+      document.getElementById('report-list-view').style.display = 'none';
+      document.getElementById('report-detail-view').classList.add('visible');
+
+      // Set report content language toggle
+      updateReportLangToggle();
+      renderReportBody();
+    }
+
+    function renderReportBody() {
+      var body = document.getElementById('report-body');
+      var content = reportLang === 'ur' ? currentReport.report_ur : currentReport.report_en;
+      body.innerHTML = formatReportContent(content);
+      // Set dir based on report content language
+      body.style.direction = reportLang === 'ur' ? 'rtl' : 'ltr';
+      body.style.textAlign = reportLang === 'ur' ? 'right' : 'left';
+    }
+
+    function updateReportLangToggle() {
+      document.querySelectorAll('.report-lang-btn').forEach(function(btn) {
+        btn.classList.toggle('active', btn.getAttribute('data-report-lang') === reportLang);
+      });
+    }
+
+    // Report language toggle clicks
+    document.querySelectorAll('.report-lang-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        reportLang = btn.getAttribute('data-report-lang');
+        updateReportLangToggle();
+        renderReportBody();
+      });
+    });
+
+    // Back to list
+    document.getElementById('btn-back-list').addEventListener('click', function() {
+      document.getElementById('report-detail-view').classList.remove('visible');
+      document.getElementById('report-list-view').style.display = '';
+    });
+
+    // Fetch reports
+    fetch(API_BASE + '/reports')
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        document.getElementById('reports-loading').style.display = 'none';
+        var reports = Array.isArray(data) ? data : (data.reports || data.results || []);
+        allReports = reports;
+
+        if (!reports.length) {
+          document.getElementById('reports-empty').style.display = '';
+          return;
+        }
+
+        renderReportList(reports, LABELS[currentLang]);
+
+        // If only one report, auto-open it
+        if (reports.length === 1) {
+          showReport(reports[0]);
+        }
+      })
+      .catch(function() {
+        document.getElementById('reports-loading').textContent = 'Error loading reports';
+      });
+  </script>
+</body>
+</html>

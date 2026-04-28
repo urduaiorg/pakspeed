@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Community Speed Map — PakSpeed | کمیونٹی سپیڈ میپ</title>
+  <meta name="description" content="Live community internet speed map of Pakistan. See real-time crowdsourced download, upload, and ping data plotted across all major cities and ISPs. پاکستان کا لائیو کمیونٹی انٹرنیٹ سپیڈ میپ۔">
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png">
+  <meta name="theme-color" content="#01411C">
+    <meta name="robots" content="index, follow">
+
+  <!-- Canonical & OG -->
+  <link rel="canonical" href="https://pakspeed.com/map.html">
+  <meta property="og:title" content="Community Speed Map — PakSpeed">
+  <meta property="og:description" content="Live crowdsourced internet speed data plotted across Pakistan's cities.">
+  <meta property="og:url" content="https://pakspeed.com/map.html">
+  <meta property="og:image" content="https://pakspeed.com/assets/og-image.jpg">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Community Speed Map — PakSpeed">
+  <meta name="twitter:description" content="Live crowdsourced internet speed data plotted across Pakistan's cities.">
+  <meta name="twitter:image" content="https://pakspeed.com/assets/og-image.jpg">
+  <meta name="twitter:site" content="@PakSpeed">
+
+  <!-- Preconnect to tile server for faster LCP -->
+  <link rel="preconnect" href="https://a.basemaps.cartocdn.com" crossorigin>
+  <link rel="preconnect" href="https://b.basemaps.cartocdn.com" crossorigin>
+  <link rel="preconnect" href="https://c.basemaps.cartocdn.com" crossorigin>
+  <link rel="dns-prefetch" href="//basemaps.cartocdn.com">
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Nastaliq+Urdu:wght@400;700&display=optional">
+  <style>
+
+    :root {
+      --dark-bg: #0A1628;
+      --neon-green: #00FF88;
+      --pk-green: #01411C;
+      --gray-700: #2d3748;
+      --gray-400: #cbd5e0;
+      --gray-300: #e2e8f0;
+      --font-en: 'Inter', sans-serif;
+      --font-ur: 'Noto Nastaliq Urdu', serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: var(--font-en);
+      background: var(--dark-bg);
+      color: #f8fafc;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    html[dir="rtl"] body { font-family: var(--font-ur); }
+
+    /* Header */
+    .map-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 20px;
+      border-bottom: 1px solid var(--gray-700);
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(12px);
+      z-index: 500;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .map-brand {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: white;
+      text-decoration: none;
+    }
+
+    .map-brand-accent { color: #FFB300; }
+
+    .map-title {
+      font-size: 0.85rem;
+      color: var(--gray-400);
+      margin-top: 2px;
+    }
+
+    html[dir="rtl"] .map-title { font-family: var(--font-ur); line-height: 1.8; }
+
+    .map-controls {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .map-btn-lang {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: white;
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .map-btn-lang:hover { background: rgba(255, 255, 255, 0.15); }
+
+    .map-btn-test {
+      background: var(--pk-green);
+      color: white;
+      padding: 6px 16px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .map-btn-test:hover { opacity: 0.85; }
+
+    /* Main map area */
+    .map-main { flex: 1; position: relative; }
+    #map { width: 100%; height: 100%; background: #0a0f1a; }
+
+    /* Loading overlay */
+    .map-loading {
+      position: absolute;
+      inset: 0;
+      background: rgba(11, 17, 33, 0.85);
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(4px);
+      transition: opacity 0.5s ease;
+    }
+
+    .map-spinner {
+      width: 48px;
+      height: 48px;
+      border: 4px solid transparent;
+      border-top-color: var(--neon-green);
+      border-bottom-color: var(--neon-green);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-bottom: 16px;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .map-loading-text { color: var(--gray-300); font-weight: 500; font-size: 1rem; }
+    .map-loading-sub { color: #64748b; font-size: 0.8rem; margin-top: 6px; }
+
+    /* Error box */
+    .map-error {
+      display: none;
+      position: absolute;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1001;
+      background: rgba(127, 29, 29, 0.9);
+      border: 1px solid #ef4444;
+      color: #fecaca;
+      padding: 12px 24px;
+      border-radius: 10px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(8px);
+      font-size: 0.9rem;
+    }
+
+    /* Leaflet popup dark theme */
+    .leaflet-popup-content-wrapper {
+      background: #0f172a;
+      color: #f8fafc;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+    }
+
+    .leaflet-popup-tip {
+      background: #0f172a;
+      border-top: 1px solid #334155;
+      border-left: 1px solid #334155;
+    }
+
+    .leaflet-container a.leaflet-popup-close-button {
+      color: #94a3b8;
+      padding-top: 5px;
+      padding-right: 5px;
+    }
+
+    .popup-city { margin: 0 0 8px; font-size: 15px; font-weight: 800; color: #fff; border-bottom: 1px solid #334155; padding-bottom: 6px; }
+    .popup-row { margin: 4px 0; font-size: 13px; color: #94a3b8; display: flex; justify-content: space-between; }
+    .popup-val-dl { color: #4ade80; font-weight: 600; }
+    .popup-val-ping { color: #facc15; font-weight: 600; }
+    .popup-tests { color: #64748b; font-size: 11px; margin-top: 8px; padding-top: 6px; border-top: 1px solid rgba(51, 65, 85, 0.5); }
+    .popup-link { display: block; text-align: center; margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(51, 65, 85, 0.5); font-size: 12px; font-weight: 600; color: #00FF88; text-decoration: none; }
+    .popup-link:hover { text-decoration: underline; }
+
+    /* Collapsible Legend */
+    .map-legend {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      z-index: 400;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid var(--gray-700);
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(12px);
+      overflow: hidden;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    html[dir="rtl"] .map-legend { left: auto; right: 20px; }
+
+    .legend-toggle {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: none;
+      border: none;
+      color: var(--gray-300);
+      cursor: pointer;
+      padding: 10px 14px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      width: 100%;
+    }
+
+    .legend-dots {
+      display: flex;
+      gap: 4px;
+    }
+
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .legend-dot-green { background: #10b981; box-shadow: 0 0 6px rgba(16, 185, 129, 0.7); }
+    .legend-dot-yellow { background: #facc15; box-shadow: 0 0 6px rgba(250, 204, 21, 0.7); }
+    .legend-dot-red { background: #ef4444; box-shadow: 0 0 6px rgba(239, 68, 68, 0.7); }
+
+    .legend-arrow {
+      margin-left: auto;
+      transition: transform 0.3s;
+      font-size: 0.7rem;
+    }
+
+    html[dir="rtl"] .legend-arrow { margin-left: 0; margin-right: auto; }
+
+    .map-legend.expanded .legend-arrow { transform: rotate(180deg); }
+
+    .legend-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s cubic-bezier(0.16, 1, 0.3, 1), padding 0.3s;
+      padding: 0 14px;
+    }
+
+    .map-legend.expanded .legend-body {
+      max-height: 200px;
+      padding: 0 14px 12px;
+    }
+
+    .legend-heading {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--gray-300);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 6px;
+      font-size: 0.8rem;
+      color: var(--gray-300);
+    }
+
+    .legend-note {
+      font-size: 0.7rem;
+      color: #64748b;
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px solid var(--gray-700);
+    }
+
+    /* No media query override — JS adds 'expanded' class on desktop load */
+  </style>
+
+  <!-- Schema -->
+  <script type="application/ld+json">
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "PakSpeed", "item": "https://pakspeed.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Community Speed Map", "item": "https://pakspeed.com/map.html" }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Dataset",
+      "name": "Pakistan Community Internet Speed Map",
+      "alternateName": "پاکستان کمیونٹی انٹرنیٹ سپیڈ میپ",
+      "description": "Crowdsourced GPS-located internet speed test data across Pakistan, visualized on an interactive map.",
+      "url": "https://pakspeed.com/map.html",
+      "license": "https://pakspeed.com/terms.html",
+      "creator": { "@type": "Organization", "name": "WANG - Welfare Association for New Generation", "url": "https://www.urduai.org" },
+      "spatialCoverage": { "@type": "Place", "name": "Pakistan" },
+      "temporalCoverage": "2025/..",
+      "variableMeasured": [
+        { "@type": "PropertyValue", "name": "Download Speed", "unitText": "Mbps" },
+        { "@type": "PropertyValue", "name": "Ping Latency", "unitText": "ms" }
+      ],
+      "measurementTechnique": "Cloudflare Edge CDN speed test with GPS geolocation"
+    }
+  ]
+  </script>
+
+  <!-- Google tag (gtag.js) — consent-gated -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('consent', 'default', { analytics_storage: 'denied' });
+    function loadGA() {
+      if (document.getElementById('ga-script')) return;
+      var s = document.createElement('script');
+      s.id = 'ga-script'; s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-0EGYB6TXS6';
+      document.head.appendChild(s);
+      gtag('js', new Date());
+      gtag('consent', 'update', { analytics_storage: 'granted' });
+      gtag('config', 'G-0EGYB6TXS6');
+    }
+    if (localStorage.getItem('cookie_consent')) loadGA();
+  </script>
+</head>
+
+<body>
+
+  <!-- Header -->
+  <header class="map-header">
+    <div>
+      <a href="/" class="map-brand" style="font-family: 'Inter', sans-serif; direction: ltr; unicode-bidi: isolate; display: inline-block;">
+        Pak<span class="map-brand-accent">Speed</span> <span style="font-size: 0.9rem; opacity: 0.5;">(</span><span style="font-size: 0.9rem; opacity: 0.5;">)</span>
+      </a>
+      <h1 class="map-title" id="map-subtitle">کمیونٹی سپیڈ میپ — پاکستان بھر سے لائیو ٹیلی میٹری</h1>
+    </div>
+    <div class="map-controls">
+      <button id="btn-lang-map" class="map-btn-lang">English</button>
+      <a href="/" class="map-btn-test" id="map-test-link">ٹیسٹ شروع کریں</a>
+    </div>
+  </header>
+
+  <!-- Map -->
+  <main class="map-main">
+    <div id="loading-overlay" class="map-loading">
+      <div class="map-spinner"></div>
+      <p class="map-loading-text" id="loading-text">لائیو ٹیلی میٹری لوڈ ہو رہی ہے...</p>
+      <p class="map-loading-sub" id="loading-sub">Cloudflare Edge سے کنکشن</p>
+    </div>
+
+    <div id="error-box" class="map-error"></div>
+    <div id="map"></div>
+  </main>
+
+  <!-- Collapsible Legend -->
+  <div id="map-legend" class="map-legend">
+    <button id="legend-toggle" class="legend-toggle" aria-label="Toggle legend">
+      <span class="legend-dots">
+        <span class="legend-dot legend-dot-green"></span>
+        <span class="legend-dot legend-dot-yellow"></span>
+        <span class="legend-dot legend-dot-red"></span>
+      </span>
+      <span id="legend-label">سپیڈ لیجنڈ</span>
+      <span class="legend-arrow">&#9662;</span>
+    </button>
+    <div class="legend-body">
+      <h4 class="legend-heading" id="legend-heading">اوسط سپیڈ</h4>
+      <div class="legend-item">
+        <span class="legend-dot legend-dot-green"></span>
+        <span id="legend-fast">> 20 Mbps</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-dot legend-dot-yellow"></span>
+        <span id="legend-medium">10 - 20 Mbps</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-dot legend-dot-red"></span>
+        <span id="legend-slow">&lt; 10 Mbps</span>
+      </div>
+      <p class="legend-note" id="legend-note">دائرے کا سائز ٹیسٹ کی تعداد ظاہر کرتا ہے۔</p>
+    </div>
+  </div>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+  <script>
+    // ========== BILINGUAL ==========
+    var currentLang = localStorage.getItem('pakspeed_lang') || 'ur';
+    var mapStrings = {
+      ur: {
+        subtitle: 'کمیونٹی سپیڈ میپ — پاکستان بھر سے لائیو ٹیلی میٹری',
+        testBtn: 'ٹیسٹ شروع کریں',
+        langBtn: 'English',
+        loading: 'لائیو ٹیلی میٹری لوڈ ہو رہی ہے...',
+        loadingSub: 'Cloudflare Edge سے کنکشن',
+        legendLabel: 'سپیڈ لیجنڈ',
+        legendHeading: 'اوسط سپیڈ',
+        legendNote: 'دائرے کا سائز ٹیسٹ کی تعداد ظاہر کرتا ہے۔',
+        noData: 'ابھی تک کوئی GPS ڈیٹا نہیں ملا۔',
+        popupDl: 'اوسط ڈاؤن لوڈ',
+        popupPing: 'اوسط پنگ',
+        popupTests: 'کمیونٹی ٹیسٹس',
+        popupDetails: 'تفصیلات دیکھیں ←'
+      },
+      en: {
+        subtitle: 'Community Speed Map — Live telemetry across Pakistan',
+        testBtn: 'Run Test',
+        langBtn: 'اردو',
+        loading: 'Loading live telemetry...',
+        loadingSub: 'Connecting to Cloudflare Edge',
+        legendLabel: 'Speed Legend',
+        legendHeading: 'Avg Speed',
+        legendNote: 'Circle size indicates test density.',
+        noData: 'No community GPS records found yet.',
+        popupDl: 'Avg Download',
+        popupPing: 'Avg Ping',
+        popupTests: 'Community Tests',
+        popupDetails: 'View Details →'
+      }
+    };
+
+    function applyMapLang(lang) {
+      currentLang = lang;
+      var s = mapStrings[lang] || mapStrings.ur;
+      document.documentElement.lang = lang === 'ur' ? 'ur' : 'en';
+      document.documentElement.dir = lang === 'ur' ? 'rtl' : 'ltr';
+      document.getElementById('map-subtitle').textContent = s.subtitle;
+      document.getElementById('map-test-link').textContent = s.testBtn;
+      document.getElementById('btn-lang-map').textContent = s.langBtn;
+      var lt = document.getElementById('loading-text');
+      var ls = document.getElementById('loading-sub');
+      if (lt) lt.textContent = s.loading;
+      if (ls) ls.textContent = s.loadingSub;
+      document.getElementById('legend-label').textContent = s.legendLabel;
+      document.getElementById('legend-heading').textContent = s.legendHeading;
+      document.getElementById('legend-note').textContent = s.legendNote;
+      localStorage.setItem('pakspeed_lang', lang);
+    }
+
+    // Init language
+    applyMapLang(currentLang);
+
+    // Toggle
+    document.getElementById('btn-lang-map').addEventListener('click', function () {
+      applyMapLang(currentLang === 'ur' ? 'en' : 'ur');
+    });
+
+    // ========== LEGEND TOGGLE ==========
+    var legendEl = document.getElementById('map-legend');
+    // Auto-expand on desktop
+    if (window.innerWidth >= 768) legendEl.classList.add('expanded');
+    document.getElementById('legend-toggle').addEventListener('click', function () {
+      legendEl.classList.toggle('expanded');
+    });
+
+    // ========== MAP INIT ==========
+    document.addEventListener('DOMContentLoaded', async function () {
+      var map = L.map('map', {
+        center: [30.3753, 69.3451],
+        zoom: 6,
+        zoomControl: false
+      });
+
+      L.control.zoom({ position: 'topright' }).addTo(map);
+
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+        subdomains: 'abcd',
+        maxZoom: 20
+      }).addTo(map);
+
+      var loading = document.getElementById('loading-overlay');
+      var errorBox = document.getElementById('error-box');
+
+      try {
+        var response = await fetch('https://pakspeed-worker.qaisar-roonjha.workers.dev/api/map-data');
+        if (!response.ok) throw new Error('Cloudflare Edge Error (' + response.status + ')');
+
+        var data = await response.json();
+        if (!Array.isArray(data) || data.length === 0) {
+          errorBox.style.display = 'block';
+          errorBox.textContent = mapStrings[currentLang].noData;
+          loading.style.opacity = '0';
+          setTimeout(function () { loading.remove(); }, 500);
+          return;
+        }
+
+        data.forEach(function (node) {
+          if (!node.latitude || !node.longitude) return;
+
+          var color = '#ef4444';
+          if (node.avg_download >= 20) color = '#10b981';
+          else if (node.avg_download >= 10) color = '#facc15';
+
+          var radius = 5 + (Math.log10(node.total_tests || 1) * 6);
+
+          var circle = L.circleMarker([node.latitude, node.longitude], {
+            radius: radius,
+            fillColor: color,
+            color: color,
+            weight: 2,
+            opacity: 1,
+            fillOpacity: 0.7
+          }).addTo(map);
+
+          circle._nodeData = node;
+
+          circle.on('click', function () {
+            var s = mapStrings[currentLang];
+            var cityUrl = '/city/' + encodeURIComponent(node.city);
+            var html = '<div style="min-width:160px">' +
+              '<div class="popup-city">\uD83D\uDCCD ' + node.city + '</div>' +
+              '<div class="popup-row"><span>' + s.popupDl + '</span> <span class="popup-val-dl">' + node.avg_download + ' Mbps</span></div>' +
+              '<div class="popup-row"><span>' + s.popupPing + '</span> <span class="popup-val-ping">' + node.avg_ping + ' ms</span></div>' +
+              '<div class="popup-tests">' + node.total_tests + ' ' + s.popupTests + '</div>' +
+              '<a href="' + cityUrl + '" class="popup-link">' + s.popupDetails + '</a>' +
+              '</div>';
+            this.unbindPopup();
+            this.bindPopup(html, { closeButton: true, autoPan: true }).openPopup();
+          });
+
+          circle.on('mouseover', function () {
+            this.setStyle({ fillOpacity: 1 });
+          });
+          circle.on('mouseout', function () {
+            if (!this.isPopupOpen()) this.setStyle({ fillOpacity: 0.7 });
+          });
+        });
+
+        loading.style.opacity = '0';
+        setTimeout(function () { loading.remove(); }, 500);
+
+      } catch (err) {
+        loading.style.opacity = '0';
+        setTimeout(function () { loading.remove(); }, 500);
+        errorBox.style.display = 'block';
+        errorBox.textContent = 'Network Error: ' + err.message;
+      }
+    });
+  </script>
+</body>
+
+</html>
