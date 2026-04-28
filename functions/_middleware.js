@@ -15,7 +15,41 @@
 
 const WORKER_API = 'https://pakspeed-worker.qaisar-roonjha.workers.dev/api';
 const SITE = 'https://pakspeed.com';
-const OG_IMAGE = 'https://www.pakspeed.com/assets/og-image.jpg';
+const OG_IMAGE = 'https://pakspeed.com/assets/og-image.jpg';
+const CANONICAL_HOST = 'pakspeed.com';
+const STATIC_HTML_PATHS = new Set([
+  '/about',
+  '/ai-reports',
+  '/best-isp',
+  '/blog',
+  '/city',
+  '/compare',
+  '/complaint',
+  '/guide',
+  '/isp',
+  '/isp-detail',
+  '/leaderboard',
+  '/map',
+  '/my-speed',
+  '/privacy',
+  '/report',
+  '/terms',
+  '/5g',
+  '/5g-auction',
+  '/5g-asia',
+  '/3g-4g-5g-difference',
+  '/5g-launch-guide',
+  '/best-isp-ranking-2026',
+  '/best-wifi-router-2026',
+  '/improve-internet-speed',
+  '/internet-slow-at-night',
+  '/internet-speed-by-province',
+  '/phone-5g-support',
+  '/pta-complaint-guide',
+  '/ptcl-vs-stormfiber-vs-nayatel',
+  '/speed-needed-streaming',
+  '/why-internet-slow-pakistan'
+]);
 function getToday() { return new Date().toISOString().slice(0, 10); }
 
 function esc(str) {
@@ -29,6 +63,30 @@ function esc(str) {
 
 export async function onRequest(context) {
   const url = new URL(context.request.url);
+  let shouldRedirect = false;
+
+  // ── Canonical host: consolidate www/non-www in Search Console ──
+  if (url.hostname === 'www.pakspeed.com') {
+    url.hostname = CANONICAL_HOST;
+    shouldRedirect = true;
+  }
+
+  // ── Canonical static URLs: Cloudflare redirects /about.html → /about.
+  // Serve clean static paths from their HTML files to avoid redirect loops.
+  const normalizedPath = url.pathname.endsWith('/') && url.pathname !== '/'
+    ? url.pathname.slice(0, -1)
+    : url.pathname;
+
+  if (shouldRedirect) {
+    return Response.redirect(url.toString(), 301);
+  }
+
+  if (STATIC_HTML_PATHS.has(normalizedPath)) {
+    const assetUrl = new URL(context.request.url);
+    assetUrl.pathname = `${normalizedPath}.html`;
+    assetUrl.search = '';
+    return context.env.ASSETS.fetch(new Request(assetUrl.toString(), { headers: context.request.headers }));
+  }
 
   // ── Clean URL: /city/Lahore/PTCL (City×ISP) ── must be before /city/X
   const cityIspMatch = url.pathname.match(/^\/city\/([^\/]+)\/([^\/]+)$/);
@@ -695,18 +753,70 @@ async function handleComparePage(context, a, b) {
 // ═══════════════════════════════════════════════════
 // DYNAMIC SITEMAP — Auto-discovers all cities & ISPs
 // ═══════════════════════════════════════════════════
-async function handleDynamicSitemap() {
-  let cities = [], isps = [];
-  try {
-    const [cityResp, ispResp] = await Promise.all([
-      fetch(`${WORKER_API}/leaderboard`, { cf: { cacheTtl: 3600 } }),
-      fetch(`${WORKER_API}/isp-rankings`, { cf: { cacheTtl: 3600 } })
-    ]);
-    cities = await cityResp.json();
-    isps = await ispResp.json();
-  } catch (e) {}
+async function fetchArray(url, keys = []) {
+  const response = await fetch(url, { cf: { cacheTtl: 3600 } });
+  if (!response.ok) return [];
+  const data = await response.json();
+  if (Array.isArray(data)) return data;
+  for (const key of keys) {
+    if (Array.isArray(data?.[key])) return data[key];
+  }
+  return [];
+}
 
-  let xml = `<?xml version="1.0" encoding="UTF-8"?>
+function buildStaticSitemap() {
+  const today = getToday();
+  const pages = [
+    ['/', today, 'daily', '1.0'],
+    ['/leaderboard.html', today, 'daily', '0.9'],
+    ['/isp.html', today, 'daily', '0.9'],
+    ['/guide.html', today, 'monthly', '0.9'],
+    ['/5g.html', today, 'weekly', '0.9'],
+    ['/5g-auction.html', '2026-03-10', 'monthly', '0.8'],
+    ['/5g-asia.html', '2026-03-10', 'monthly', '0.8'],
+    ['/map.html', today, 'hourly', '0.8'],
+    ['/best-isp.html', today, 'daily', '0.9'],
+    ['/internet-speed-by-province.html', '2026-04-23', 'monthly', '0.8'],
+    ['/pta-complaint-guide.html', '2026-04-21', 'monthly', '0.8'],
+    ['/speed-needed-streaming.html', '2026-04-16', 'monthly', '0.8'],
+    ['/ptcl-vs-stormfiber-vs-nayatel.html', '2026-04-14', 'monthly', '0.8'],
+    ['/best-wifi-router-2026.html', '2026-04-09', 'monthly', '0.8'],
+    ['/improve-internet-speed.html', '2026-04-07', 'monthly', '0.8'],
+    ['/internet-slow-at-night.html', '2026-04-02', 'monthly', '0.8'],
+    ['/best-isp-ranking-2026.html', '2026-03-31', 'monthly', '0.8'],
+    ['/why-internet-slow-pakistan.html', '2026-03-26', 'monthly', '0.8'],
+    ['/3g-4g-5g-difference.html', '2026-03-24', 'monthly', '0.8'],
+    ['/phone-5g-support.html', '2026-03-19', 'monthly', '0.8'],
+    ['/5g-launch-guide.html', '2026-03-17', 'monthly', '0.8'],
+    ['/blog.html', today, 'weekly', '0.7'],
+    ['/compare.html', today, 'daily', '0.7'],
+    ['/complaint.html', today, 'monthly', '0.6'],
+    ['/report.html', today, 'daily', '0.7'],
+    ['/about.html', today, 'monthly', '0.6'],
+    ['/privacy.html', today, 'yearly', '0.4'],
+    ['/terms.html', today, 'yearly', '0.4']
+  ];
+
+  const urls = pages
+    .map(([path, lastmod, changefreq, priority]) =>
+      `  <url><loc>${SITE}${path}</loc><lastmod>${lastmod}</lastmod><changefreq>${changefreq}</changefreq><priority>${priority}</priority></url>`
+    )
+    .join('\n');
+
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${urls}
+</urlset>`;
+}
+
+async function handleDynamicSitemap() {
+  try {
+    const [cities, isps] = await Promise.all([
+      fetchArray(`${WORKER_API}/leaderboard`, ['cities', 'leaderboard', 'data', 'results']),
+      fetchArray(`${WORKER_API}/isp-rankings`, ['isps', 'rankings', 'data', 'results'])
+    ]);
+
+    let xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>${SITE}/</loc><lastmod>${getToday()}</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>
   <url><loc>${SITE}/leaderboard.html</loc><lastmod>${getToday()}</lastmod><changefreq>daily</changefreq><priority>0.9</priority></url>
@@ -734,56 +844,80 @@ async function handleDynamicSitemap() {
   <url><loc>${SITE}/complaint.html</loc><lastmod>${getToday()}</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>${SITE}/report.html</loc><lastmod>${getToday()}</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>`;
 
-  if (isps.length) {
-    isps.forEach(isp => {
-      xml += `\n  <url><loc>${SITE}/isp/${encodeURIComponent(isp.isp_name)}</loc><lastmod>${getToday()}</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>`;
-    });
-  }
-
-  if (cities.length) {
-    cities.forEach(city => {
-      xml += `\n  <url><loc>${SITE}/city/${encodeURIComponent(city.city)}</loc><lastmod>${getToday()}</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>`;
-    });
-
-    // City×ISP cross-pages — major ISPs in each city
     if (isps.length) {
-      const topIsps = isps.slice(0, 8);
-      cities.slice(0, 20).forEach(city => {
-        topIsps.forEach(isp => {
-          xml += `\n  <url><loc>${SITE}/city/${encodeURIComponent(city.city)}/${encodeURIComponent(isp.isp_name)}</loc><lastmod>${getToday()}</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>`;
-        });
+      isps.forEach(isp => {
+        const name = isp.isp_name || isp.name || isp.isp;
+        if (name) {
+          xml += `\n  <url><loc>${SITE}/isp/${encodeURIComponent(name)}</loc><lastmod>${getToday()}</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>`;
+        }
       });
     }
-  }
 
-  // ISP comparison pages
-  if (isps.length >= 2) {
-    const top = isps.slice(0, 6);
-    for (let i = 0; i < top.length; i++) {
-      for (let j = i + 1; j < top.length; j++) {
-        xml += `\n  <url><loc>${SITE}/compare/${encodeURIComponent(top[i].isp_name)}-vs-${encodeURIComponent(top[j].isp_name)}</loc><lastmod>${getToday()}</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>`;
+    if (cities.length) {
+      cities.forEach(city => {
+        const name = city.city || city.name;
+        if (name) {
+          xml += `\n  <url><loc>${SITE}/city/${encodeURIComponent(name)}</loc><lastmod>${getToday()}</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>`;
+        }
+      });
+
+      // City×ISP cross-pages — major ISPs in each city
+      if (isps.length) {
+        const topIsps = isps.slice(0, 8);
+        cities.slice(0, 20).forEach(city => {
+          const cityName = city.city || city.name;
+          if (!cityName) return;
+          topIsps.forEach(isp => {
+            const ispName = isp.isp_name || isp.name || isp.isp;
+            if (ispName) {
+              xml += `\n  <url><loc>${SITE}/city/${encodeURIComponent(cityName)}/${encodeURIComponent(ispName)}</loc><lastmod>${getToday()}</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>`;
+            }
+          });
+        });
       }
     }
-  }
 
-  // City comparison pages
-  if (cities.length >= 2) {
-    const top = cities.slice(0, 5);
-    for (let i = 0; i < top.length; i++) {
-      for (let j = i + 1; j < top.length; j++) {
-        xml += `\n  <url><loc>${SITE}/compare/${encodeURIComponent(top[i].city)}-vs-${encodeURIComponent(top[j].city)}</loc><lastmod>${getToday()}</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>`;
+    // ISP comparison pages
+    if (isps.length >= 2) {
+      const top = isps.slice(0, 6);
+      for (let i = 0; i < top.length; i++) {
+        for (let j = i + 1; j < top.length; j++) {
+          const a = top[i].isp_name || top[i].name || top[i].isp;
+          const b = top[j].isp_name || top[j].name || top[j].isp;
+          if (a && b) {
+            xml += `\n  <url><loc>${SITE}/compare/${encodeURIComponent(a)}-vs-${encodeURIComponent(b)}</loc><lastmod>${getToday()}</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>`;
+          }
+        }
       }
     }
-  }
 
-  xml += `\n  <url><loc>${SITE}/about.html</loc><lastmod>${getToday()}</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+    // City comparison pages
+    if (cities.length >= 2) {
+      const top = cities.slice(0, 5);
+      for (let i = 0; i < top.length; i++) {
+        for (let j = i + 1; j < top.length; j++) {
+          const a = top[i].city || top[i].name;
+          const b = top[j].city || top[j].name;
+          if (a && b) {
+            xml += `\n  <url><loc>${SITE}/compare/${encodeURIComponent(a)}-vs-${encodeURIComponent(b)}</loc><lastmod>${getToday()}</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>`;
+          }
+        }
+      }
+    }
+
+    xml += `\n  <url><loc>${SITE}/about.html</loc><lastmod>${getToday()}</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>${SITE}/privacy.html</loc><lastmod>${getToday()}</lastmod><changefreq>yearly</changefreq><priority>0.4</priority></url>
   <url><loc>${SITE}/terms.html</loc><lastmod>${getToday()}</lastmod><changefreq>yearly</changefreq><priority>0.4</priority></url>
 </urlset>`;
 
-  return new Response(xml, {
-    headers: { 'Content-Type': 'application/xml', 'Cache-Control': 'public, max-age=3600' }
-  });
+    return new Response(xml, {
+      headers: { 'Content-Type': 'application/xml; charset=utf-8', 'Cache-Control': 'public, max-age=3600' }
+    });
+  } catch (e) {
+    return new Response(buildStaticSitemap(), {
+      headers: { 'Content-Type': 'application/xml; charset=utf-8', 'Cache-Control': 'public, max-age=300' }
+    });
+  }
 }
 
 // ═══════════════════════════════════════════════════

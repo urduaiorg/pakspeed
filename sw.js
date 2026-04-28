@@ -1,8 +1,8 @@
-const CACHE_NAME = 'pakspeed-v15';
+const CACHE_NAME = 'pakspeed-v16';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
-  '/css/style.css?v=18',
+  '/css/style.css?v=19',
   '/css/rtl.css?v=4',
   '/js/app.js?v=18',
   '/js/i18n.js?v=12',

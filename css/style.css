@@ -2198,6 +2198,48 @@ html[dir="rtl"] .hero-title {
   border: 1px solid var(--border-soft);
 }
 
+.seo-link-panel {
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border-soft);
+}
+
+.seo-link-panel h3 {
+  margin-bottom: 0.9rem;
+  color: var(--white);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.seo-link-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.65rem;
+}
+
+.seo-link-grid a {
+  display: block;
+  padding: 0.72rem 0.85rem;
+  border-radius: 0.85rem;
+  color: var(--neon-green);
+  text-decoration: none;
+  background: rgba(22, 242, 166, 0.07);
+  border: 1px solid rgba(22, 242, 166, 0.16);
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.18s ease;
+}
+
+.seo-link-grid a:hover {
+  transform: translateY(-1px);
+  background: rgba(22, 242, 166, 0.12);
+  border-color: rgba(22, 242, 166, 0.28);
+}
+
+@media (max-width: 560px) {
+  .seo-link-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .partner-ad {
   width: 100%;
   max-width: 900px;

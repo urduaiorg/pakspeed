@@ -1,0 +1,28 @@
+{
+  "name": "PakSpeed - Pakistan Internet Speed Test",
+  "short_name": "PakSpeed",
+  "description": "Free Urdu-first internet speed test for Pakistan.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#050B14",
+  "theme_color": "#01411C",
+  "orientation": "portrait-primary",
+  "lang": "ur-PK",
+  "dir": "rtl",
+  "categories": ["utilities", "productivity"],
+  "icons": [
+    {
+      "src": "/assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
