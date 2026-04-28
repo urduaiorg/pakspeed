@@ -166,10 +166,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const isUrdu = window.currentLang !== 'en';
 
     if (isUrdu) {
-      counterLine.innerHTML = 'پاکستان کے <span id="cn-locations" class="counter-number">0</span> مقامات سے <span id="cn-tests" class="counter-number">0</span> دوستوں نے اپنی سپیڈ چیک کی';
+      counterLine.innerHTML = '<span class="counter-stat"><span id="cn-tests" class="counter-number">0</span><span class="counter-label">سپیڈ ٹیسٹ</span></span><span class="counter-stat"><span id="cn-locations" class="counter-number">0</span><span class="counter-label">پاکستانی مقامات</span></span>';
       counterCta.textContent = 'آپ بھی چیک کریں۔';
     } else {
-      counterLine.innerHTML = '<span id="cn-tests" class="counter-number">0</span> friends from <span id="cn-locations" class="counter-number">0</span> locations across Pakistan checked their speed';
+      counterLine.innerHTML = '<span class="counter-stat"><span id="cn-tests" class="counter-number">0</span><span class="counter-label">speed tests</span></span><span class="counter-stat"><span id="cn-locations" class="counter-number">0</span><span class="counter-label">Pakistan locations</span></span>';
       counterCta.textContent = 'Check yours too.';
     }
 

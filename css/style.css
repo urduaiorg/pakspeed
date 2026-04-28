@@ -1409,15 +1409,33 @@ body::after {
 
 .community-counter {
   text-align: center;
-  margin-bottom: 0.5rem;
+  width: min(100%, 520px);
+  margin: 0 auto 0.75rem;
   animation: fadeIn 1.2s ease-out;
 }
 
 .counter-line {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
   font-size: 1rem;
   color: rgba(148, 163, 184, 0.85);
-  line-height: 2;
+  line-height: 1.3;
   margin: 0;
+}
+
+.counter-stat {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  min-width: 180px;
+  padding: 0.72rem 0.95rem;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.045);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.045);
 }
 
 .counter-number {
@@ -1428,7 +1446,16 @@ body::after {
   direction: ltr;
   unicode-bidi: isolate;
   display: inline-block;
-  min-width: 2ch;
+  min-width: 5.5ch;
+  text-align: end;
+  font-variant-numeric: tabular-nums;
+}
+
+.counter-label {
+  color: rgba(226, 232, 240, 0.8);
+  font-size: 0.88rem;
+  font-weight: 700;
+  white-space: nowrap;
 }
 
 .counter-cta {
@@ -1446,8 +1473,18 @@ body::after {
   .counter-number {
     font-size: 1.35rem;
   }
+  .counter-label {
+    font-size: 0.95rem;
+  }
   .counter-cta {
     font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 520px) {
+  .counter-stat {
+    width: 100%;
+    min-width: 0;
   }
 }
 

@@ -170,7 +170,10 @@ const translations = {
   }
 };
 
-let currentLang = localStorage.getItem('pakspeed_lang') || 'ur';
+const requestedLang = new URLSearchParams(window.location.search).get('lang');
+let currentLang = requestedLang === 'en' || requestedLang === 'ur'
+  ? requestedLang
+  : localStorage.getItem('pakspeed_lang') || 'ur';
 
 // Expose on window so other scripts can access via window.translations / window.currentLang
 window.translations = translations;
